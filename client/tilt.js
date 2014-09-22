@@ -1,10 +1,20 @@
+//We route the pages
+Router.map(function() {
+  this.route('topics_board', {path: '/'});
+  // this.route('topic_timeline');
+});
+
+
+
+
+
 //Client side scripts
 Topics = new Mongo.Collection("topics");
 
 // ID of currently selected topic
 Session.setDefault('selected_topic_id', null);
 
-Template.topicboard.topics = function () {
+Template.topics_board.topics = function () {
   return Topics.find({}, {sort: {score: -1, name: 1}});
 };
 
@@ -19,7 +29,7 @@ Template.topic.events({
   }
 });
 
-Template.topicboard.events({
+Template.topics_board.events({
   'click button' : function(){
     var input = Template.instance().$("input");
     Topics.insert({name: input.val(), score: 0});
