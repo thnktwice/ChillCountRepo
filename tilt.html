@@ -1,14 +1,31 @@
 <head>
-  <title>tilt</title>
+  <title>tiltapp</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Tilt !</h1>
+  <h2>Count your stuff</h2>
 
-  {{> hello}}
+  {{> topicboard}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="topicboard">
+  <div class="topicBoard">
+    {{#each topics}}
+      {{> topic}}
+    {{/each}}
+  </div>
+  <hr/>
+  <div class="topicCreation">
+    <input type="text"/>
+    <button>Add Topic</button>
+  </div>
+</template>
+
+<template name="topic">
+  <div class="topic {{selected}}">
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
 </template>
