@@ -1,0 +1,52 @@
+<head>
+  <title>tiltapp</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+
+<body>
+</body>
+
+<template name="topics_board">
+  <h5><i>Thanks for joining Superchill mission into the galaxy...</i></h5>
+  <h1>Tilt !</h1>
+  <h2>Count your stuff</h2>
+
+  <div class="topicBoard">
+    {{#each topics}}
+      {{> topic}}
+    {{/each}}
+  </div>
+  <hr/>
+  <div class="topicCreation">
+    <input type="text"/>
+    <button id="add_topic">Add Topic</button>
+  </div>
+</template>
+
+<template name="topic">
+  <div class="topic {{selected}}">
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+    <button class="plus">Plus !</button>    
+    <button class="go">Go !</button>    
+  </div>
+</template>
+
+<template name="topic_timeline">
+  <h2>{{name}} timeline</h2>
+  <button id="back">Back MF</button>
+  {{#each counts}}
+    {{> count}}
+  {{/each}}
+</template>
+
+<template name="count">
+  <div class="count">
+    <span>Log: </span>
+    <span class="time">{{formatted_time timestamp}}</span>
+  </div>
+</template>
+
+<template name="page_not_found">
+  <h1>Something went wrong....</h1>
+</template>
