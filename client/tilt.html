@@ -33,6 +33,20 @@
 </template>
 
 <template name="topic_timeline">
-  <h1>TIMELINEEEEE</h1>
+  <h2>{{name}} timeline</h2>
   <button id="back">Back MF</button>
+  {{#each counts}}
+    {{> count}}
+  {{/each}}
+</template>
+
+<template name="count">
+  <div class="count">
+    <span>Log: </span>
+    <span class="time">{{formatted_time timestamp}}</span>
+  </div>
+</template>
+
+<template name="page_not_found">
+  <h1>Something went wrong....</h1>
 </template>

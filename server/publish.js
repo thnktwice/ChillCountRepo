@@ -1,19 +1,9 @@
 //Declare the database sharing server side
-//
-//Topics - {name:string, 
-//          score:integer}
-Topics = new Mongo.Collection("topics");
 
 // Publish complete set of topics to all clients.
 Meteor.publish('topics', function () {
   return Topics.find();
 });
-
-
-// Counts -- {topic_id: String,
-//           timestamp: Number}
-Counts = new Mongo.Collection("counts");
-
 
 // Publish all counts for requested topic_id.
 Meteor.publish('counts', function (topic_id) {
