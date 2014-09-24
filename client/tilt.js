@@ -15,6 +15,10 @@ Template.topics_board.events({
   }
 });
 
+// Template.topics_board.battery = function () {
+
+// };
+
 //This is one way of defining a helper
 Template.topic.selected = function () {
   return Session.equals("selected_topic_id", this._id) ? "selected" : '';
