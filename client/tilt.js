@@ -106,6 +106,11 @@ Template.topic_timeline.events({
       timestamp: timestamp,
       content: message.val()
     };
+    console.log(res);
+    if (Meteor.user().isAdmin() && res.content.charAt(0) === '&') {
+      res.type = 'adminMessage';
+      res.content= res.content.slice(1);
+    }
     Logs.insert(res);
     console.log(res);
     message.val('');
