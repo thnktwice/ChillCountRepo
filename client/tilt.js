@@ -17,7 +17,7 @@ Template.topics_board.events({
     // we prevent the form to relaod the page
     e.preventDefault();
     var input = Template.instance().$("input.search-query");
-    Topics.insert({name: input.val(), score: 0});
+    Topics.insert({user_id: Meteor.userId(), name: input.val(), score: 0});
     input.val('');
   }
 });
