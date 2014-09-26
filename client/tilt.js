@@ -58,6 +58,12 @@ Template.topic_timeline.helpers({
   }
 });
 
+Template.login.helpers({
+  goHome: function(){
+    Router.go('topics_board');
+  }
+});
+
 Template.topic_timeline.events({
   'click button#back' : function(){
     Router.go("topics_board");

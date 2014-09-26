@@ -11,6 +11,9 @@
   <div id="login">
     {{> loginButtons}}
   </div>
+  {{#if currentUser}}
+    {{goHome}}
+  {{/if}}
 </template>
 
 <template name="topics_board">
