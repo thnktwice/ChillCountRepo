@@ -3,16 +3,24 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 200;
     text-align: center;
+    padding-bottom:50px;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+    background-color: rgba(255,153,51,0.1);
+
 }
 
 .outer {
     max-width: 400px;
     margin: 0 auto;
+}
+
+.navbar-inner {
+    background: #ff9933;
+    background-image: none;
 }
 
 .topic {
@@ -22,17 +30,27 @@ body {
 
 .topic .name {
     display: inline-block;
-    width: 70%;
+    width: 40%;
     font-size: 1.6em;
+    vertical-align: middle;
 }
 
 .topic .score {
     display: inline-block;
-    width: 28%;
+    width: 20%;
 /*    text-align: right;*/
     font-size: 2em;
     font-weight: bold;
     color: #777;
+    vertical-align: middle;    
+}
+
+.topic .plus {
+    display: inline-block;
+}
+
+.topic .go {
+    display: inline-block;
 }
 
 .topic.selected {
@@ -60,4 +78,8 @@ body {
 .inc {
     margin: 5px 0;
     font-size: 0.6em;
+}
+.topicBoard {
+    position: relative;
+    top: 100px;
 }

@@ -1,43 +1,71 @@
 <head>
   <title>tiltapp</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
 </head>
 
 <body>
 </body>
 
+<template name="login">
+  <p><i>Ready,steady....</i></p>
+  <div id="login">
+    {{> loginButtons}}
+  </div>
+  {{#if currentUser}}
+    {{goHome}}
+  {{/if}}
+</template>
+
 <template name="topics_board">
-  <h5><i>Thanks for joining Superchill mission into the galaxy...</i></h5>
-  <h1>Tilt !</h1>
-  <h2>Count your stuff</h2>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h2>Tilt !</h2>
+    </div>
+  </div>
+  <h5><i>You can count on it</i></h5>
 
   <div class="topicBoard">
+    {{log}}
+    {{> loginButtons}}
     {{#each topics}}
       {{> topic}}
     {{/each}}
-  </div>
+
   <hr/>
-  <div class="topicCreation">
-    <input type="text"/>
-    <button id="add_topic">Add Topic</button>
-  </div>
+  <form class="form-search">
+    <div class="topicCreation input-prepend">
+      <button type="submit" id="add_topic" class="btn btn-warning">New</button>
+      <input type="text" class="span2 search-query"/>
+    </div>
+  </form> 
+  <p><i>Thanks for joining Superchill mission into the galaxy...</i></p>
+</div>
 </template>
 
 <template name="topic">
   <div class="topic {{selected}}">
-    <span class="name">{{name}}</span>
+    <button class="plus btn btn-success btn-small">+ 1</button>
     <span class="score">{{score}}</span>
-    <button class="plus">Plus !</button>    
-    <button class="go">Go !</button>    
+    <span class="name">{{name}}</span>
+    <button class="go btn btn-info btn-small"><i class="icon-chevron-right icon-white"></i></button> 
   </div>
 </template>
 
 <template name="topic_timeline">
-  <h2>{{name}} timeline</h2>
-  <button id="back">Back MF</button>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <button id="back" class="btn btn-info btn-small pull-left"><i class="icon-chevron-left icon-white"></i></button>
+        <h2>{{name}} timeline</h2>
+    </div>
+  </div>
   {{#each counts}}
     {{> count}}
   {{/each}}
+<!--   <div class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+        <i class="icon-th-list"></i>
+    </div>
+  </div> -->
 </template>
 
 <template name="count">
