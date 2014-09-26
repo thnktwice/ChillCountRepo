@@ -84,6 +84,6 @@ body {
     top: 100px;
 }
 
-.isAdmin {
+.adminMessage {
     background-color: yellow;
 }

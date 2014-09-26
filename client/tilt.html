@@ -94,18 +94,40 @@
 </template>
 
 <template name="log">
-  <div class="log {{this.isAdminCss}}">
-    <span>@{{this.uname}}: </span>
-    <span class="time">{{formatted_time timestamp}}</span>
+  <div class="log">
     {{#if this.isMessage}}
       {{> message}}
     {{/if}}
+    {{#if this.isCount}}
+      {{> count}}
+    {{/if}}    
+    {{#if this.isAdminMessage}}
+      {{> adminMessage}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="count">
+  <div class="count">
+    <span class="uname">@{{this.uname}}: </span>
+    <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="plus_one">+1</span>
   </div>
 </template>
 
 <template name="message">
   <div class="message">
-  : {{content}}
+    <span class="uname">@{{this.uname}}: </span>
+    <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="content">{{content}}</span>
+  </div>
+</template>
+
+<template name="adminMessage">
+  <div class="adminMessage">
+    <span class="admin_uname">--CHILLBOT-- : </span>
+    <span class="admin_formatted_time">{{formatted_time timestamp}}</span>
+    <span class="admin_content">{{content}}</span>
   </div>
 </template>
 

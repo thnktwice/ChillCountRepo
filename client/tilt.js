@@ -112,10 +112,3 @@ Template.topic_timeline.events({
   }
 });
 
-//how to display the good timestamp
-Template.log.helpers({
-  formatted_time: function(timestamp){
-    return new Date(this.timestamp).toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
-  }
-});
-
