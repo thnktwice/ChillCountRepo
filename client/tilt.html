@@ -24,7 +24,9 @@
   </div>
   <h5><i>You can count on it</i></h5>
 
+
   <div class="topicBoard">
+  <button class="btn btn-warning" id="add_topic">New topic</button>
     {{log}}
     {{> loginButtons}}
     {{#each topics}}
@@ -32,12 +34,8 @@
     {{/each}}
 
   <hr/>
-  <form class="form-search">
-    <div class="topicCreation input-prepend">
-      <button type="submit" id="add_topic" class="btn btn-warning">New</button>
-      <input type="text" class="span2 search-query"/>
-    </div>
-  </form> 
+
+      <!-- <input type="text" class="span2 search-query"/> -->
   <p><i>Thanks for joining Superchill mission into the galaxy...</i></p>
 </div>
 </template>
@@ -51,6 +49,29 @@
   </div>
 </template>
 
+<template name="topic_creation">
+  <button class="btn btn-primary" id="cancel_new_topic">Cancel</button>
+  <div id="topic_creation_form">
+    {{> topic_creation_form}}
+  </div>
+</template>
+
+<template name="topic_creation_form">
+  <form class="form-search">
+    <label class="control-label">Would you like your topic to be : </label>
+    <br/>
+    <label class="radio-inline">
+      <input type="radio" name="topic_type" value="public" checked> Public
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="topic_type" value="private"> Private
+    </label>
+    <br/>
+    <input class="form-control" type="text" id="topic_name" placeholder="Topic Name">
+    <button class="btn btn-warning" type="input" id="new_topic">Create new topic</button>
+  </form>
+</template>
+
 <template name="topic_timeline">
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -61,11 +82,6 @@
   {{#each counts}}
     {{> count}}
   {{/each}}
-<!--   <div class="navbar navbar-fixed-bottom">
-    <div class="navbar-inner">
-        <i class="icon-th-list"></i>
-    </div>
-  </div> -->
 </template>
 
 <template name="count">

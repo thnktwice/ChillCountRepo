@@ -12,13 +12,9 @@ Accounts.ui.config({
 
 Template.topics_board.events({
   'click button#add_topic' : function(e){
-    //We create a new topic in the db
-    //
     // we prevent the form to relaod the page
     e.preventDefault();
-    var input = Template.instance().$("input.search-query");
-    Topics.insert({user_id: Meteor.userId(), name: input.val(), score: 0});
-    input.val('');
+    Router.go('topic_creation');
   }
 });
 
@@ -42,6 +38,24 @@ Template.topic.events({
   'click button.go': function () {
     Session.set("selected_topic_id", this._id);
     Router.go("/topics/"+this._id);
+  }
+});
+
+Template.topic_creation.events({
+  'click button#new_topic' : function(e, templ) {
+    //We stop the event from propagating
+    e.preventDefault();
+    //We take the value from the inputs
+    var topic_name = templ.$("#topic_name").val();
+    var topic_type = templ.$("input[type='radio'][name='topic_type']:checked").val();
+    console.log(topic_name);
+    console.log(topic_type);
+    //We create the relevant new topic in the database
+    Topics.insert({user_id: Meteor.userId(), name: topic_name, type:topic_type, score: 0});
+    Router.go('/');
+  },
+  'click button#cancel_new_topic' : function() {
+    Router.go('/');
   }
 });
 
