@@ -4,12 +4,20 @@
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
 
-
+Accounts.ui.config({
+  requestPermissions: {
+    facebook: ['user_likes']
+  }
+});
 
 Template.topics_board.events({
-  'click button#add_topic' : function(){
+  'click button#add_topic' : function(e){
     //We create a new topic in the db
-    var input = Template.instance().$("input");
+    //
+    //we prevent the form to relaod the page
+    e.preventDefault();
+    var input = Template.instance().$("input.search-query");
+    console.log("BLICK");
     Topics.insert({name: input.val(), score: 0});
     input.val('');
   }
@@ -57,3 +65,4 @@ Template.count.helpers({
     return new Date(this.timestamp).toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
   }
 });
+

@@ -15,10 +15,11 @@
   <h5><i>You can count on it</i></h5>
 
   <div class="topicBoard">
+    {{> loginButtons}}
     {{#each topics}}
       {{> topic}}
     {{/each}}
-  </div>
+
   <hr/>
   <form class="form-search">
     <div class="topicCreation input-prepend">
@@ -27,6 +28,7 @@
     </div>
   </form> 
   <p><i>Thanks for joining Superchill mission into the galaxy...</i></p>
+</div>
 </template>
 
 <template name="topic">
