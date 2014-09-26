@@ -79,3 +79,7 @@ body {
     margin: 5px 0;
     font-size: 0.6em;
 }
+.topicBoard {
+    position: relative;
+    top: 100px;
+}

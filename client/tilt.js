@@ -4,13 +4,20 @@
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
 
-
+Accounts.ui.config({
+  requestPermissions: {
+    facebook: ['public_profile','user_friends', 'email']
+  }
+});
 
 Template.topics_board.events({
-  'click button#add_topic' : function(){
+  'click button#add_topic' : function(e){
     //We create a new topic in the db
-    var input = Template.instance().$("input");
-    Topics.insert({name: input.val(), score: 0});
+    //
+    // we prevent the form to relaod the page
+    e.preventDefault();
+    var input = Template.instance().$("input.search-query");
+    Topics.insert({user_id: Meteor.userId(), name: input.val(), score: 0});
     input.val('');
   }
 });
@@ -39,9 +46,21 @@ Template.topic.events({
 });
 
 //Useful logging of the template data
+
+Template.topics_board.helpers({
+  log: function () {
+    console.log(this);
+  }
+});
 Template.topic_timeline.helpers({
   log: function () {
     console.log(this);
+  }
+});
+
+Template.login.helpers({
+  goHome: function(){
+    Router.go('topics_board');
   }
 });
 
@@ -57,3 +76,4 @@ Template.count.helpers({
     return new Date(this.timestamp).toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
   }
 });
+

@@ -8,4 +8,6 @@ autopublish
 insecure
 iron:router
 bootstrap
+accounts-facebook
+accounts-ui
 
