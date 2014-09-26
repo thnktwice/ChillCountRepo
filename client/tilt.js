@@ -68,6 +68,7 @@ Template.topics_board.helpers({
     console.log(this);
   }
 });
+
 Template.topic_timeline.helpers({
   debug: function () {
     console.log(this);
@@ -77,6 +78,12 @@ Template.topic_timeline.helpers({
 Template.login.helpers({
   goHome: function(){
     Router.go('topics_board');
+  }
+});
+
+Template.topic.helpers({
+  currentUserIsAdmin: function() {
+    return Meteor.user().isAdmin;
   }
 });
 
