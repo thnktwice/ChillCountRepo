@@ -79,9 +79,11 @@
         <h2>{{name}} timeline</h2>
     </div>
   </div>
-  {{#each counts}}
+  {{#each logs}}
     {{> count}}
   {{/each}}
+  <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
+  <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
 </template>
 
 <template name="count">

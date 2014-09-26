@@ -27,13 +27,14 @@ Template.topic.events({
   'click button.plus': function () {
     //On click on plus, we insert a new log in the db
     var timestamp = (new Date()).getTime();
-    Counts.insert({
+    Logs.insert({
       topic_id: this._id,
       user_id: Meteor.userId(),
+      type: 'count',
       timestamp: timestamp
     });
     //We update the score count
-    var score = Counts.find({topic_id: this._id}).count();
+    var score = Logs.find({topic_id: this._id, type: 'count'}).count();
     Topics.update(this._id, {$set: {score: score}});
   },  
   'click button.go': function () {
