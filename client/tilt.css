@@ -83,3 +83,7 @@ body {
     position: relative;
     top: 100px;
 }
+
+.adminMessage {
+    background-color: yellow;
+}

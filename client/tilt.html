@@ -27,7 +27,7 @@
 
   <div class="topicBoard">
   <button class="btn btn-warning" id="add_topic">New topic</button>
-    {{log}}
+    {{debug}}
     {{> loginButtons}}
     {{#each topics}}
       {{> topic}}
@@ -45,6 +45,10 @@
     <button class="plus btn btn-success btn-small">+ 1</button>
     <span class="score">{{score}}</span>
     <span class="name">{{name}}</span>
+    {{#if currentUserIsAdmin}}
+      <span class="creator">{{this.uname}}</span>
+    {{/if}}
+    <span class="type"><i>{{type}}</i></span>
     <button class="go btn btn-info btn-small"><i class="icon-chevron-right icon-white"></i></button> 
   </div>
 </template>
@@ -77,17 +81,54 @@
     <div class="navbar-inner">
         <button id="back" class="btn btn-info btn-small pull-left"><i class="icon-chevron-left icon-white"></i></button>
         <h2>{{name}} timeline</h2>
+        <button class="plus btn btn-success btn-small">+1</button>
     </div>
   </div>
-  {{#each counts}}
-    {{> count}}
+  {{#each logs}}
+    {{> log}}
   {{/each}}
+
+  <form class="form-search">
+    <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
+    <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
+  </form>
+</template>
+
+<template name="log">
+  <div class="log">
+    {{#if this.isMessage}}
+      {{> message}}
+    {{/if}}
+    {{#if this.isCount}}
+      {{> count}}
+    {{/if}}    
+    {{#if this.isAdminMessage}}
+      {{> adminMessage}}
+    {{/if}}
+  </div>
 </template>
 
 <template name="count">
   <div class="count">
-    <span>Log: </span>
-    <span class="time">{{formatted_time timestamp}}</span>
+    <span class="uname">@{{this.uname}}: </span>
+    <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="plus_one">+1</span>
+  </div>
+</template>
+
+<template name="message">
+  <div class="message">
+    <span class="uname">@{{this.uname}}: </span>
+    <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="content">{{content}}</span>
+  </div>
+</template>
+
+<template name="adminMessage">
+  <div class="adminMessage">
+    <span class="admin_uname">--CHILLBOT-- : </span>
+    <span class="admin_formatted_time">{{formatted_time timestamp}}</span>
+    <span class="admin_content">{{content}}</span>
   </div>
 </template>
 
