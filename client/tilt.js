@@ -64,12 +64,12 @@ Template.topic_creation.events({
 //Useful logging of the template data
 
 Template.topics_board.helpers({
-  log: function () {
+  debug: function () {
     console.log(this);
   }
 });
 Template.topic_timeline.helpers({
-  log: function () {
+  debug: function () {
     console.log(this);
   }
 });
@@ -83,11 +83,30 @@ Template.login.helpers({
 Template.topic_timeline.events({
   'click button#back' : function(){
     Router.go("topics_board");
+  },
+  'click button#new_message' : function(e, templ) {
+    //We stop the event from propagating
+    e.preventDefault();
+    //We take the value from the input
+    var message = templ.$("#message_content");
+    //We create the relevant new topic in the database
+    //On click on plus, we insert a new log in the db
+    var timestamp = (new Date()).getTime();
+    var res = {
+      topic_id: this.topic_id,
+      user_id: Meteor.userId(),
+      type: 'message',
+      timestamp: timestamp,
+      content: message.val()
+    };
+    Logs.insert(res);
+    console.log(res);
+    message.val('');
   }
 });
 
 //how to display the good timestamp
-Template.count.helpers({
+Template.log.helpers({
   formatted_time: function(timestamp){
     return new Date(this.timestamp).toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
   }

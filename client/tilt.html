@@ -27,7 +27,7 @@
 
   <div class="topicBoard">
   <button class="btn btn-warning" id="add_topic">New topic</button>
-    {{log}}
+    {{debug}}
     {{> loginButtons}}
     {{#each topics}}
       {{> topic}}
@@ -80,17 +80,25 @@
     </div>
   </div>
   {{#each logs}}
-    {{> count}}
+    {{> log}}
   {{/each}}
   <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
   <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
 </template>
 
-<template name="count">
-  <div class="count">
+<template name="log">
+  <div class="log">
     <span>@{{this.uname}}: </span>
     <span class="time">{{formatted_time timestamp}}</span>
+    {{#if this.isMessage}}
+      {{> message}}
+    {{/if}}
+  </div>
+</template>
 
+<template name="message">
+  <div class="message">
+  : {{content}}
   </div>
 </template>
 
