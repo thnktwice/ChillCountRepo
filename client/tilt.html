@@ -86,8 +86,11 @@
   {{#each logs}}
     {{> log}}
   {{/each}}
-  <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
-  <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
+
+  <form class="form-search">
+    <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
+    <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
+  </form>
 </template>
 
 <template name="log">
