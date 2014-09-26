@@ -29,6 +29,7 @@ Template.topic.events({
     var timestamp = (new Date()).getTime();
     Counts.insert({
       topic_id: this._id,
+      user_id: Meteor.userId(),
       timestamp: timestamp
     });
     //We update the score count
