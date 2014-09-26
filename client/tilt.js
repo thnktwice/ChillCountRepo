@@ -6,7 +6,7 @@ Session.setDefault('selected_topic_id', null);
 
 Accounts.ui.config({
   requestPermissions: {
-    facebook: ['user_likes']
+    facebook: ['public_profile','user_friends', 'email']
   }
 });
 
@@ -14,10 +14,9 @@ Template.topics_board.events({
   'click button#add_topic' : function(e){
     //We create a new topic in the db
     //
-    //we prevent the form to relaod the page
+    // we prevent the form to relaod the page
     e.preventDefault();
     var input = Template.instance().$("input.search-query");
-    console.log("BLICK");
     Topics.insert({name: input.val(), score: 0});
     input.val('');
   }
@@ -47,6 +46,12 @@ Template.topic.events({
 });
 
 //Useful logging of the template data
+
+Template.topics_board.helpers({
+  log: function () {
+    console.log(this);
+  }
+});
 Template.topic_timeline.helpers({
   log: function () {
     console.log(this);

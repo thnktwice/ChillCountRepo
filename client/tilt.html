@@ -1,10 +1,17 @@
 <head>
   <title>tiltapp</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
 </head>
 
 <body>
 </body>
+
+<template name="login">
+  <p><i>Ready,steady....</i></p>
+  <div id="login">
+    {{> loginButtons}}
+  </div>
+</template>
 
 <template name="topics_board">
   <div class="navbar navbar-fixed-top">
@@ -15,6 +22,7 @@
   <h5><i>You can count on it</i></h5>
 
   <div class="topicBoard">
+    {{log}}
     {{> loginButtons}}
     {{#each topics}}
       {{> topic}}
