@@ -23,6 +23,7 @@ Meteor.startup(function () {
 
     // expires 1 hour from now
     note.expiry = Math.floor(Date.now() / 1000) + 3600;
+    note.badge = 1;
     note.sound = alertSound;
     note.alert = alert;
     note.payload = {'url': url};
