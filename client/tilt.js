@@ -11,14 +11,18 @@ Accounts.ui.config({
 });
 
 var addACount = function(topic_id, user_id) {
+  //We update the score count
+  var my_score = Logs.find({user_id: user_id, topic_id: topic_id, type: 'count'}).count() +1;
   //On click on plus, we insert a new log in the db
   var timestamp = (new Date()).getTime();
   Logs.insert({
     topic_id: topic_id,
     user_id: user_id,
     type: 'count',
-    timestamp: timestamp
+    timestamp: timestamp,
+    score: my_score
   });
+
   //We update the score count
   var score = Logs.find({topic_id: topic_id, type: 'count'}).count();
   Topics.update(topic_id, {$set: {score: score}}); 
@@ -54,10 +58,11 @@ Template.topic_creation.events({
     //We take the value from the inputs
     var topic_name = templ.$("#topic_name").val();
     var topic_type = templ.$("#topic_type").html();
+    var topic_description = templ.$("#topic_description").val();
     console.log(topic_name);
-    console.log(topic_type);
+    console.log(topic_description);
     //We create the relevant new topic in the database
-    Topics.insert({user_id: Meteor.userId(), name: topic_name, type:topic_type, score: 0});
+    Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
     Router.go('/');
   },
   'click #cancel_new_topic' : function() {
@@ -101,12 +106,16 @@ Template.topic_timeline.events({
     //We create the relevant new topic in the database
     //On click on plus, we insert a new log in the db
     var timestamp = (new Date()).getTime();
+
+    var my_score = Logs.find({user_id: Meteor.userId(), topic_id: this.topic_id, type: 'count'}).count();
+
     var res = {
       topic_id: this.topic_id,
       user_id: Meteor.userId(),
       type: 'message',
       timestamp: timestamp,
-      content: message.val()
+      content: message.val(),
+      score: my_score
     };
     if (Meteor.user().isAdmin() && res.content.charAt(0) === '&') {
       res.type = 'adminMessage';
@@ -132,6 +141,10 @@ Template.topics_board.helpers({
 Template.topic_timeline.helpers({
   debug: function () {
     console.log(this);
+  },
+  my_score: function(){
+    var my_score = Logs.find({user_id: Meteor.userId(), topic_id: this.topic_id, type: 'count'}).count();
+    return my_score;
   }
 });
 

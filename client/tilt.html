@@ -110,7 +110,7 @@
   <form class="form-search">
     <input class="form-control" type="text" id="topic_name" placeholder="Title">
     <br/><br/>
-    <textarea rows="3" placeholder="Description"></textarea>
+    <textarea id="topic_description" rows="3" placeholder="Description"></textarea>
     <br/>
     <label class="control-label">Shared with: </label>
     <br/>
@@ -148,7 +148,7 @@
 
     <div class="row">
       <div class="col-xs-3" id="my_score">
-        <img src="/images/my_count.png">
+        <img src="/images/my_count.png">{{my_score}}
       </div>
       <div class="col-xs-6 plus">
         <h1 id="total_score">{{score}}</h1>
@@ -159,7 +159,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h4 id="description"><i>pour quand mik aura ajouté la description</i></h4>
+        <h4 id="description"><i>{{description}}</i></h4>
       </div>
     </div>
     <div class="row">
@@ -209,7 +209,7 @@
 <template name="count">
   <div class="count">
     <span class="formatted_time">{{formatted_time timestamp}}</span>
-    <span class="uname">{{this.uname}}: </span>
+    <span class="uname">{{this.uname}}({{score}}): </span>
     <span class="plus_one">+1</span>
   </div>
 </template>
@@ -217,7 +217,7 @@
 <template name="message">
   <div class="message">
     <span class="formatted_time">{{formatted_time timestamp}}</span>
-    <span class="uname">{{this.uname}}: </span>
+    <span class="uname">{{this.uname}}({{score}}): </span>
     <span class="content">{{content}}</span>
   </div>
 </template>

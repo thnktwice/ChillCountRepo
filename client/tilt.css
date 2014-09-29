@@ -107,6 +107,10 @@ body {
     top: 60px;
 }
 
+#my_score {
+    color: black;
+}
+
 #description{
     color:#0099cc;
 }
