@@ -9,7 +9,7 @@ body {
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-    background-color: rgba(255,153,51,0.1);
+    /*background-color: rgba(255,153,51,0.1);*/
 
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 .navbar-inner {
-    background: #ff9933;
+    background: #0099cc;
     background-image: none;
 }
 
@@ -47,6 +47,14 @@ body {
 
 .topic .plus {
     display: inline-block;
+    background-image: url('images/circle_orange_1.png');
+}
+
+#total_score {
+    display: inline-block;
+    height:133px;
+    width:133px;
+    background-image: url('images/circle_orange_large.png');
 }
 
 .topic .go {

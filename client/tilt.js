@@ -25,7 +25,7 @@ var addACount = function(topic_id, user_id) {
 };
 
 Template.topics_board.events({
-  'click button#add_topic' : function(e){
+  'click #add_topic' : function(e){
     // we prevent the form to relaod the page
     e.preventDefault();
     Router.go('topic_creation');
@@ -38,17 +38,17 @@ Template.topic.selected = function () {
 };
 
 Template.topic.events({
-  'click button.plus': function () {
+  'click .plus': function () {
     addACount(this._id, Meteor.userId());
   },  
-  'click button.go': function () {
+  'click .go': function () {
     Session.set("selected_topic_id", this._id);
     Router.go("/topics/"+this._id);
   }
 });
 
 Template.topic_creation.events({
-  'click button#new_topic' : function(e, templ) {
+  'click #new_topic' : function(e, templ) {
     //We stop the event from propagating
     e.preventDefault();
     //We take the value from the inputs
@@ -60,13 +60,13 @@ Template.topic_creation.events({
     Topics.insert({user_id: Meteor.userId(), name: topic_name, type:topic_type, score: 0});
     Router.go('/');
   },
-  'click button#cancel_new_topic' : function() {
+  'click #cancel_new_topic' : function() {
     Router.go('/');
   }
 });
 
 Template.topic_timeline.events({
-  'click button#back' : function(){
+  'click #back' : function(){
     Router.go("topics_board");
   },
   'click button#new_message' : function(e, templ) {
@@ -119,7 +119,7 @@ Template.login.helpers({
 
 Template.topic.helpers({
   currentUserIsAdmin: function() {
-    return Meteor.user().isAdmin;
+    return Meteor.user().isAdmin();
   }
 });
 
