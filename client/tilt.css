@@ -10,7 +10,6 @@ body {
     -o-user-select: none;
     user-select: none;
     /*background-color: rgba(255,153,51,0.1);*/
-
 }
 
 .outer {
@@ -18,57 +17,118 @@ body {
     margin: 0 auto;
 }
 
-.navbar-inner {
-    background: #0099cc;
-    background-image: none;
+
+/*Navigation Bar*/
+    .navbar-inner {
+        background: #0099cc;
+        background-image: none;
+    }
+
+    .title{
+        color:white;
+        padding:0;
+    }
+
+    h2{
+        margin:5px 0px 5px 0px;
+        font-size: 25pt;
+        font-weight:100;
+    }
+
+    .left_button{
+        margin-top:8px;
+        color:white;
+    }
+
+    .right_button{
+        margin-top:8px;
+        color:white;
+        padding:0;
+    }
+
+
+/*Topic Board*/
+    .topicBoard {
+        position: relative;
+        top: 46px;
+        padding-bottom:150px;
+    }
+
+
+    .topic {
+        cursor: pointer;
+        padding: 5px 10px;
+        border-style: solid;
+        border-width: 0px 0px 2px 0px;
+        border-color: #0099cc;
+    }
+
+    .topic .name {
+        font-size: 1.8em;
+        vertical-align: middle;
+        text-align: left;
+    }
+
+    .topic .score {
+        font-size: 3em;
+        font-weight: bold;
+        color: white;
+        vertical-align: middle;    
+    }
+
+    .topic .plus {
+        margin:5px 0px 5px 0px;
+        vertical-align: middle;
+        height:61px;
+        width:61px;
+        background-image: url('images/circle_orange_1.png');
+    }
+
+    .topic .go {
+        margin-top: 22px;
+    }
+
+    .topic.selected {
+        background-color: rgba(255,153,51,0.1);
+    }
+
+    .topic.selected .score {
+        /*color: black;*/
+    }
+
+#topic_creation_form{
+    position: relative;
+    top: 60px;
 }
 
-.topic {
-    cursor: pointer;
-    padding: 5px 10px;
+
+#scoreboard{
+    position: relative;
+    top: 60px;
 }
 
-.topic .name {
-    display: inline-block;
-    width: 40%;
-    font-size: 1.6em;
-    vertical-align: middle;
-}
-
-.topic .score {
-    display: inline-block;
-    width: 20%;
-/*    text-align: right;*/
-    font-size: 2em;
-    font-weight: bold;
-    color: #777;
-    vertical-align: middle;    
-}
-
-.topic .plus {
-    display: inline-block;
-    background-image: url('images/circle_orange_1.png');
+#description{
+    color:#0099cc;
 }
 
 #total_score {
-    display: inline-block;
+    display:inline-block;
+    vertical-align: middle;
+    font-size: 40pt;
     height:133px;
     width:133px;
     background-image: url('images/circle_orange_large.png');
+
 }
 
-.topic .go {
-    display: inline-block;
+#footer {
+    width:100%;
+    height:80px;
+    position:absolute;
+    bottom:0;
 }
 
-.topic.selected {
-    background-color: yellow;
-}
-
-.topic.selected .score {
-    color: black;
-}
-
+/*
 .details, .none {
     font-weight: bold;
     font-size: 2em;
@@ -87,11 +147,7 @@ body {
     margin: 5px 0;
     font-size: 0.6em;
 }
-.topicBoard {
-    position: relative;
-    top: 100px;
-}
 
 .adminMessage {
     background-color: yellow;
-}
+}*/

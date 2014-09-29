@@ -92,7 +92,7 @@ Template.topic_timeline.events({
     console.log(res);
     message.val('');
   },
-  'click button.plus' : function() {
+  'click .plus' : function() {
     addACount(this.topic_id,Meteor.userId());
   }
 });

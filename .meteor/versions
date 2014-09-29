@@ -11,7 +11,6 @@ binary-heap@1.0.0
 blaze-tools@1.0.0
 blaze@2.0.1
 boilerplate-generator@1.0.0
-bootstrap@1.0.1
 callback-hook@1.0.0
 channikhabra:stupid-models@0.0.3
 check@1.0.1
@@ -45,6 +44,7 @@ meteorhacks:async@1.0.0
 meteorhacks:npm@1.2.0
 minifiers@1.1.0
 minimongo@1.0.3
+mizzao:bootstrap-3@3.2.0
 mobile-status-bar@1.0.0
 mongo@1.0.6
 npm-container@1.0.0
