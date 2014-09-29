@@ -10,7 +10,7 @@ Meteor.startup(function () {
       alert('error = ' + error); 
     };
     var pushTokenHandler = function (result) { 
-      alert('iOS device token = ' + result); 
+      console.log('iOS device token = ' + result); 
     };
 
     pushNotification.register(
