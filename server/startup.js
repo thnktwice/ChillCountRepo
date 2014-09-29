@@ -1,45 +1,38 @@
 
 Meteor.startup(function () {
+  //Enable push notification by adding the relevant package
+  var apn = Meteor.npmRequire("apn");
+  var path = Npm.require('path');
+  var apnOptions = Meteor.settings.apnOptions || {};
+  var alertSound = apnOptions.sound || "alert.aiff";
+  var apnConnection;
 
-//If database empty fill with samples
-  // if (Topics.find().count() === 0) {
-  //   var data = [{
-  //     name: "I am bored",
-  //     counts: [
-  //       [],
-  //       [],
-  //       []
-  //     ]
-  //   },
-  //   {
-  //     name: "Squirrel !",
-  //     counts: [
-  //       [],
-  //       [],
-  //       [],
-  //       []
-  //     ]
-  //   }];
+  // default apn connection options
+  apnOptions = _.extend(
+    {
+    cert: path.join("../", "private", "cert.pem"),
+    key: path.join("../", "private", "key.pem")
+    }, 
+    apnOptions);
+  console.log(apnOptions);
 
-  //   var timestamp = (new Date()).getTime();
+  apnConnection = new apn.Connection(apnOptions);
 
-  //   for (var i = 0; i < data.length; i++) {
-  //     //We create the topic and keep the id
-  //     var topic_id = Topics.insert({
-  //       name: data[i].name,
-  //       score: 0
-  //     });
-  //     //We attach the related counts
-  //     for (var j= 0; j < data[i].counts.length; j++){
-  //       Counts.insert({
-  //         topic_id: topic_id,
-  //         timestamp: timestamp
-  //       });
-  //     }
-  //     //We update the score count
-  //     var score = Logs.find({topic_id: topic_id}).count();
-  //     Topics.update(topic_id, {$set: {score: score}});
-  //   }
+  var sendAppleNotifications = function (alert, url, pushIds) {
+    var note = new apn.Notification();
 
-  // }
+    // expires 1 hour from now
+    note.expiry = Math.floor(Date.now() / 1000) + 3600;
+    note.badge = 1;
+    note.sound = alertSound;
+    note.alert = alert;
+    note.payload = {'url': url};
+
+    _.each(pushIds, function (token) {
+      var device = new apn.Device(token);
+      apnConnection.pushNotification(note, device);
+    });
+
+    return {success:'ok'};
+  }; // end sendAppleNotifications
 });

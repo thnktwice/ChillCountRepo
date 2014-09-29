@@ -25,7 +25,7 @@ var addACount = function(topic_id, user_id) {
 };
 
 Template.topics_board.events({
-  'click button#add_topic' : function(e){
+  'click #add_topic' : function(e){
     // we prevent the form to relaod the page
     e.preventDefault();
     Router.go('topic_creation');
@@ -38,35 +38,59 @@ Template.topic.selected = function () {
 };
 
 Template.topic.events({
-  'click button.plus': function () {
+  'click .plus': function () {
     addACount(this._id, Meteor.userId());
   },  
-  'click button.go': function () {
+  'click .go': function () {
     Session.set("selected_topic_id", this._id);
     Router.go("/topics/"+this._id);
   }
 });
 
 Template.topic_creation.events({
-  'click button#new_topic' : function(e, templ) {
+  'click #new_topic' : function(e, templ) {
     //We stop the event from propagating
     e.preventDefault();
     //We take the value from the inputs
     var topic_name = templ.$("#topic_name").val();
-    var topic_type = templ.$("input[type='radio'][name='topic_type']:checked").val();
+    var topic_type = templ.$("#topic_type").html();
     console.log(topic_name);
     console.log(topic_type);
     //We create the relevant new topic in the database
     Topics.insert({user_id: Meteor.userId(), name: topic_name, type:topic_type, score: 0});
     Router.go('/');
   },
-  'click button#cancel_new_topic' : function() {
+  'click #cancel_new_topic' : function() {
     Router.go('/');
   }
 });
 
+Template.topic_creation_form.events({
+  // quand clic sur img private , la source change a la nouvelle image et l'autre grise
+  // idem pour l'img group
+  'click #private_icon' : function(e, templ) {
+    var private_icon = templ.$("#private_icon");
+    var public_icon = templ.$("#public_icon");
+    var topic_type = templ.$("#topic_type");
+    private_icon.attr("src", "/images/lock_blue_1.png");
+    public_icon.attr("src", "/images/group_grey_1.png");
+    topic_type.html("private");
+  },
+
+  'click #public_icon' : function(e, templ) {
+    var private_icon = templ.$("#private_icon");
+    var public_icon = templ.$("#public_icon");
+    var topic_type = templ.$("#topic_type");
+    private_icon.attr("src", "/images/lock_grey_1.png");
+    public_icon.attr("src", "/images/group_blue_1.png");
+    topic_type.html("public");
+  }
+
+
+});
+
 Template.topic_timeline.events({
-  'click button#back' : function(){
+  'click #back' : function(){
     Router.go("topics_board");
   },
   'click button#new_message' : function(e, templ) {
@@ -92,7 +116,7 @@ Template.topic_timeline.events({
     console.log(res);
     message.val('');
   },
-  'click button.plus' : function() {
+  'click .plus' : function() {
     addACount(this.topic_id,Meteor.userId());
   }
 });
@@ -119,7 +143,7 @@ Template.login.helpers({
 
 Template.topic.helpers({
   currentUserIsAdmin: function() {
-    return Meteor.user().isAdmin;
+    return Meteor.user().isAdmin();
   }
 });
 

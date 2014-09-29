@@ -16,82 +16,180 @@
   {{/if}}
 </template>
 
-<template name="topics_board">
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <h2>Tilt !</h2>
-    </div>
-  </div>
-  <h5><i>You can count on it</i></h5>
 
+
+<template name="topics_board">
+ 
+  <!-- navigation bar -->
+  <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-2 left_button">
+              <img src="/images/plus_white.png" id="add_topic">
+            </div>
+            <div class="col-xs-8 title">
+                <h2>Chillcount</h2>
+            </div> 
+            <div class="col-xs-2 right_button">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <div class="topicBoard">
-  <button class="btn btn-warning" id="add_topic">New topic</button>
     {{debug}}
-    {{> loginButtons}}
     {{#each topics}}
       {{> topic}}
     {{/each}}
-
-  <hr/>
-
+    
       <!-- <input type="text" class="span2 search-query"/> -->
-  <p><i>Thanks for joining Superchill mission into the galaxy...</i></p>
-</div>
+    <div id="footer">  
+      <hr/>
+      <p><i>Thanks for joining Superchill mission into the galaxy...</i></p>
+      {{> loginButtons}}
+    </div>
+  </div>
 </template>
 
 <template name="topic">
   <div class="topic {{selected}}">
-    <button class="plus btn btn-success btn-small">+ 1</button>
-    <span class="score">{{score}}</span>
-    <span class="name">{{name}}</span>
-    {{#if currentUserIsAdmin}}
-      <span class="creator">{{this.uname}}</span>
-    {{/if}}
-    <span class="type"><i>{{type}}</i></span>
-    <button class="go btn btn-info btn-small"><i class="icon-chevron-right icon-white"></i></button> 
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 plus score">
+          {{score}}
+        </div>
+        <div class="col-xs-8 name">
+          {{name}}
+          <div class="row">
+            <div class="col-xs-6">
+              <img src="/images/{{type}}_icon_grey.png">
+            </div>
+          </div>
+        </div>
+        {{#if currentUserIsAdmin}}
+          <div class="creator">
+            {{this.uname}}
+          </div>
+        {{/if}}
+        <div class="col-xs-1">
+          <img class="go" src="/images/right_chevron_blue.png">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
+<!-- Topic creation -->
 <template name="topic_creation">
-  <button class="btn btn-primary" id="cancel_new_topic">Cancel</button>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-2 left_button">
+            <p id="cancel_new_topic">Cancel</p>
+          </div>
+          <div class="col-xs-8 title">
+            <h2>New Topic</h2>
+          </div>
+          <div class="col-xs-2 right_button">
+            <p id="new_topic">Create</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="topic_creation_form">
-    {{> topic_creation_form}}
+   {{> topic_creation_form}}
   </div>
 </template>
 
 <template name="topic_creation_form">
   <form class="form-search">
-    <label class="control-label">Would you like your topic to be : </label>
+    <input class="form-control" type="text" id="topic_name" placeholder="Title">
+    <br/><br/>
+    <textarea rows="3" placeholder="Description"></textarea>
     <br/>
-    <label class="radio-inline">
-      <input type="radio" name="topic_type" value="public" checked> Public
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="topic_type" value="private"> Private
-    </label>
+    <label class="control-label">Shared with: </label>
     <br/>
-    <input class="form-control" type="text" id="topic_name" placeholder="Topic Name">
-    <button class="btn btn-warning" type="input" id="new_topic">Create new topic</button>
+    <div>
+      <img id="private_icon" src="/images/lock_blue_1.png">
+    </div>
+    <div>
+      <img id="public_icon" src="/images/group_grey_1.png">
+    </div>
+<!-- champ cache html style display:none, son id icon_type, .html , div -->
+    <div id="topic_type" style="display:none">private</div>
   </form>
 </template>
 
+<!-- Timeline -->
 <template name="topic_timeline">
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-        <button id="back" class="btn btn-info btn-small pull-left"><i class="icon-chevron-left icon-white"></i></button>
-        <h2>{{name}} timeline</h2>
-        <button class="plus btn btn-success btn-small">+1</button>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-2 left_button">
+            <img src="/images/left_chevron_white.png" id="back">
+          </div>
+          <div class="col-xs-8 title">
+            <h2>{{name}}</h2>
+          </div>
+          <div class="col-xs-2 right_button">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  {{#each logs}}
-    {{> log}}
-  {{/each}}
 
-  <form class="form-search">
-    <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
-    <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
-  </form>
+  <div class="container" id="scoreboard">
+
+    <div class="row">
+      <div class="col-xs-3" id="my_score">
+        <img src="/images/my_count.png">
+      </div>
+      <div class="col-xs-6 plus">
+        <h1 id="total_score">{{score}}</h1>
+      </div>
+      <div class="col-xs-3">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 id="description"><i>pour quand mik aura ajouté la description</i></h4>
+      </div>
+    </div>
+    <div class="row">
+      <hr/>
+    </div>
+  
+
+    <form class="form-search">
+      <div class="row">
+        <div class="col-xs-9">
+          <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
+        </div>
+        <div class="col-xs-1">
+          <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
+        </div>
+        <div class="col-xs-1">
+        </div>
+      </div>
+    </form>
+
+    <br/>
+    <div class="row">
+      <div class="col-xs-12">
+        {{#each logs}}
+          {{> log}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <template name="log">
@@ -110,24 +208,24 @@
 
 <template name="count">
   <div class="count">
-    <span class="uname">@{{this.uname}}: </span>
     <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="uname">{{this.uname}}: </span>
     <span class="plus_one">+1</span>
   </div>
 </template>
 
 <template name="message">
   <div class="message">
-    <span class="uname">@{{this.uname}}: </span>
     <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="uname">{{this.uname}}: </span>
     <span class="content">{{content}}</span>
   </div>
 </template>
 
 <template name="adminMessage">
   <div class="adminMessage">
-    <span class="admin_uname">--CHILLBOT-- : </span>
     <span class="admin_formatted_time">{{formatted_time timestamp}}</span>
+    <span class="admin_uname">--CHILLBOT-- : </span>
     <span class="admin_content">{{content}}</span>
   </div>
 </template>
