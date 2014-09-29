@@ -7,8 +7,8 @@ meteor-platform
 autopublish
 insecure
 iron:router
-bootstrap
 accounts-facebook
 accounts-ui
 channikhabra:stupid-models
+mizzao:bootstrap-3
 
