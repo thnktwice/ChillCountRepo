@@ -126,7 +126,7 @@ Template.topic.helpers({
       return Meteor.user().isAdmin();      
     }
     else {
-      return false
+      return false;
     }
   }
 });
