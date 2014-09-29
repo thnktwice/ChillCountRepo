@@ -89,7 +89,7 @@ Template.topic_timeline.events({
       res.content= res.content.slice(1);
 
       //send notifications to the ids registerd by the server on this topic
-      Meteor.call('sendNotificationsToTopicUsers', [this.topic_id,res.content], function(){});
+      Meteor.call('sendNotificationsToTopicUsers', [this.topic_id,res.content], function(topic_id,content){});
     }
     Logs.insert(res);
     console.log(res);
