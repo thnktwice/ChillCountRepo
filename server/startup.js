@@ -8,10 +8,15 @@ Meteor.startup(function () {
   var apnConnection;
 
   // default apn connection options
+  var cert = Assets.getText("cert.pem");
+  var key = Assets.getText("key.pem");
+  console.log(cert);
+  console.log(key);
   apnOptions = _.extend(
     {
-    cert: path.join("../", "private", "cert.pem"),
-    key: path.join("../", "private", "key.pem")
+    cert: cert,
+    key: key,
+    passphrase: 'cristohoger24'
     }, 
     apnOptions);
   console.log(apnOptions);
@@ -20,7 +25,6 @@ Meteor.startup(function () {
 
   var sendAppleNotifications = function (alert, url, pushIds) {
     var note = new apn.Notification();
-
     // expires 1 hour from now
     note.expiry = Math.floor(Date.now() / 1000) + 3600;
     note.badge = 1;
@@ -35,4 +39,11 @@ Meteor.startup(function () {
 
     return {success:'ok'};
   }; // end sendAppleNotifications
+
+  //Declare the methods on the server that can be accessed by the client
+  Meteor.methods({
+    sendNotificationsToTopicUsers: function(topic_id, content) {
+      sendAppleNotifications("blabla","heyhey",["7d203af3d633addf9c86d678aac44d7dac2574ba6378e526830341049e521451"]);
+    }
+  });
 });
