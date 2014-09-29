@@ -53,7 +53,7 @@ Template.topic_creation.events({
     e.preventDefault();
     //We take the value from the inputs
     var topic_name = templ.$("#topic_name").val();
-    var topic_type = templ.$("input[type='radio'][name='topic_type']:checked").val();
+    var topic_type = templ.$("#topic_type").html();
     console.log(topic_name);
     console.log(topic_type);
     //We create the relevant new topic in the database
@@ -71,15 +71,19 @@ Template.topic_creation_form.events({
   'click #private_icon' : function(e, templ) {
     var private_icon = templ.$("#private_icon");
     var public_icon = templ.$("#public_icon");
+    var topic_type = templ.$("#topic_type");
     private_icon.attr("src", "/images/lock_blue_1.png");
     public_icon.attr("src", "/images/group_grey_1.png");
+    topic_type.html("private");
   },
 
   'click #public_icon' : function(e, templ) {
     var private_icon = templ.$("#private_icon");
     var public_icon = templ.$("#public_icon");
+    var topic_type = templ.$("#topic_type");
     private_icon.attr("src", "/images/lock_grey_1.png");
     public_icon.attr("src", "/images/group_blue_1.png");
+    topic_type.html("public");
   }
 
 
