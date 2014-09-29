@@ -12,7 +12,7 @@ Accounts.ui.config({
 
 var addACount = function(topic_id, user_id) {
   //We update the score count
-  var score = Logs.find({topic_id: topic_id, type: 'count'}).count() +1;
+  var my_score = Logs.find({user_id: user_id, topic_id: topic_id, type: 'count'}).count() +1;
   //On click on plus, we insert a new log in the db
   var timestamp = (new Date()).getTime();
   Logs.insert({
@@ -20,8 +20,11 @@ var addACount = function(topic_id, user_id) {
     user_id: user_id,
     type: 'count',
     timestamp: timestamp,
-    score: score
+    score: my_score
   });
+
+  //We update the score count
+  var score = Logs.find({topic_id: topic_id, type: 'count'}).count();
   Topics.update(topic_id, {$set: {score: score}}); 
 };
 
@@ -104,7 +107,7 @@ Template.topic_timeline.events({
     //On click on plus, we insert a new log in the db
     var timestamp = (new Date()).getTime();
 
-    var score = Logs.find({topic_id: this.topic_id, type: 'count'}).count();
+    var my_score = Logs.find({user_id: Meteor.userId(), topic_id: this.topic_id, type: 'count'}).count();
 
     var res = {
       topic_id: this.topic_id,
@@ -112,7 +115,7 @@ Template.topic_timeline.events({
       type: 'message',
       timestamp: timestamp,
       content: message.val(),
-      score: score
+      score: my_score
     };
     if (Meteor.user().isAdmin() && res.content.charAt(0) === '&') {
       res.type = 'adminMessage';
@@ -138,6 +141,10 @@ Template.topics_board.helpers({
 Template.topic_timeline.helpers({
   debug: function () {
     console.log(this);
+  },
+  my_score: function(){
+    var my_score = Logs.find({user_id: Meteor.userId(), topic_id: this.topic_id, type: 'count'}).count();
+    return my_score;
   }
 });
 
