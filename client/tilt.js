@@ -54,10 +54,11 @@ Template.topic_creation.events({
     //We take the value from the inputs
     var topic_name = templ.$("#topic_name").val();
     var topic_type = templ.$("#topic_type").html();
+    var topic_description = templ.$("#topic_description").val();
     console.log(topic_name);
-    console.log(topic_type);
+    console.log(topic_description);
     //We create the relevant new topic in the database
-    Topics.insert({user_id: Meteor.userId(), name: topic_name, type:topic_type, score: 0});
+    Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
     Router.go('/');
   },
   'click #cancel_new_topic' : function() {
