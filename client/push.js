@@ -1,3 +1,5 @@
+Meteor.startup(function () {
+
   var pushStuff = function () {
 
     var pushNotification = window.plugins.pushNotification;
@@ -17,7 +19,8 @@
 
     var myself = {
 
-      registerForNotifications:function (){
+      registerForNotifications:function () {
+        console.log("REGISTERRR");
         pushNotification.register(
           pushTokenHandler,
           pushErrorHandler,
@@ -35,10 +38,10 @@
 
   }.call();
 
-Meteor.startup(function () {
   if (Meteor.isCordova){
     Deps.autorun(function(){ 
-      if(Meteor.userId()){
+      if(Meteor.user()){
+        console.log("USERRR");
         pushStuff.registerForNotifications();
       }
     });
