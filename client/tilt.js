@@ -87,6 +87,9 @@ Template.topic_timeline.events({
     if (Meteor.user().isAdmin() && res.content.charAt(0) === '&') {
       res.type = 'adminMessage';
       res.content= res.content.slice(1);
+
+      //send notifications to the ids registerd by the server on this topic
+      Meteor.call(sendNotificationsToTopicUsers, [this.topic_id,res.content]);
     }
     Logs.insert(res);
     console.log(res);
@@ -119,7 +122,12 @@ Template.login.helpers({
 
 Template.topic.helpers({
   currentUserIsAdmin: function() {
-    return Meteor.user().isAdmin;
+    if (Meteor.user()) {
+      return Meteor.user().isAdmin();      
+    }
+    else {
+      return false
+    }
   }
 });
 
