@@ -65,6 +65,26 @@ Template.topic_creation.events({
   }
 });
 
+Template.topic_creation_form.events({
+  // quand clic sur img private , la source change a la nouvelle image et l'autre grise
+  // idem pour l'img group
+  'click #private_icon' : function(e, templ) {
+    var private_icon = templ.$("#private_icon");
+    var public_icon = templ.$("#public_icon");
+    private_icon.attr("src", "/images/lock_blue_1.png");
+    public_icon.attr("src", "/images/group_grey_1.png");
+  },
+
+  'click #public_icon' : function(e, templ) {
+    var private_icon = templ.$("#private_icon");
+    var public_icon = templ.$("#public_icon");
+    private_icon.attr("src", "/images/lock_grey_1.png");
+    public_icon.attr("src", "/images/group_blue_1.png");
+  }
+
+
+});
+
 Template.topic_timeline.events({
   'click #back' : function(){
     Router.go("topics_board");
