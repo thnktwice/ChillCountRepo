@@ -1,6 +1,6 @@
 /* CSS declarations go here */
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-weight: 200;
     text-align: center;
     padding-bottom:50px;
@@ -22,35 +22,42 @@ body {
     .navbar-inner {
         background: #0099cc;
         background-image: none;
+        height:50px;
     }
 
     .title{
         color:white;
         padding:0;
+        width:80%;
+        vertical-align: middle;
     }
 
     h2{
         margin:5px 0px 5px 0px;
-        font-size: 25pt;
+        font-size: 22pt;
         font-weight:100;
     }
 
     .left_button{
         margin-top:8px;
         color:white;
+        width:10%;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .right_button{
         margin-top:8px;
         color:white;
         padding:0;
+        width:10%;
     }
 
 
 /*Topic Board*/
     .topicBoard {
         position: relative;
-        top: 46px;
+        top: 50px;
         padding-bottom:150px;
     }
 
@@ -64,24 +71,27 @@ body {
     }
 
     .topic .name {
-        font-size: 1.8em;
+        font-size: 1.6em;
         vertical-align: middle;
         text-align: left;
+        color:#0099cc;
     }
 
     .topic .score {
-        font-size: 3em;
-        font-weight: bold;
+        font-size: 2em;
+        font-weight: normal;
         color: white;
         vertical-align: middle;    
     }
 
     .topic .plus {
         margin:5px 0px 5px 0px;
-        vertical-align: middle;
+/*        text-align: center;*/
+        line-height: 61px;
         height:61px;
         width:61px;
         background-image: url('images/circle_orange_1.png');
+        background-repeat: no-repeat;
     }
 
     .topic .go {
@@ -101,7 +111,6 @@ body {
     top: 60px;
 }
 
-
 #scoreboard{
     position: relative;
     top: 60px;
@@ -113,12 +122,28 @@ body {
 
 #total_score {
     display:inline-block;
-    vertical-align: middle;
-    font-size: 40pt;
     height:133px;
     width:133px;
     background-image: url('images/circle_orange_large.png');
+    background-repeat: no-repeat;
+    text-align:center;
+    line-height: 133px;
+    color:white;
+    font-size: 50pt;
+    font-weight:150;
 
+}
+
+#input_bar{
+    padding: 0;
+    margin-left:15px;
+    width:240px;
+}
+
+#input_button{
+    width:51px;
+    padding: 0;
+    margin-right: 10px;
 }
 
 #footer {
