@@ -1,5 +1,7 @@
-Meteor.startup(function () {
-  if (Meteor.isCordova){
+if (Meteor.isCordova){
+  Meteor.startup(function () {
+
+    console.log("ISCORDOVA");
     var pushStuff = function () {
 
       var pushNotification = window.plugins.pushNotification;
@@ -38,11 +40,12 @@ Meteor.startup(function () {
 
     }.call();
 
-    Deps.autorun(function(){ 
+    Tracker.autorun(function(){ 
       if(Meteor.user()){
         console.log("USERRR");
         pushStuff.registerForNotifications();
       }
     });
-  }   
-});
+   
+  });
+}
