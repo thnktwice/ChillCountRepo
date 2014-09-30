@@ -256,6 +256,11 @@ body {
         font-size: 13pt
     }
 
+    .chillbot{
+        height:30px;
+        float:right;
+    }
+
 
 #footer {
     width:100%;
