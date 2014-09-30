@@ -112,14 +112,14 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <input class="form-control" type="text" id="topic_name" placeholder="Title">
+          <input class="form-control" type="text" id="topic_name" placeholder="Title" maxlength="18">
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-xs-12">
           <textarea rows="3" placeholder="Description"
-          id="description" class="form-control"></textarea>
+          id="topic_description" class="form-control"></textarea>
         </div>
       </div>
       <br/>
@@ -166,8 +166,8 @@
   <div class="container" id="scoreboard">
 
     <div class="row">
-      <div class="col-xs-3" id="my_score">
-        <img src="/images/my_count.png">
+      <div class="col-xs-3">
+        <p id="my_score">{{my_score}}</p>
       </div>
       <div class="col-xs-6 plus">
         <h1 id="total_score">{{score}}</h1>
@@ -178,7 +178,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h4 id="description"><i>pour quand mik aura ajouté la description</i></h4>
+        <h4 id="description"><i>{{description}}</i></h4>
       </div>
     </div>
     <div class="row">
@@ -208,7 +208,7 @@
       </div>
     </div>
   </div>
-
+  <br/>
 </template>
 
 <template name="log">
@@ -228,7 +228,7 @@
 <template name="count">
   <div class="count">
     <span class="formatted_time">{{formatted_time timestamp}}</span>
-    <span class="uname">{{this.uname}}: </span>
+    <span class="uname">{{this.uname}}({{score}}): </span>
     <span class="plus_one">+1</span>
   </div>
 </template>
@@ -236,7 +236,7 @@
 <template name="message">
   <div class="message">
     <span class="formatted_time">{{formatted_time timestamp}}</span>
-    <span class="uname">{{this.uname}}: </span>
+    <span class="uname">{{this.uname}}({{score}}): </span>
     <span class="content">{{content}}</span>
   </div>
 </template>

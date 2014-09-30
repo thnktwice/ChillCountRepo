@@ -116,6 +116,16 @@ body {
     top: 60px;
 }
 
+#my_score {
+    color: #0099cc;
+    font-size: 20pt;
+    line-height: 60px;
+    background-image: url('images/my_count.png');
+    background-repeat: no-repeat;
+    height:90px;
+    width:62px;
+}
+
 #description{
     color:#0099cc;
 }
