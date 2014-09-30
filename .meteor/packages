@@ -10,5 +10,9 @@ iron:router
 accounts-facebook
 accounts-ui
 channikhabra:stupid-models
+meteorhacks:npm
 mizzao:bootstrap-3
+mrt:moment
 
+
+npm-container

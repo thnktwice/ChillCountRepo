@@ -125,28 +125,22 @@
       <br/>
       <div class="row">
         <div class="col-xs-12">
-          <label>Shared with: </label>
+          <label class="control-label">Shared with: </label>
           <br/>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-xs-6">
-          <img src="/images/lock_blue_1.png">
+          <img id="private_icon" src="/images/lock_blue_1.png">
         </div>
         <div class="col-xs-6">
-          <img src="/images/group_grey_1.png">
+          <img id="public_icon" src="/images/group_grey_1.png">
         </div>
       </div>
     </div>
-      
-
-    <label class="radio-inline">
-      <input type="radio" name="topic_type" value="public" checked > Everyone
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="topic_type" value="private"> Only Me
-    </label>
+    <!-- champ cache html style display:none, son id icon_type, .html , div -->
+    <div id="topic_type" style="display:none">private</div>
   </form>
 </template>
 
@@ -233,24 +227,24 @@
 
 <template name="count">
   <div class="count">
-    <span class="uname">@{{this.uname}}: </span>
     <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="uname">{{this.uname}}: </span>
     <span class="plus_one">+1</span>
   </div>
 </template>
 
 <template name="message">
   <div class="message">
-    <span class="uname">@{{this.uname}}: </span>
     <span class="formatted_time">{{formatted_time timestamp}}</span>
+    <span class="uname">{{this.uname}}: </span>
     <span class="content">{{content}}</span>
   </div>
 </template>
 
 <template name="adminMessage">
   <div class="adminMessage">
-    <span class="admin_uname">--CHILLBOT-- : </span>
     <span class="admin_formatted_time">{{formatted_time timestamp}}</span>
+    <span class="admin_uname">--CHILLBOT-- : </span>
     <span class="admin_content">{{content}}</span>
   </div>
 </template>
