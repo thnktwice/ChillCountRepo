@@ -1,6 +1,6 @@
 /* CSS declarations go here */
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-weight: 200;
     text-align: center;
     padding-bottom:50px;
@@ -22,35 +22,48 @@ body {
     .navbar-inner {
         background: #0099cc;
         background-image: none;
+        height:50px;
+    }
+
+    .title_box{
+        color:white;
+        padding:0;
+        width:80%;
+
     }
 
     .title{
-        color:white;
-        padding:0;
-    }
-
-    h2{
+        text-align: center;
+        vertical-align: middle;
+        line-height: 35px;
         margin:5px 0px 5px 0px;
-        font-size: 25pt;
+        font-size: 22pt;
         font-weight:100;
     }
+
 
     .left_button{
         margin-top:8px;
         color:white;
+        width:10%;
+        padding-left: 10px;
+        padding-right: 5px;
+        line-height: 25px;
     }
 
     .right_button{
         margin-top:8px;
         color:white;
-        padding:0;
+        padding: 0px 10px 0px 0px;
+        width:10%;
+        line-height: 25px;
     }
 
 
 /*Topic Board*/
     .topicBoard {
         position: relative;
-        top: 46px;
+        top: 50px;
         padding-bottom:150px;
     }
 
@@ -64,24 +77,26 @@ body {
     }
 
     .topic .name {
-        font-size: 1.8em;
+        font-size: 1.6em;
         vertical-align: middle;
         text-align: left;
+        color:#0099cc;
     }
 
     .topic .score {
-        font-size: 3em;
-        font-weight: bold;
+        font-size: 2em;
+        font-weight: normal;
         color: white;
         vertical-align: middle;    
     }
 
     .topic .plus {
         margin:5px 0px 5px 0px;
-        vertical-align: middle;
+        line-height: 61px;
         height:61px;
         width:61px;
         background-image: url('images/circle_orange_1.png');
+        background-repeat: no-repeat;
     }
 
     .topic .go {
@@ -96,34 +111,156 @@ body {
         /*color: black;*/
     }
 
-#topic_creation_form{
-    position: relative;
-    top: 60px;
-}
+/*Topic creation*/
+    
+    #topic_creation_form{
+        position: relative;
+        top: 60px;
+    }
+
+    #public_icon{
+        padding-top:11px;
+    }
+
+    #shared_with{
+        font-size: 18pt;
+        font-weight: 100;
+        color:#0099cc;
+    }
+
+/*Timeline*/
+    #scoreboard{
+        position: relative;
+        top: 60px;
+    }
+
+    #my_score {
+        color: #0099cc;
+        font-size: 20pt;
+        line-height: 60px;
+        background-image: url('images/my_count.png');
+        background-repeat: no-repeat;
+        height:90px;
+        width:62px;
+    }
+
+    #description{
+        color:#0099cc;
+    }
+
+    #total_score {
+        display:inline-block;
+        height:133px;
+        width:133px;
+        background-image: url('images/circle_orange_large.png');
+        background-repeat: no-repeat;
+        text-align:center;
+        line-height: 133px;
+        color:white;
+        font-size: 50pt;
+        font-weight:150;
+
+    }
+
+    #input_bar{
+        padding: 0;
+        margin-left:15px;
+        width:240px;
+    }
+
+    #input_button{
+        width:51px;
+        padding: 0;
+        margin-right: 10px;
+    }
 
 
-#scoreboard{
-    position: relative;
-    top: 60px;
-}
+    .log{
+        color:#0099cc;
+        text-align: left;
+    }
 
-#my_score {
-    color: black;
-}
+    .mine{
+        text-align:right;   
+    }
 
-#description{
-    color:#0099cc;
-}
 
-#total_score {
-    display:inline-block;
-    vertical-align: middle;
-    font-size: 40pt;
-    height:133px;
-    width:133px;
-    background-image: url('images/circle_orange_large.png');
+    .formatted_time{
+        color:grey;
+        font-size: 8pt;
+    }
 
-}
+    .admin_formatted_time{
+        color:grey;
+        font-size: 8pt;
+    }
+
+    .count.mine{
+        border-width: 0px 2px 0px 0px;
+        padding-right: 5px;
+    }
+
+    .count{
+        border-style: solid;
+        border-width: 0px 0px 0px 2px;
+        border-color: #ff9933;
+        padding-left: 5px;
+        margin-bottom: 8px;
+    }
+
+
+
+    .score_log{
+        color:#ff9933;
+        font-size: 15pt;
+        font-weight: bold;
+    }
+    .name_log{
+        font-size:11pt;
+        color:#0099cc;
+    }
+
+
+    .message{
+ /*       border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: #0099cc;*/
+        border-radius:10px;
+        padding:2px 5px;
+        background-color: rgba(255,153,51,0.1);
+        margin-bottom: 8px;
+        font-size:11pt;
+    }
+
+
+    .message .uname{
+        font-weight:normal;
+        font-size: 13pt;    
+    }
+    
+
+
+    .adminMessage{
+  /*      border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: #ff9933;*/
+        border-radius:10px;
+        background-color: rgba(0,153,204,0.05);
+        margin-bottom: 8px;
+        padding:2px 5px;
+        color:#ff9933;
+        font-size:11pt;
+    }
+    .adminMessage .admin_uname{
+        font-weight:normal;
+        font-size: 13pt
+    }
+
+    .chillbot{
+        height:30px;
+        float:right;
+    }
+
 
 #footer {
     width:100%;

@@ -168,3 +168,12 @@ Template.topic.helpers({
   }
 });
 
+Template.count.isMine = function () {
+  return (this.user_id === Meteor.userId()) ;
+};
+
+Template.message.isMine = function () {
+  return (this.user_id === Meteor.userId()) ;
+};
+
+
