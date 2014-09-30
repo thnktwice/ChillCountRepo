@@ -25,32 +25,38 @@ body {
         height:50px;
     }
 
-    .title{
+    .title_box{
         color:white;
         padding:0;
         width:80%;
-        vertical-align: middle;
+
     }
 
-    h2{
+    .title{
+        text-align: center;
+        vertical-align: middle;
+        line-height: 35px;
         margin:5px 0px 5px 0px;
         font-size: 22pt;
         font-weight:100;
     }
 
+
     .left_button{
         margin-top:8px;
         color:white;
         width:10%;
-        padding-left: 5px;
+        padding-left: 10px;
         padding-right: 5px;
+        line-height: 25px;
     }
 
     .right_button{
         margin-top:8px;
         color:white;
-        padding:0;
+        padding: 0px 10px 0px 0px;
         width:10%;
+        line-height: 25px;
     }
 
 
@@ -86,7 +92,6 @@ body {
 
     .topic .plus {
         margin:5px 0px 5px 0px;
-/*        text-align: center;*/
         line-height: 61px;
         height:61px;
         width:61px;
@@ -106,55 +111,151 @@ body {
         /*color: black;*/
     }
 
-#topic_creation_form{
-    position: relative;
-    top: 60px;
-}
+/*Topic creation*/
+    
+    #topic_creation_form{
+        position: relative;
+        top: 60px;
+    }
 
-#scoreboard{
-    position: relative;
-    top: 60px;
-}
+    #public_icon{
+        padding-top:11px;
+    }
 
-#my_score {
-    color: #0099cc;
-    font-size: 20pt;
-    line-height: 60px;
-    background-image: url('images/my_count.png');
-    background-repeat: no-repeat;
-    height:90px;
-    width:62px;
-}
+    #shared_with{
+        font-size: 18pt;
+        font-weight: 100;
+        color:#0099cc;
+    }
 
-#description{
-    color:#0099cc;
-}
+/*Timeline*/
+    #scoreboard{
+        position: relative;
+        top: 60px;
+    }
 
-#total_score {
-    display:inline-block;
-    height:133px;
-    width:133px;
-    background-image: url('images/circle_orange_large.png');
-    background-repeat: no-repeat;
-    text-align:center;
-    line-height: 133px;
-    color:white;
-    font-size: 50pt;
-    font-weight:150;
+    #my_score {
+        color: #0099cc;
+        font-size: 20pt;
+        line-height: 60px;
+        background-image: url('images/my_count.png');
+        background-repeat: no-repeat;
+        height:90px;
+        width:62px;
+    }
 
-}
+    #description{
+        color:#0099cc;
+    }
 
-#input_bar{
-    padding: 0;
-    margin-left:15px;
-    width:240px;
-}
+    #total_score {
+        display:inline-block;
+        height:133px;
+        width:133px;
+        background-image: url('images/circle_orange_large.png');
+        background-repeat: no-repeat;
+        text-align:center;
+        line-height: 133px;
+        color:white;
+        font-size: 50pt;
+        font-weight:150;
 
-#input_button{
-    width:51px;
-    padding: 0;
-    margin-right: 10px;
-}
+    }
+
+    #input_bar{
+        padding: 0;
+        margin-left:15px;
+        width:240px;
+    }
+
+    #input_button{
+        width:51px;
+        padding: 0;
+        margin-right: 10px;
+    }
+
+
+    .log{
+        color:#0099cc;
+        text-align: left;
+    }
+
+    .mine{
+        text-align:right;   
+    }
+
+
+    .formatted_time{
+        color:grey;
+        font-size: 8pt;
+    }
+
+    .admin_formatted_time{
+        color:grey;
+        font-size: 8pt;
+    }
+
+    .count.mine{
+        border-width: 0px 2px 0px 0px;
+        padding-right: 5px;
+    }
+
+    .count{
+        border-style: solid;
+        border-width: 0px 0px 0px 2px;
+        border-color: #ff9933;
+        padding-left: 5px;
+        margin-bottom: 8px;
+    }
+
+
+
+    .score_log{
+        color:#ff9933;
+        font-size: 15pt;
+        font-weight: bold;
+    }
+    .name_log{
+        font-size:11pt;
+        color:#0099cc;
+    }
+
+
+    .message{
+ /*       border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: #0099cc;*/
+        border-radius:10px;
+        padding:2px 5px;
+        background-color: rgba(255,153,51,0.1);
+        margin-bottom: 8px;
+        font-size:11pt;
+    }
+
+
+    .message .uname{
+        font-weight:normal;
+        font-size: 13pt;    
+    }
+    
+
+
+    .adminMessage{
+  /*      border-style: solid;
+        border-width: 1px 1px 1px 1px;
+        border-color: #ff9933;*/
+        border-radius:10px;
+        background-color: rgba(0,153,204,0.05);
+        margin-bottom: 8px;
+        padding:2px 5px;
+        color:#ff9933;
+        font-size:11pt;
+    }
+    .adminMessage .admin_uname{
+        font-weight:normal;
+        font-size: 13pt
+    }
+
 
 #footer {
     width:100%;

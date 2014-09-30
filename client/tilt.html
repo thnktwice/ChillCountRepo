@@ -28,8 +28,8 @@
             <div class="col-xs-2 left_button">
               <img src="/images/plus_white.png" id="add_topic">
             </div>
-            <div class="col-xs-8 title">
-                <h2>Chillcount</h2>
+            <div class="col-xs-8 title_box">
+                <h2 class="title">Chillcount</h2>
             </div> 
             <div class="col-xs-2 right_button">
             </div>
@@ -82,6 +82,7 @@
   </div>
 </template>
 
+
 <!-- Topic creation -->
 <template name="topic_creation">
   <div class="navbar navbar-fixed-top">
@@ -91,11 +92,11 @@
           <div class="col-xs-2 left_button">
             <img src="/images/left_chevron_white.png" id="cancel_new_topic">
           </div>
-          <div class="col-xs-8 title">
-            <h2>New Topic</h2>
+          <div class="col-xs-8 title_box">
+            <h2 class="title">New Topic</h2>
           </div>
           <div class="col-xs-2 right_button">
-            <p id="new_topic">Go</p>
+            <img src="/images/check_white.png" id="new_topic">
           </div>
         </div>
       </div>
@@ -111,6 +112,7 @@
   <form class="form-search">
     <div class="container">
       <div class="row">
+        <br/>
         <div class="col-xs-12">
           <input class="form-control" type="text" id="topic_name" placeholder="Title" maxlength="18">
         </div>
@@ -123,9 +125,10 @@
         </div>
       </div>
       <br/>
+      <br/>
       <div class="row">
         <div class="col-xs-12">
-          <label class="control-label">Shared with: </label>
+          <label class="control-label" id="shared_with">Shared with: </label>
           <br/>
         </div>
       </div>
@@ -153,8 +156,8 @@
           <div class="col-xs-2 left_button">
             <img src="/images/left_chevron_white.png" id="back">
           </div>
-          <div class="col-xs-8 title">
-            <h2>{{name}}</h2>
+          <div class="col-xs-8 title_box">
+            <h2 class="title">{{name}}</h2>
           </div>
           <div class="col-xs-2 right_button">
           </div>
@@ -226,26 +229,108 @@
 </template>
 
 <template name="count">
-  <div class="count">
-    <span class="formatted_time">{{formatted_time timestamp}}</span>
-    <span class="uname">{{this.uname}}({{score}}): </span>
-    <span class="plus_one">+1</span>
+  {{#if isMine}}
+  <div class="count mine">
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time mine">
+        {{formatted_time timestamp}}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-12 mine">
+        <span class="score_log">{{score}} !</span>
+        <span class="name_log">(logged by me)</span>
+      </div>
+    </div>
   </div>
+  {{else}}
+  <div class="count">
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time">
+        {{formatted_time timestamp}}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-12">
+        <span class="name_log">(logged by {{this.uname}})</span>
+        <span class="score_log">{{score}}</span>
+      </div>
+    </div>
+  </div>
+  {{/if}}
 </template>
 
 <template name="message">
-  <div class="message">
-    <span class="formatted_time">{{formatted_time timestamp}}</span>
-    <span class="uname">{{this.uname}}({{score}}): </span>
-    <span class="content">{{content}}</span>
-  </div>
+  {{#if isMine}}
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time mine">
+        {{formatted_time timestamp}}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-11 col-xs-offset-1">
+        <div class="message">
+          <div class="row"> 
+            <div class="col-xs-12 uname mine">
+              ({{score}})  Me
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 content mine">
+              {{content}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time">
+        {{formatted_time timestamp }}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-11s">
+        <div class="message">
+          <div class="row"> 
+            <div class="col-xs-12 uname">
+              {{this.uname}}  ({{score}})
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 content">
+              {{content}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
 </template>
 
 <template name="adminMessage">
-  <div class="adminMessage">
-    <span class="admin_formatted_time">{{formatted_time timestamp}}</span>
-    <span class="admin_uname">--CHILLBOT-- : </span>
-    <span class="admin_content">{{content}}</span>
+  <div class="row"> 
+    <div class="col-xs-12 admin_formatted_time">
+      {{formatted_time timestamp}}
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-xs-11">
+      <div class="adminMessage">
+        <div class="row"> 
+          <div class="col-xs-6 admin_uname">
+          Chillbot
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 admin_content">
+          {{content}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
