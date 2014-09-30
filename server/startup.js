@@ -21,12 +21,14 @@ Meteor.startup(function () {
   // var cert = Assets.getText("cert.pem");
   var cert = Assets.getText("tiltProdCert.pem");
   var key = Assets.getText("key.pem");
+  var ca = Assets.getText("entrust_2048_ca.cer");
   // console.log(cert);
   // console.log(key);
   apnOptions = _.extend(
     {
     cert: cert,
     key: key,
+    ca: ca,
     passphrase: 'cristohoger24',
     production: true
     }, 
@@ -36,6 +38,7 @@ Meteor.startup(function () {
   apnConnection = new apn.Connection(apnOptions);
 
   var sendAppleNotifications = function (topic_id, content) {
+    console.log("sendAppleNotifications");
     var note = new apn.Notification();
     // expires 1 hour from now
     note.expiry = Math.floor(Date.now() / 1000) + 3600;
@@ -49,6 +52,8 @@ Meteor.startup(function () {
 
     _.each(pushIds, function (token) {
       var device = new apn.Device(token);
+      console.log("sending notification to +" + token );
+      console.log(note);
       apnConnection.pushNotification(note, device);
     });
 
