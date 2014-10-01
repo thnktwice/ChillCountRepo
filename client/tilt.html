@@ -25,8 +25,7 @@
       <div class="navbar-inner">
         <div class="container">
           <div class="row">
-            <div class="col-xs-2 left_button">
-              <img src="/images/plus_white.png" id="add_topic">
+            <div class="col-xs-2 left_button" id="add_topic">
             </div>
             <div class="col-xs-8 title_box">
                 <h2 class="title">Chillcount</h2>
@@ -65,18 +64,16 @@
         <div class="col-xs-8 name">
           {{name}}
           <div class="row">
-            <div class="col-xs-6">
-              <img src="/images/{{type}}_icon_grey.png">
+            <div class="col-xs-4 {{type}}_small_icon">
             </div>
+            {{#if currentUserIsAdmin}}
+              <div class="col-xs-5 creator">
+                {{this.uname}}
+              </div>
+            {{/if}}
           </div>
         </div>
-        {{#if currentUserIsAdmin}}
-          <div class="creator">
-            {{this.uname}}
-          </div>
-        {{/if}}
-        <div class="col-xs-1">
-          <img class="go" src="/images/right_chevron_blue.png">
+        <div class="col-xs-1 go">
         </div>
       </div>
     </div>
@@ -90,14 +87,12 @@
     <div class="navbar-inner">
       <div class="container">
         <div class="row">
-          <div class="col-xs-2 left_button">
-            <img src="/images/left_chevron_white.png" id="cancel_new_topic">
+          <div class="col-xs-2 left_button" id="cancel_new_topic">
           </div>
           <div class="col-xs-8 title_box">
             <h2 class="title">New Topic</h2>
           </div>
-          <div class="col-xs-2 right_button">
-            <img src="/images/check_white.png" id="new_topic">
+          <div class="col-xs-2 right_button" id="new_topic">
           </div>
         </div>
       </div>
@@ -135,11 +130,9 @@
       </div>
       <br/>
       <div class="row">
-        <div class="col-xs-6">
-          <img id="private_icon" src="/images/lock_blue_1.png">
+        <div class="col-xs-6 enabled" id="private_icon">
         </div>
-        <div class="col-xs-6">
-          <img id="public_icon" src="/images/group_grey_1.png">
+        <div class="col-xs-6 disabled" id="public_icon">
         </div>
       </div>
     </div>
@@ -154,8 +147,7 @@
     <div class="navbar-inner">
       <div class="container">
         <div class="row">
-          <div class="col-xs-2 left_button">
-            <img src="/images/left_chevron_white.png" id="back">
+          <div class="col-xs-2 left_button" id="back">
           </div>
           <div class="col-xs-8 title_box">
             <h2 class="title">{{name}}</h2>
@@ -192,13 +184,13 @@
 
     <form class="form-search">
       <div class="row">
-        <div class="col-xs-10" id="input_bar">
-          <input class="form-control" type="text" id="message_content" placeholder="Feelings about these logs ?">
-        </div>
-        <div class="col-xs-1" id="input_button">
-          <button class="btn btn-warning" type="input" id="new_message">Ya !</button>
-        </div>
-        <div class="col-xs-1">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <input type="text" class="form-control" id="message_content" placeholder="Feelings about these logs ?">
+            <span class="input-group-btn">
+              <button class="btn btn-warning" type="button" id="new_message">Post</button>
+            </span>
+          </div>
         </div>
       </div>
     </form>
@@ -239,8 +231,8 @@
     </div>
     <div class="row"> 
       <div class="col-xs-12 mine">
-        <span class="score_log">{{score}} !</span>
-        <span class="name_log">(logged by me)</span>
+        <span class="score_log">{{score}}</span>
+        <span class="name_log">&nbsp;by me</span>
       </div>
     </div>
   </div>
@@ -253,7 +245,7 @@
     </div>
     <div class="row"> 
       <div class="col-xs-12">
-        <span class="name_log">(logged by {{this.uname}})</span>
+        <span class="name_log">{{this.uname}}:&nbsp;</span>
         <span class="score_log">{{score}}</span>
       </div>
     </div>
@@ -291,7 +283,7 @@
       </div>
     </div>
     <div class="row"> 
-      <div class="col-xs-11s">
+      <div class="col-xs-11">
         <div class="message">
           <div class="row"> 
             <div class="col-xs-12 uname">
@@ -320,10 +312,10 @@
   <div class="row"> 
     <div class="col-xs-11">
       <div class="adminMessage">
-        <img class="chillbot" src="/images/chillbot.png">
         <div class="row"> 
-          <div class="col-xs-6 admin_uname">
-          Chillbot
+          <div class="col-xs-12 admin_uname">
+            <span>Chillbot</span>
+            <span class="chillbot"></span>
           </div>
         </div>
         <div class="row">
