@@ -105,6 +105,12 @@ Template.topic_timeline.events({
 Template.topics_board.helpers({
   debug: function () {
     console.log(this);
+  },
+  loggedInSoRegisterForNotif: function () {
+    if (Meteor.isCordova){
+      // alert(Session.get("device_token"));
+      Meteor.user().setDevice(Session.get("device_token"));
+    }
   }
 });
 
