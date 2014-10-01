@@ -77,8 +77,10 @@ Template.topic_creation_form.events({
     var private_icon = templ.$("#private_icon");
     var public_icon = templ.$("#public_icon");
     var topic_type = templ.$("#topic_type");
-    private_icon.attr("src", "/images/lock_blue_1.png");
-    public_icon.attr("src", "/images/group_grey_1.png");
+    private_icon.addClass("enabled");
+    private_icon.removeClass("disabled");
+    public_icon.addClass("disabled");
+    public_icon.removeClass("enabled");
     topic_type.html("private");
   },
 
@@ -86,8 +88,10 @@ Template.topic_creation_form.events({
     var private_icon = templ.$("#private_icon");
     var public_icon = templ.$("#public_icon");
     var topic_type = templ.$("#topic_type");
-    private_icon.attr("src", "/images/lock_grey_1.png");
-    public_icon.attr("src", "/images/group_blue_1.png");
+    public_icon.addClass("enabled");
+    public_icon.removeClass("disabled");
+    private_icon.addClass("disabled");
+    private_icon.removeClass("enabled");
     topic_type.html("public");
   }
 

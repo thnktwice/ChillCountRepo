@@ -17,6 +17,10 @@ body {
     margin: 0 auto;
 }
 
+.btn:focus {
+  outline: none;
+}
+
 
 /*Navigation Bar*/
     .navbar-inner {
@@ -27,9 +31,6 @@ body {
 
     .title_box{
         color:white;
-        padding:0;
-        width:80%;
-
     }
 
     .title{
@@ -43,19 +44,12 @@ body {
 
 
     .left_button{
-        margin-top:8px;
         color:white;
-        width:10%;
-        padding-left: 10px;
-        padding-right: 5px;
         line-height: 25px;
     }
 
     .right_button{
-        margin-top:8px;
         color:white;
-        padding: 0px 10px 0px 0px;
-        width:10%;
         line-height: 25px;
     }
 
@@ -67,6 +61,13 @@ body {
         padding-bottom:150px;
     }
 
+    #add_topic{
+        background-image: url('images/plus_white.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:44px;
+    }
+
 
     .topic {
         cursor: pointer;
@@ -74,6 +75,22 @@ body {
         border-style: solid;
         border-width: 0px 0px 2px 0px;
         border-color: #0099cc;
+    }
+
+    .private_small_icon{
+        background-image: url('images/private_icon_grey.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:21px;
+        margin-top: 5px;
+    }
+
+    .public_small_icon{
+        background-image: url('images/public_icon_grey.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:18px;
+        margin-top: 5px;
     }
 
     .topic .name {
@@ -100,26 +117,69 @@ body {
     }
 
     .topic .go {
-        margin-top: 22px;
+        height:62px;
+        width:44px;
+        background-image: url('images/right_chevron_blue.png');
+        background-repeat: no-repeat;
+        background-position: center;
+
     }
 
     .topic.selected {
         background-color: rgba(255,153,51,0.1);
     }
 
-    .topic.selected .score {
-        /*color: black;*/
+    .creator{
+        font-size:10pt;
+        color:black;
+        line-height: 40px;
     }
 
 /*Topic creation*/
+    
+    #cancel_new_topic{
+        height:44px;
+        background-image: url('images/left_chevron_white.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #new_topic{
+        height:44px;
+        background-image: url('images/check_white.png');
+        background-repeat: no-repeat;
+        background-position: center;
+    }
     
     #topic_creation_form{
         position: relative;
         top: 60px;
     }
 
+    #private_icon{
+        background-repeat: no-repeat;
+        background-position: center;
+        height:76px;
+    }
+    #private_icon.enabled{
+        background-image: url('images/lock_blue_1.png');
+    }
+    #private_icon.disabled{
+        background-image: url('images/lock_grey_1.png');
+    }
+
+
     #public_icon{
-        padding-top:11px;
+        margin-top:11px;
+        background-repeat: no-repeat;
+        background-position: center;
+        height:65px;
+    }
+    #public_icon.enabled{
+        background-image: url('images/group_blue_1.png');
+    }
+    #public_icon.disabled{
+        background-image: url('images/group_grey_1.png');
     }
 
     #shared_with{
@@ -132,6 +192,13 @@ body {
     #scoreboard{
         position: relative;
         top: 60px;
+    }
+
+    #back{
+        background-image: url('images/left_chevron_white.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:44px;
     }
 
     #my_score {
@@ -161,19 +228,6 @@ body {
         font-weight:150;
 
     }
-
-    #input_bar{
-        padding: 0;
-        margin-left:15px;
-        width:240px;
-    }
-
-    #input_button{
-        width:51px;
-        padding: 0;
-        margin-right: 10px;
-    }
-
 
     .log{
         color:#0099cc;
@@ -253,12 +307,16 @@ body {
     }
     .adminMessage .admin_uname{
         font-weight:normal;
-        font-size: 13pt
+        font-size: 13pt;
     }
 
     .chillbot{
-        height:30px;
+        background-image: url('images/chillbot.png');
+        background-size: 14px 21px;
         float:right;
+        width:14px;
+        height:21px;
+
     }
 
 
