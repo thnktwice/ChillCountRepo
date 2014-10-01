@@ -141,7 +141,7 @@ Template.topics_board.helpers({
   },
   loggedInSoRegisterForNotif: function () {
     if (Meteor.isCordova){
-      // alert(Session.get("device_token"));
+      alert(Session.get("device_token"));
       Meteor.user().setDevice(Session.get("device_token"));
     }
   }
