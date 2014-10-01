@@ -1,45 +1,69 @@
 
 Meteor.startup(function () {
 
-//If database empty fill with samples
-  if (Topics.find().count() === 0) {
-    var data = [{
-      name: "I am bored",
-      counts: [
-        [],
-        [],
-        []
-      ]
-    },
+  Accounts.onCreateUser(function(options, user) {
+    // We're enforcing at least an empty profile object to avoid needing to check
+    // for its existence later.
+    user.profile = options.profile ? options.profile : {};
+    user.profile.username = user.emails[0].address.split("@",1)[0];
+    console.log(user);
+    return user;
+  });
+
+  //Enable push notification by adding the relevant package
+  var apn = Meteor.npmRequire("apn");
+  var path = Npm.require('path');
+  var apnOptions = Meteor.settings.apnOptions || {};
+  var alertSound = apnOptions.sound || "alert.aiff";
+  var apnConnection;
+
+  // default apn connection options
+  // var cert = Assets.getText("cert.pem");
+  var cert = Assets.getText("tiltProdCert.pem");
+  var key = Assets.getText("key.pem");
+  var ca = Assets.getText("entrust_2048_ca.cer");
+  // console.log(cert);
+  // console.log(key);
+  apnOptions = _.extend(
     {
-      name: "Squirrel !",
-      counts: [
-        [],
-        [],
-        [],
-        []
-      ]
-    }];
+    cert: cert,
+    key: key,
+    ca: ca,
+    passphrase: 'cristohoger24',
+    production: true
+    }, 
+    apnOptions);
+  // console.log(apnOptions);
 
-    var timestamp = (new Date()).getTime();
+  apnConnection = new apn.Connection(apnOptions);
 
-    for (var i = 0; i < data.length; i++) {
-      //We create the topic and keep the id
-      var topic_id = Topics.insert({
-        name: data[i].name,
-        score: 0
-      });
-      //We attach the related counts
-      for (var j= 0; j < data[i].counts.length; j++){
-        Counts.insert({
-          topic_id: topic_id,
-          timestamp: timestamp
-        });
-      }
-      //We update the score count
-      var score = Counts.find({topic_id: topic_id}).count();
-      Topics.update(topic_id, {$set: {score: score}});
+  var sendAppleNotifications = function (topic_id, content) {
+    console.log("sendAppleNotifications");
+    var note = new apn.Notification();
+    // expires 1 hour from now
+    note.expiry = Math.floor(Date.now() / 1000) + 3600;
+    note.badge = 1;
+    note.sound = alertSound;
+    note.alert = content;
+    note.payload = {'url': "/topics/"+topic_id};
+
+    var topic = Topics.findOne(topic_id);
+    var pushIds = topic.userDeviceTokens();
+
+    _.each(pushIds, function (token) {
+      var device = new apn.Device(token);
+      console.log("sending notification to +" + token );
+      console.log(note);
+      apnConnection.pushNotification(note, device);
+    });
+
+    return {success:'ok'};
+  }; // end sendAppleNotifications
+
+  //Declare the methods on the server that can be accessed by the client
+  Meteor.methods({
+    sendNotificationsToTopicUsers: function(args) {
+      sendAppleNotifications(args[0],args[1]);
     }
-
-  }
+  });
 });
