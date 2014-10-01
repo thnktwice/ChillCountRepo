@@ -1,12 +1,5 @@
 if (Meteor.isCordova){
   // alert('i----------sCordova');
-  Meteor.startup(function () {
-
-    alert("------ISSTARTUP");
-
-      var pushNotification = window.plugins.pushNotification;
-      //pour le push
-      alert(window.plugins);
       var pushSuccessHandler = function (result) { 
         alert('pushResult = ' + result); 
       };
@@ -18,7 +11,18 @@ if (Meteor.isCordova){
       var pushTokenHandler = function (result) { 
         alert('iOS device token = ' + result);
         Session.set('device_token', result); 
-      };
+      }; 
+  Meteor.startup(function () {
+
+    alert("------ISSTARTUP");
+    alert("heyhey");
+
+      var pushNotification = window.plugins.pushNotification;
+      //pour le push
+      alert('h' +pushNotification);
+      alert(pushNotification.register);
+      console.log(window.plugins);
+      alert(window.plugins);
 
       pushNotification.register(
         pushTokenHandler,
