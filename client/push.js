@@ -1,8 +1,8 @@
 if (Meteor.isCordova){
+  // alert('i----------sCordova');
   Meteor.startup(function () {
 
-    console.log("ISCORDOVA");
-    var pushStuff = function () {
+    // alert("------ISSTARTUP");
 
       var pushNotification = window.plugins.pushNotification;
       //pour le push
@@ -15,37 +15,19 @@ if (Meteor.isCordova){
       };
 
       var pushTokenHandler = function (result) { 
-        console.log('iOS device token = ' + result); 
-        Meteor.user().setDevice(result);
+        // alert('iOS device token = ' + result);
+        Session.set('device_token', result); 
       };
 
-      var myself = {
-
-        registerForNotifications:function () {
-          console.log("REGISTERRR");
-          pushNotification.register(
-            pushTokenHandler,
-            pushErrorHandler,
-            {
-            "badge":"true",
-            "sound":"true",
-            "alert":"true",
-            "ecb":"onNotificationAPN"
-            }
-          );
-        }
-      };
-
-      return myself;
-
-    }.call();
-
-    Tracker.autorun(function(){ 
-      if(Meteor.user()){
-        console.log("USERRR");
-        pushStuff.registerForNotifications();
-      }
-    });
-   
+        pushNotification.register(
+          pushTokenHandler,
+          pushErrorHandler,
+          {
+          "badge":"true",
+          "sound":"true",
+          "alert":"true",
+          "ecb":"onNotificationAPN"
+          }
+        );
   });
 }
