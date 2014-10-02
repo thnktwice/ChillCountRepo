@@ -62,8 +62,8 @@ Template.topic_creation.events({
     console.log(topic_name);
     console.log(topic_description);
     //We create the relevant new topic in the database
-    Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
-    Router.go('/');
+    var topic_id = Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
+    Router.go('/topics/'+topic_id);
   },
   'click #cancel_new_topic' : function() {
     Router.go('/');
