@@ -38,18 +38,20 @@ body {
         vertical-align: middle;
         line-height: 58px;
         margin:5px 0px 5px 0px;
-        font-size: 22pt;
+        font-size: 16pt;
         font-weight:100;
     }
 
 
     .left_button{
         color:white;
+        line-height: 40px;
         margin-top: 10px;
     }
 
     .right_button{
         color:white;
+        line-height: 40px;
         margin-top: 10px;
     }
 
@@ -82,7 +84,7 @@ body {
         background-repeat: no-repeat;
         background-position: center;
         height:21px;
-        margin-top: 5px;
+        margin-top: 10px;
     }
 
     .public_small_icon{
@@ -90,11 +92,24 @@ body {
         background-repeat: no-repeat;
         background-position: center;
         height:18px;
-        margin-top: 5px;
+        margin-top: 13px;
     }
 
+    .link_icon.selected {
+        background-image: url('images/link_icon_blue.png');
+    }
+    .link_icon {
+        background-image: url('images/link_icon_grey.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:44px;
+        width:44px;
+        margin-top:0px;
+    }
+
+
     .topic .name {
-        font-size: 1.6em;
+        font-size: 1.3em;
         vertical-align: middle;
         text-align: left;
         color:#0099cc;
@@ -119,6 +134,7 @@ body {
     .topic .go {
         height:62px;
         width:44px;
+        margin-left:-22px;
         background-image: url('images/right_chevron_blue.png');
         background-repeat: no-repeat;
         background-position: center;
@@ -209,6 +225,15 @@ body {
         background-repeat: no-repeat;
         height:90px;
         width:62px;
+    }
+
+    .link_icon_selected {
+        background-image: url('images/link_icon_blue.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:18px;
+        width:35px;
+        margin-top: 13px;
     }
 
     #description{
