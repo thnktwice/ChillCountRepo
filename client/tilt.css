@@ -26,7 +26,7 @@ body {
     .navbar-inner {
         background: #0099cc;
         background-image: none;
-        height:50px;
+        height:60px;
     }
 
     .title_box{
@@ -36,28 +36,30 @@ body {
     .title{
         text-align: center;
         vertical-align: middle;
-        line-height: 35px;
+        line-height: 58px;
         margin:5px 0px 5px 0px;
-        font-size: 22pt;
+        font-size: 16pt;
         font-weight:100;
     }
 
 
     .left_button{
         color:white;
-        line-height: 25px;
+        line-height: 40px;
+        margin-top: 10px;
     }
 
     .right_button{
         color:white;
-        line-height: 25px;
+        line-height: 40px;
+        margin-top: 10px;
     }
 
 
 /*Topic Board*/
     .topicBoard {
         position: relative;
-        top: 50px;
+        top: 60px;
         padding-bottom:150px;
     }
 
@@ -82,7 +84,7 @@ body {
         background-repeat: no-repeat;
         background-position: center;
         height:21px;
-        margin-top: 5px;
+        margin-top: 10px;
     }
 
     .public_small_icon{
@@ -90,11 +92,26 @@ body {
         background-repeat: no-repeat;
         background-position: center;
         height:18px;
-        margin-top: 5px;
+        margin-top: 13px;
     }
 
+    .link_icon.selected {
+        background-image: url('images/link_icon_blue.png');
+    }
+    .link_icon {
+        background-image: url('images/link_icon_grey.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:18px;
+        width:35px;
+        margin-top: 13px;
+    }
+
+
+
+
     .topic .name {
-        font-size: 1.6em;
+        font-size: 1.3em;
         vertical-align: middle;
         text-align: left;
         color:#0099cc;
@@ -119,6 +136,7 @@ body {
     .topic .go {
         height:62px;
         width:44px;
+        margin-left:-22px;
         background-image: url('images/right_chevron_blue.png');
         background-repeat: no-repeat;
         background-position: center;
@@ -191,7 +209,7 @@ body {
 /*Timeline*/
     #scoreboard{
         position: relative;
-        top: 60px;
+        top: 70px;
     }
 
     #back{
