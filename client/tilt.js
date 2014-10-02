@@ -4,6 +4,7 @@
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
 Session.set("logmessage", "");
+Session.set("bluetooth_status","");
 
 Accounts.ui.config({
   requestPermissions: {
