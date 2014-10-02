@@ -229,6 +229,15 @@ body {
         width:62px;
     }
 
+    .link_icon_selected {
+        background-image: url('images/link_icon_blue.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height:18px;
+        width:35px;
+        margin-top: 13px;
+    }
+
     #description{
         color:#0099cc;
     }
