@@ -149,6 +149,9 @@ body {
         font-size:10pt;
         color:black;
         line-height: 40px;
+        position: absolute;
+        z-index: 10;
+        color:#0099cc;
     }
 
 /*Topic creation*/

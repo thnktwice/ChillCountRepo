@@ -60,6 +60,11 @@
 
 <template name="topic">
   <div class="topic {{selected}}">
+  {{#if currentUserIsAdmin}}
+    <div class="creator">
+      {{this.uname}}
+    </div>
+  {{/if}}
     <div class="container">
       <div class="row">
         <div class="col-xs-3 plus score">
@@ -74,11 +79,6 @@
               <div class="link_icon {{selected}}">
               </div>
             </div>
-            {{#if currentUserIsAdmin}}
-              <div class="col-xs-6 creator">
-                {{this.uname}}
-              </div>
-            {{/if}}
           </div>
         </div>
         <div class="col-xs-1">

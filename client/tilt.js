@@ -52,8 +52,10 @@ Template.topic.events({
     addACount(this._id, Meteor.userId());
   },  
   'click .go': function () {
-    Session.set("selected_topic_id", this._id);
     Router.go("/topics/"+this._id);
+  },
+  'click .link_icon': function (){
+    Session.set("selected_topic_id", this._id);
   }
 });
 
