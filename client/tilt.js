@@ -3,6 +3,8 @@
 
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
+Session.setDefault("logmessage", "");
+Session.setDefault("bluetooth_status","");
 
 Accounts.ui.config({
   requestPermissions: {
@@ -28,6 +30,10 @@ var addACount = function(topic_id, user_id) {
   Topics.update(topic_id, {$set: {score: score}}); 
 };
 
+Template.layout.logmessage = function (){
+  return Session.get('logmessage');
+};
+
 Template.topics_board.events({
   'click #add_topic' : function(e){
     // we prevent the form to relaod the page
@@ -46,8 +52,10 @@ Template.topic.events({
     addACount(this._id, Meteor.userId());
   },  
   'click .go': function () {
-    Session.set("selected_topic_id", this._id);
     Router.go("/topics/"+this._id);
+  },
+  'click .link_icon': function (){
+    Session.set("selected_topic_id", this._id);
   }
 });
 
@@ -62,8 +70,8 @@ Template.topic_creation.events({
     console.log(topic_name);
     console.log(topic_description);
     //We create the relevant new topic in the database
-    Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
-    Router.go('/');
+    var topic_id = Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
+    Router.go('/topics/'+topic_id);
   },
   'click #cancel_new_topic' : function() {
     Router.go('/');
@@ -143,11 +151,8 @@ Template.topics_board.helpers({
   debug: function () {
     console.log(this);
   },
-  loggedInSoRegisterForNotif: function () {
-    if (Meteor.isCordova){
-      alert(Session.get("device_token"));
-      Meteor.user().setDevice(Session.get("device_token"));
-    }
+  beanIsConnected: function (){
+    return Session.equals('bluetooth_status','bean_connected');
   }
 });
 
@@ -175,6 +180,9 @@ Template.topic.helpers({
     else {
       return false;
     }
+  },
+  beanIsConnected: function (){
+    return Session.equals('bluetooth_status','bean_connected');
   }
 });
 
@@ -185,5 +193,3 @@ Template.count.isMine = function () {
 Template.message.isMine = function () {
   return (this.user_id === Meteor.userId()) ;
 };
-
-
