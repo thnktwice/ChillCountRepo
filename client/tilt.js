@@ -3,8 +3,8 @@
 
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
-Session.set("logmessage", "");
-Session.set("bluetooth_status","");
+Session.setDefault("logmessage", "");
+Session.setDefault("bluetooth_status","");
 
 Accounts.ui.config({
   requestPermissions: {
@@ -150,6 +150,9 @@ Template.topic_timeline.events({
 Template.topics_board.helpers({
   debug: function () {
     console.log(this);
+  },
+  beanIsConnected: function (){
+    return Session.equals('bluetooth_status','bean_connected');
   }
 });
 
@@ -177,6 +180,9 @@ Template.topic.helpers({
     else {
       return false;
     }
+  },
+  beanIsConnected: function (){
+    return Session.equals('bluetooth_status','bean_connected');
   }
 });
 

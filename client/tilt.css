@@ -152,6 +152,7 @@ body {
         position: absolute;
         z-index: 10;
         color:#0099cc;
+        margin-top: -20px;
     }
 
 /*Topic creation*/
