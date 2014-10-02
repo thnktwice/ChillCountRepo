@@ -44,7 +44,7 @@ Meteor.startup(function () {
     note.expiry = Math.floor(Date.now() / 1000) + 3600;
     note.badge = 1;
     note.sound = alertSound;
-    note.alert = content;
+    note.alert = "@"+Topics.find(topic_id).name+":" + content;
     note.payload = {'url': "/topics/"+topic_id};
 
     var topic = Topics.findOne(topic_id);
