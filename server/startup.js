@@ -60,10 +60,32 @@ Meteor.startup(function () {
     return {success:'ok'};
   }; // end sendAppleNotifications
 
+
+  var addACount = function(topic_id, user_id) {
+    //We update the score count
+    var my_score = Logs.find({user_id: user_id, topic_id: topic_id, type: 'count'}).count() +1;
+    //On click on plus, we insert a new log in the db
+    var timestamp = (new Date()).getTime();
+    Logs.insert({
+      topic_id: topic_id,
+      user_id: user_id,
+      type: 'count',
+      timestamp: timestamp,
+      score: my_score
+    });
+
+    //We update the score count
+    var score = Logs.find({topic_id: topic_id, type: 'count'}).count();
+    Topics.update(topic_id, {$set: {score: score}}); 
+  };
+
   //Declare the methods on the server that can be accessed by the client
   Meteor.methods({
     sendNotificationsToTopicUsers: function(args) {
       sendAppleNotifications(args[0],args[1]);
+    },
+    addARemoteCount: function(args){
+      addACount(args[0],args[1]);
     }
   });
 });
