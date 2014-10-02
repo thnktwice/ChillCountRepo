@@ -3,6 +3,7 @@
 
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
+Session.set("logmessage", "");
 
 Accounts.ui.config({
   requestPermissions: {
@@ -26,6 +27,10 @@ var addACount = function(topic_id, user_id) {
   //We update the score count
   var score = Logs.find({topic_id: topic_id, type: 'count'}).count();
   Topics.update(topic_id, {$set: {score: score}}); 
+};
+
+Template.layout.logmessage = function (){
+  return Session.get('logmessage');
 };
 
 Template.topics_board.events({
@@ -179,5 +184,3 @@ Template.count.isMine = function () {
 Template.message.isMine = function () {
   return (this.user_id === Meteor.userId()) ;
 };
-
-

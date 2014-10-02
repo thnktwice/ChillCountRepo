@@ -6,6 +6,10 @@
 <body>
 </body>
 
+<template name="layout">
+{{> yield}}
+<div id="bluetooth_status"><p>{{logmessage}}</p></div>
+</template>
 
 <template name="login">
   <p><i>Ready,steady....</i></p>
