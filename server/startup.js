@@ -10,6 +10,7 @@ Meteor.startup(function () {
     return user;
   });
 
+  //iOS
   //Enable push notification by adding the relevant package
   var apn = Meteor.npmRequire("apn");
   var path = Npm.require('path');
@@ -40,15 +41,16 @@ Meteor.startup(function () {
   var sendAppleNotifications = function (topic_id, content) {
     console.log("sendAppleNotifications");
     var note = new apn.Notification();
+
+    var topic = Topics.findOne(topic_id);
+    var pushIds = topic.appleUserDeviceTokens();
     // expires 1 hour from now
     note.expiry = Math.floor(Date.now() / 1000) + 3600;
     note.badge = 1;
     note.sound = alertSound;
-    note.alert = "@"+Topics.find(topic_id).name+":" + content;
+    note.alert = "@"+topic.name+":" + content;
     note.payload = {'url': "/topics/"+topic_id};
 
-    var topic = Topics.findOne(topic_id);
-    var pushIds = topic.userDeviceTokens();
 
     _.each(pushIds, function (token) {
       var device = new apn.Device(token);
@@ -59,6 +61,12 @@ Meteor.startup(function () {
 
     return {success:'ok'};
   }; // end sendAppleNotifications
+
+
+
+  var sendNotifications = function (topic_id, content) {
+    sendAppleNotifications(topic_id,content);
+  };
 
 
   var addACount = function(topic_id, user_id) {
@@ -82,7 +90,7 @@ Meteor.startup(function () {
   //Declare the methods on the server that can be accessed by the client
   Meteor.methods({
     sendNotificationsToTopicUsers: function(args) {
-      sendAppleNotifications(args[0],args[1]);
+      sendNotifications(args[0],args[1]);
     },
     addARemoteCount: function(args){
       addACount(args[0],args[1]);
