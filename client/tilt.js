@@ -3,7 +3,7 @@
 
 // Set ID of currently selected topic to null at the beginning
 Session.setDefault('selected_topic_id', null);
-Session.setDefault("logmessage", "");
+Session.setDefault("logmessage", "No bluetooth on this device...");
 Session.setDefault("bluetooth_status","");
 
 Accounts.ui.config({
