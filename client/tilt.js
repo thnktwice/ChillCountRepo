@@ -30,9 +30,20 @@ var addACount = function(topic_id, user_id) {
   Topics.update(topic_id, {$set: {score: score}}); 
 };
 
-Template.layout.logmessage = function (){
-  return Session.get('logmessage');
-};
+Template.layout.helpers ({
+  logmessage: function (){
+    return Session.get('logmessage');
+  },
+  beanWasDisconnected: function () {
+    return (Session.get('bluetooth_status')==='bean_disconnected');
+  }
+});
+
+Template.layout.events({
+  'click #bluetooth_reconnect' : function(e){
+    bleManager.retry();
+  }
+});
 
 Template.topics_board.events({
   'click #add_topic' : function(e){

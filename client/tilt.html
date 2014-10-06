@@ -74,6 +74,11 @@
     <div id="bluetooth_status">
       {{logmessage}}
     </div>
+    {{#if beanWasDisconnected}}
+    <div id="bluetooth_reconnect">
+    <a>Reconnect to the ChillButton >></a>
+    </div>
+    {{/if}}
   </i>
 </p>
 </template>
