@@ -124,11 +124,11 @@ Router.map(function() {
     layoutTemplate: 'layout'
   });
 
-  this.route('topic_creation',{
+  this.route('topicCreation',{
     layoutTemplate: 'layout'
   });
   //This will render the topics board template
-  this.route('topics_board', {
+  this.route('topicsBoard', {
     path: '/',
     layoutTemplate: 'layout',
     onBeforeAction: function () {
@@ -138,6 +138,7 @@ Router.map(function() {
           Router.go('login');
         }
       }
+      this.next();
     },
     data: function(){
       var topics_board_data;
@@ -156,7 +157,7 @@ Router.map(function() {
   });
 
   //this will render the topic timeline, with the relevant data
-  this.route('topic_timeline', {
+  this.route('topicTimeline', {
     path:'/topics/:id',
     layoutTemplate: 'layout',
     notFoundTemplate: 'page_not_found',

@@ -45,11 +45,11 @@ Template.layout.events({
   }
 });
 
-Template.topics_board.events({
+Template.topicsBoard.events({
   'click #add_topic' : function(e){
     // we prevent the form to relaod the page
     e.preventDefault();
-    Router.go('topic_creation');
+    Router.go('topicCreation');
   }
 });
 
@@ -70,7 +70,7 @@ Template.topic.events({
   }
 });
 
-Template.topic_creation.events({
+Template.topicCreation.events({
   'click #new_topic' : function(e, templ) {
     //We stop the event from propagating
     e.preventDefault();
@@ -89,7 +89,7 @@ Template.topic_creation.events({
   }
 });
 
-Template.topic_creation_form.events({
+Template.topicCreationForm.events({
   // quand clic sur img private , la source change a la nouvelle image et l'autre grise
   // idem pour l'img group
   'click #private_icon' : function(e, templ) {
@@ -117,9 +117,9 @@ Template.topic_creation_form.events({
 
 });
 
-Template.topic_timeline.events({
+Template.topicTimeline.events({
   'click #back' : function(){
-    Router.go("topics_board");
+    Router.go("topicsBoard");
   },
   'click button#new_message' : function(e, templ) {
     //We stop the event from propagating
@@ -158,7 +158,7 @@ Template.topic_timeline.events({
 
 //Useful logging of the template data
 
-Template.topics_board.helpers({
+Template.topicsBoard.helpers({
   debug: function () {
     console.log(this);
   },
@@ -167,7 +167,7 @@ Template.topics_board.helpers({
   }
 });
 
-Template.topic_timeline.helpers({
+Template.topicTimeline.helpers({
   debug: function () {
     console.log(this);
   },
@@ -179,7 +179,7 @@ Template.topic_timeline.helpers({
 
 Template.login.helpers({
   goHome: function(){
-    Router.go('topics_board');
+    Router.go('topicsBoard');
   }
 });
 
