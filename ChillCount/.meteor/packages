@@ -10,9 +10,10 @@ iron:router
 accounts-ui
 channikhabra:stupid-models
 meteorhacks:npm
-mizzao:bootstrap-3
 mrt:moment
 
 
 npm-container
 accounts-password
+reywood:bootstrap3-sass
+
