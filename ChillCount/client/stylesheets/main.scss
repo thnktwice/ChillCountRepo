@@ -1,0 +1,8 @@
+//Import all the scss partials needed in this one
+
+// Bootstrap integration
+// !!! Watch out this needs "meteor run" done at least one to be working
+@import ".meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap";
+
+//General style integration
+@import "client/stylesheets/_style";
