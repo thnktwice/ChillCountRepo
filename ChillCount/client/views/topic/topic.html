@@ -1,0 +1,154 @@
+<template name="topic">
+  <div class="topic {{selected}}">
+  {{#if currentUserIsAdmin}}
+    <div class="creator">
+      {{this.uname}}
+    </div>
+  {{/if}}
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-3 plus score">
+          {{score}}
+        </div>
+        <div class="col-xs-7 name">
+          {{name}}
+          <div class="row">
+            <div class="col-xs-3 {{type}}_small_icon">
+            </div>
+            <div class="col-xs-2">
+              {{#if beanIsConnected}}
+              <div class="link_icon {{selected}}">
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-1">
+          <div class="go">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="log">
+  <div class="log">
+    {{#if this.isMessage}}
+      {{> message}}
+    {{/if}}
+    {{#if this.isCount}}
+      {{> count}}
+    {{/if}}    
+    {{#if this.isAdminMessage}}
+      {{> adminMessage}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="count">
+  {{#if isMine}}
+  <div class="count mine">
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time mine">
+        {{formatted_time timestamp}}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-12 mine">
+        <span class="score_log">{{score}}</span>
+        <span class="name_log">&nbsp;by me</span>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div class="count">
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time">
+        {{formatted_time timestamp}}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-12">
+        <span class="name_log">{{this.uname}}:&nbsp;</span>
+        <span class="score_log">{{score}}</span>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</template>
+
+<template name="message">
+  {{#if isMine}}
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time mine">
+        {{formatted_time timestamp}}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-11 col-xs-offset-1">
+        <div class="message">
+          <div class="row"> 
+            <div class="col-xs-12 uname mine">
+              ({{score}})  Me
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 content mine">
+              {{content}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="row"> 
+      <div class="col-xs-12 formatted_time">
+        {{formatted_time timestamp }}
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-xs-11">
+        <div class="message">
+          <div class="row"> 
+            <div class="col-xs-12 uname">
+              {{this.uname}}  ({{score}})
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 content">
+              {{content}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
+</template>
+
+<template name="adminMessage">
+  <div class="row"> 
+    <div class="col-xs-12 admin_formatted_time">
+      {{formatted_time timestamp}}
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-xs-11">
+      <div class="adminMessage">
+        <div class="row"> 
+          <div class="col-xs-12 admin_uname">
+            <span>Chillbot</span>
+            <span class="chillbot"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 admin_content">
+          {{content}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

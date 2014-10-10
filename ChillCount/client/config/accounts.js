@@ -1,3 +1,5 @@
-// Accounts.ui.config({
-//   passwordSignupFields: 'USERNAME_AND_EMAIL'
-// });
+Accounts.ui.config({
+  requestPermissions: {
+    facebook: ['public_profile','user_friends', 'email']
+  }
+});

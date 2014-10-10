@@ -2,33 +2,34 @@
 //
 
 // Set ID of currently selected topic to null at the beginning
-Session.setDefault('selected_topic_id', null);
-Session.setDefault("logmessage", "No bluetooth on this device...");
-Session.setDefault("bluetooth_status","");
+// Session.setDefault('selected_topic_id', null);
+// Session.setDefault("logmessage", "No bluetooth on this device...");
+// Session.setDefault("bluetooth_status","");
 
-Accounts.ui.config({
-  requestPermissions: {
-    facebook: ['public_profile','user_friends', 'email']
-  }
-});
+// Accounts.ui.config({
+//   requestPermissions: {
+//     facebook: ['public_profile','user_friends', 'email']
+//   }
+// });
 
-var addACount = function(topic_id, user_id) {
-  //We update the score count
-  var my_score = Logs.find({user_id: user_id, topic_id: topic_id, type: 'count'}).count() +1;
-  //On click on plus, we insert a new log in the db
-  var timestamp = (new Date()).getTime();
-  Logs.insert({
-    topic_id: topic_id,
-    user_id: user_id,
-    type: 'count',
-    timestamp: timestamp,
-    score: my_score
-  });
+// PUT THAT IN THE MODEL
+// var addACount = function(topic_id, user_id) {
+//   //We update the score count
+//   var my_score = Logs.find({user_id: user_id, topic_id: topic_id, type: 'count'}).count() +1;
+//   //On click on plus, we insert a new log in the db
+//   var timestamp = (new Date()).getTime();
+//   Logs.insert({
+//     topic_id: topic_id,
+//     user_id: user_id,
+//     type: 'count',
+//     timestamp: timestamp,
+//     score: my_score
+//   });
 
-  //We update the score count
-  var score = Logs.find({topic_id: topic_id, type: 'count'}).count();
-  Topics.update(topic_id, {$set: {score: score}}); 
-};
+//   //We update the score count
+//   var score = Logs.find({topic_id: topic_id, type: 'count'}).count();
+//   Topics.update(topic_id, {$set: {score: score}}); 
+// };
 
 Template.layout.helpers ({
   logmessage: function (){
@@ -60,7 +61,7 @@ Template.topic.selected = function () {
 
 Template.topic.events({
   'click .plus': function () {
-    addACount(this._id, Meteor.userId());
+    this.addACount(Meteor.userId());
   },  
   'click .go': function () {
     Router.go("/topics/"+this._id);
@@ -152,7 +153,7 @@ Template.topicTimeline.events({
     message.val('');
   },
   'click .plus' : function() {
-    addACount(this.topic_id,Meteor.userId());
+    Topics.findOne(this.topic_id).addACount(Meteor.userId());
   }
 });
 
