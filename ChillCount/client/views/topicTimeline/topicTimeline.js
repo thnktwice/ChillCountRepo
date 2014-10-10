@@ -49,7 +49,9 @@ Template.topicTimeline.helpers({
 
 Template.log.events({
   'click .delete' : function(e,templ) {
+    var topic_id = this.topic_id;
     this.remove();
+    Topics.findOne(topic_id).resetScore();
   }
 });
 

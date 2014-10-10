@@ -59,5 +59,9 @@ Topic.extend({
     //We update the score count
     var score = Logs.find({topic_id: this._id, type: 'count'}).count();
     Topics.update(this._id, {$set: {score: score}});    
+  },
+  resetScore: function () {
+    var score = Logs.find({topic_id: this._id, type: 'count'}).count();
+    Topics.update(this._id, {$set: {score: score}});       
   }
 });
