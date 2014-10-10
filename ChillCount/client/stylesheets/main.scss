@@ -5,4 +5,17 @@
 @import ".meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/bootstrap";
 
 //General style integration
-@import "client/stylesheets/_style";
+@import "client/stylesheets/_global";
+
+//All the others sheets for each views...
+@import "client/views/common/_layout";
+
+@import "client/views/topicsBoard/_topicsBoard";
+
+@import "client/views/topic/_topic";
+
+@import "client/views/topicCreation/_topicCreation";
+
+@import "client/views/topicTimeline/_topicTimeline";
+
+

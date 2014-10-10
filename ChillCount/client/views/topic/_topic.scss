@@ -1,0 +1,83 @@
+.topic {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-style: solid;
+  border-width: 0px 0px 2px 0px;
+  border-color: #0099cc;
+}
+
+.private_small_icon {
+  background-image: url('images/private_icon_grey.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height:21px;
+  margin-top: 10px;
+}
+
+.public_small_icon {
+  background-image: url('images/public_icon_grey.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height:18px;
+  margin-top: 13px;
+}
+
+.link_icon.selected {
+  background-image: url('images/link_icon_blue.png');
+}
+.link_icon {
+  background-image: url('images/link_icon_grey.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height:44px;
+  width:44px;
+  margin-top:0px;
+}
+
+
+.topic .name {
+  font-size: 1.3em;
+  vertical-align: middle;
+  text-align: left;
+  color:#0099cc;
+}
+
+.topic .score {
+  font-size: 2em;
+  font-weight: normal;
+  color: white;
+  vertical-align: middle;    
+}
+
+.topic .plus {
+  margin:5px 0px 5px 0px;
+  line-height: 61px;
+  height:61px;
+  width:61px;
+  background-image: url('images/circle_orange_1.png');
+  background-repeat: no-repeat;
+}
+
+.topic .go {
+  height:62px;
+  width:44px;
+  margin-left:-22px;
+  background-image: url('images/right_chevron_blue.png');
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+.topic.selected {
+  background-color: rgba(255,153,51,0.1);
+}
+
+.creator {
+  font-size:10pt;
+  color:black;
+  line-height: 40px;
+  position: absolute;
+  z-index: 10;
+  color:#0099cc;
+  margin-top: -20px;
+}
