@@ -46,3 +46,18 @@ Template.topicTimeline.helpers({
     return my_score;
   }
 });
+
+Template.log.events({
+  'click .delete' : function(e,templ) {
+    this.remove();
+  }
+});
+
+Template.count.isMine = function () {
+  return (this.user_id === Meteor.userId()) ;
+};
+
+Template.message.isMine = function () {
+  return (this.user_id === Meteor.userId()) ;
+};
+
