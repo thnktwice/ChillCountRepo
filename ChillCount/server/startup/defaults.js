@@ -34,10 +34,12 @@ Meteor.startup(function () {
     topicMore.addACount(user_id);
     topicMore.addACount(user_id);
     topicLess.addACount(user_id);
+    var timestamp = (new Date()).getTime();
     var goalMore_id = DailyGoals.insert({
       topic_id:topicMore_id,
       user_id:user_id,
       comparator:"moreThan",
+      timestamp:timestamp,
       value:5
     });
 
@@ -45,6 +47,7 @@ Meteor.startup(function () {
       topic_id: topicLess_id,
       user_id:user_id,
       comparator:"lessThan",
+      timestamp:timestamp,
       value:8
     });
   }

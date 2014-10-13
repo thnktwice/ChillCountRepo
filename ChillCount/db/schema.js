@@ -54,5 +54,31 @@ Schemas.Topic = new SimpleSchema({
     }
 });
 
+Schemas.DailyGoal = new SimpleSchema({
+    user_id: {
+        type: String,
+        label: "User"
+    },
+    topic_id: {
+        type: String,
+        label: "Topic"
+    },
+    comparator: {
+        type: String,
+        label:"Goal comparator : moreThan or lessThan"
+    },
+    value: {
+        type: Number,
+        label: "Goal value",
+        min: 0
+    },    
+    timestamp: {
+        type: Number,
+        label: "Timestamp"
+    },
+});
+
 Logs.attachSchema(Schemas.Log);
 Topics.attachSchema(Schemas.Topic);
+DailyGoals.attachSchema(Schemas.DailyGoal);
+
