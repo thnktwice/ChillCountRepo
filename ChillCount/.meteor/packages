@@ -7,7 +7,6 @@ meteor-platform
 autopublish
 insecure
 iron:router
-accounts-ui
 channikhabra:stupid-models
 meteorhacks:npm
 mrt:moment
@@ -23,4 +22,5 @@ raix:handlebar-helpers
 velocity:html-reporter
 mike:mocha
 superstringsoft:observatory
+mrt:accounts-ui-bootstrap-3
 
