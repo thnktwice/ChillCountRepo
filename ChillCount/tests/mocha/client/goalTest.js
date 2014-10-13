@@ -14,7 +14,7 @@ if (!(typeof MochaWeb === 'undefined')){
         Meteor.autorun(function(){
           var user = Meteor.users.findOne({"profile.username":"m.coenca"});
           var dailyGoal = DailyGoals.findOne({user_id: user._id});
-          if (dailyGoal && user){
+          if (dailyGoal){
             done();
           }
         });
@@ -22,7 +22,7 @@ if (!(typeof MochaWeb === 'undefined')){
 
       it("should return the correct user", function(){
         Meteor.flush();
-        chai.assert.equal(dailyGoal.user(), user);
+        chai.assert.deepEqual(dailyGoal.user(), user);
       });
     });
   });
