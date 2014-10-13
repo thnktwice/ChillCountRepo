@@ -25,6 +25,8 @@ if (Meteor.isCordova) {
       if (logmessage === "isDisconnected : Device is disconnected"){
         Session.set("logmessage", "ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.");
         Session.set("bluetooth_status","bean_disconnected");
+        //We try to reconnect directly without asking
+        Meteor.setTimeout(reconnect,3000);
       }
       else{
         Session.set("logmessage", logmessage);
