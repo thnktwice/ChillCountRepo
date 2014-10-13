@@ -12,7 +12,7 @@
 }
 
 #my_score {
-  color: #0099cc;
+  color: $primary-color;
   font-size: 20pt;
   line-height: 60px;
   background-image: url('images/my_count.png');
@@ -31,7 +31,7 @@
 }
 
 #description{
-  color:#0099cc;
+  color:$primary-color;
 }
 
 #total_score {
@@ -49,7 +49,7 @@
 }
 
 .log{
-  color:#0099cc;
+  color:$primary-color;
   text-align: left;
 }
 
@@ -76,7 +76,7 @@
 .count{
   border-style: solid;
   border-width: 0px 0px 0px 2px;
-  border-color: #ff9933;
+  border-color: $secondary-color;
   padding-left: 5px;
   margin-bottom: 8px;
 }
@@ -84,20 +84,20 @@
 
 
 .score_log{
-  color:#ff9933;
+  color:$secondary-color;
   font-size: 15pt;
   font-weight: bold;
 }
 .name_log{
   font-size:11pt;
-  color:#0099cc;
+  color:$primary-color;
 }
 
 
 .message{
  /*       border-style: solid;
         border-width: 1px 1px 1px 1px;
-        border-color: #0099cc;*/
+        border-color: $primary-color;*/
         border-radius:10px;
         padding:2px 5px;
         background-color: rgba(255,153,51,0.1);
@@ -116,12 +116,12 @@
       .adminMessage{
   /*      border-style: solid;
         border-width: 1px 1px 1px 1px;
-        border-color: #ff9933;*/
+        border-color: $secondary-color;*/
         border-radius:10px;
         background-color: rgba(0,153,204,0.05);
         margin-bottom: 8px;
         padding:2px 5px;
-        color:#ff9933;
+        color:$secondary-color;
         font-size:11pt;
       }
       .adminMessage .admin_uname{
