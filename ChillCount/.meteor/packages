@@ -10,9 +10,17 @@ iron:router
 accounts-ui
 channikhabra:stupid-models
 meteorhacks:npm
-mizzao:bootstrap-3
 mrt:moment
 
 
 npm-container
 accounts-password
+reywood:bootstrap3-sass
+aldeed:collection2
+reywood:font-awesome-sass
+richsilv:semantic-ui-sass
+raix:handlebar-helpers
+velocity:html-reporter
+mike:mocha
+superstringsoft:observatory
+
