@@ -49,7 +49,8 @@ Schemas.Topic = new SimpleSchema({
     score: {
         type: Number,
         label: "Number of counts in the topic",
-        min: 0
+        min: 0,
+        optional: true
     }
 });
 
