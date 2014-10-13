@@ -24,6 +24,10 @@ Template.topic.events({
     Router.go("/topics/"+this._id);
   },
   'click .link_icon': function (){
-    Session.set("selected_topic_id", this._id);
+    if(Session.equals("selected_topic_id",this._id)){
+      Session.set("selected_topic_id","");
+    }else{
+      Session.set("selected_topic_id", this._id);
+    }
   }
 });
