@@ -355,7 +355,7 @@ if (Meteor.isCordova) {
 
     var myself = {
       setup: function(){
-        alert("setup");
+        // alert("setup");
         bluetoothle.initialize(initializeSuccessCallback, error, {request:true});
       },
       retry: function() {
