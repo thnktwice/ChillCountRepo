@@ -77,12 +77,12 @@
            stats_data = {
             topic_id: this.params.id,
             name: topic.name,
-            goals: DailyGoals.find(
+            goal: DailyGoals.findOne(
               {
                 topic_id: this.params.id,
                 user_id: Meteor.userId()
               }),
-            logs: Logs.find(
+            my_logs: Logs.find(
             {
               topic_id: this.params.id,
               user_id: Meteor.userId()
