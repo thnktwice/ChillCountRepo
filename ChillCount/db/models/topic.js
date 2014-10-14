@@ -70,5 +70,31 @@ Topic.extend({
   resetScore: function () {
     var score = Logs.find({topic_id: this._id, type: 'count'}).count();
     Topics.update(this._id, {$set: {score: score}});       
+  },
+  dailyLogs : function () {
+    // This is an array grouped by day with the relevant score
+    var res = {};
+    var user_id = Meteor.userId();
+
+    var logs = Logs.find(
+      {topic_id: this._id},
+      {sort: {timestamp: -1}}
+    ).fetch();
+
+    res = _.chain(logs)
+      .groupBy(function(log){
+        var day = new Date(log.timestamp);
+        var dayWrapper = moment(day);
+        return dayWrapper.format('YYYY-MM-DD');
+      })
+      .map(function(dayLogs, key){
+        var count = _.countBy(dayLogs,function(log){
+          if (log.type === 'count' && log.user_id === user_id){return 'count';}
+        }).count;
+        return [dayLogs,count];
+      })
+      .value();
+    // console.log(JSON.stringify(res));
+    return res;
   }
 });

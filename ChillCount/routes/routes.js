@@ -54,10 +54,14 @@
         var timeline_data;
         var topic = Topics.findOne(this.params.id);
         if(typeof topic !== 'undefined') {
+          //Here we process the data of the topic
+          var daily_logs = topic.dailyLogs();
+
           timeline_data = {
             topic_id: this.params.id,
             name: topic.name,
             logs: Logs.find({topic_id: this.params.id}, {sort: {timestamp: -1}}),
+            daily_logs: daily_logs,
             score: topic.score,
             description: topic.description
           };      
