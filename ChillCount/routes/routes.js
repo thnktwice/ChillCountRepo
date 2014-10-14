@@ -73,15 +73,25 @@
       data: function() {
         var stats_data;
         var topic = Topics.findOne(this.params.id);
+        var goal = DailyGoals.findOne({
+          topic_id: this.params.id,
+          user_id: Meteor.userId()
+        });
         if(typeof topic !== 'undefined') {
+          if(typeof goal ==='undefined'){
+            var timestamp = (new Date()).getTime();
+            DailyGoals.insert({
+              topic_id: this.params.id,
+              user_id: Meteor.userId(),
+              comparator: "moreThan",
+              value:0,
+              timestamp: timestamp
+            });
+          }
            stats_data = {
             topic_id: this.params.id,
             name: topic.name,
-            goal: DailyGoals.findOne(
-              {
-                topic_id: this.params.id,
-                user_id: Meteor.userId()
-              }),
+            goal: goal,
             my_logs: Logs.find(
             {
               topic_id: this.params.id,

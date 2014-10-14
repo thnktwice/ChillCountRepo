@@ -1,15 +1,15 @@
-Template.topicStats.helpers({
+Template.topicGoals.helpers({
   moreIsSelected: function(){
     if(this.goal) {
-      return (this.goal.comparator === 'moreThan' ? 'selected' : '' );
+      return (this.goal.comparator === 'moreThan' ? 'selected' : null );
     }
     return '';
   },
   lessIsSelected: function(){
     if(this.goal) {
-      return (this.goal.comparator === 'lessThan' ? 'selected' : '' );
+      return (this.goal.comparator === 'lessThan' ? 'selected' : null );
     }
-    return '';
+    return null;
   }
 });
 

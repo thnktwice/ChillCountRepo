@@ -76,7 +76,8 @@ Schemas.DailyGoal = new SimpleSchema({
     value: {
         type: Number,
         label: "Goal value",
-        min: 0
+        min: 0,
+        optional: true
     },    
     timestamp: {
         type: Number,
