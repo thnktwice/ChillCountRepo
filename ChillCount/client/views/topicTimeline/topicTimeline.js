@@ -47,6 +47,21 @@ Template.topicTimeline.helpers({
   }
 });
 
+Template.daily_log.helpers({
+  count: function() {
+    return this[1];
+  },
+  logs: function() {
+    return this[0];
+  },
+  day: function() {
+    return this[0][0].formatted_day();
+  },
+  topic: function(){
+    return Topics.findOne(this[0][0].topic_id);
+  }
+});
+
 Template.log.events({
   'click .delete' : function(e,templ) {
     var topic_id = this.topic_id;

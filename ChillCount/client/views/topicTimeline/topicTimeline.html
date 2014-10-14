@@ -59,11 +59,22 @@
     <br/>
     <div class="row">
       <div class="col-xs-12">
-        {{#each logs}}
-          {{> log}}
+      
+        {{#each daily_logs}}
+          {{>daily_log}}
         {{/each}}
       </div>
     </div>
   </div>
   <br/>
+</template>
+
+<template name="daily_log">
+<p>
+  You have counted {{count}} on {{day}}. 
+</p>
+<hr/>
+  {{#each logs}}
+    {{> log}}
+  {{/each}}  
 </template>
