@@ -1,0 +1,43 @@
+<template name="topicStats">
+{{debug}}
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-2 left_button" id="back_timeline">
+          </div>
+          <div class="col-xs-8 title_box">
+            <h2 class="title">{{name}}</h2>
+          </div>
+          <div class="col-xs-2 right_button">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="topic_stats">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="title">I want to count it</h2>
+      </div>    
+    </div>  
+    <div  class="row">
+      <div class="col-xs-4">
+        <select class="form-control" id="goal_comparator">
+          <option>more</option>
+          <option>less</option>
+        </select>
+      </div>
+      <div class="col-xs-2">
+        <p>than</p>
+      </div>
+      <div class="col-xs-3">
+          <input class="form-control" type="number" id="goal_value" placeholder="4" maxlength="3" value="{{goal.value}}">
+      </div>      
+      <div class="col-xs-2">
+          <p>a day</p>
+      </div>
+    </div>
+  </div>
+</template>
