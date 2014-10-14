@@ -2,6 +2,9 @@ Template.topicTimeline.events({
   'click #back' : function(){
     Router.go("topicsBoard");
   },
+  'click #go_stats' : function (){
+    Router.go("/topics/"+this.topic_id+"/stats");
+  },
   'click button#new_message' : function(e, templ) {
     //We stop the event from propagating
     e.preventDefault();
@@ -38,9 +41,6 @@ Template.topicTimeline.events({
 });
 
 Template.topicTimeline.helpers({
-  debug: function () {
-    console.log(this);
-  },
   my_score: function(){
     var my_score = Logs.find({user_id: Meteor.userId(), topic_id: this.topic_id, type: 'count'}).count();
     return my_score;
@@ -54,12 +54,4 @@ Template.log.events({
     Topics.findOne(topic_id).resetScore();
   }
 });
-
-Template.count.isMine = function () {
-  return (this.user_id === Meteor.userId()) ;
-};
-
-Template.message.isMine = function () {
-  return (this.user_id === Meteor.userId()) ;
-};
 

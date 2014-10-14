@@ -1,18 +1,6 @@
-Template.topic.selected = function () {
-  return Session.equals("selected_topic_id", this._id) ? "selected" : '';
-};
-
 Template.topic.helpers({
-  currentUserIsAdmin: function() {
-    if (Meteor.user()) {
-      return Meteor.user().isAdmin();      
-    }
-    else {
-      return false;
-    }
-  },
-  beanIsConnected: function (){
-    return Session.equals('bluetooth_status','bean_connected');
+  selected: function() {
+    return Session.equals("selected_topic_id", this._id) ? "selected" : '';    
   }
 });
 

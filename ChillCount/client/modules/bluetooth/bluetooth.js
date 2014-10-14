@@ -158,7 +158,11 @@ if (Meteor.isCordova) {
       }
       else if (successReturn.status === "subscribedResult") {
         // bluetoothLogging("ChillButton subscrition..." + successReturn.value);
-        bluetoothLogging('Chillbutton was clicked and sent the message : (' +successReturn.value +'). Link it to a topic to see it actually work !');
+        var hexVal = successReturn.value;
+        var unit8ArrayVal = bluetoothle.encodedStringToBytes(hexVal);
+        var intVal = unit8ArrayVal["0"];
+        // alert(JSON.stringify(unit8ArrayVal));
+        bluetoothLogging('Chillbutton was clicked and sent the message : (' + intVal +'). Link it to a topic to see it actually work !');
         // alert("inrmotecount1");
         // alert(Session.get('selected_topic_id'));
         // alert(Meteor.userId());

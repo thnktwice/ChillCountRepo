@@ -7,6 +7,9 @@ Topics = new Mongo.Collection("topics");
 Topic = Model(Topics);
 
 Topic.extend({
+  defaultValues: {
+    score: 0
+  },
   uname: function() {
     var user = Meteor.users.findOne({_id: this.user_id});
     return user.uname();

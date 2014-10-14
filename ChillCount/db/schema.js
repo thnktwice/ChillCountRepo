@@ -24,6 +24,12 @@ Schemas.Log = new SimpleSchema({
         label: "Content of the message",
         optional: true,
         max: 1000
+    },
+    score: {
+        type: Number,
+        label: "Personal score at the log moment",
+        optional: true,
+        min: 0
     }
 });
 
@@ -49,9 +55,37 @@ Schemas.Topic = new SimpleSchema({
     score: {
         type: Number,
         label: "Number of counts in the topic",
-        min: 0
+        min: 0,
+        optional: true
     }
+});
+
+Schemas.DailyGoal = new SimpleSchema({
+    user_id: {
+        type: String,
+        label: "User"
+    },
+    topic_id: {
+        type: String,
+        label: "Topic"
+    },
+    comparator: {
+        type: String,
+        label:"Goal comparator : moreThan or lessThan"
+    },
+    value: {
+        type: Number,
+        label: "Goal value",
+        min: 0,
+        optional: true
+    },    
+    timestamp: {
+        type: Number,
+        label: "Timestamp"
+    },
 });
 
 Logs.attachSchema(Schemas.Log);
 Topics.attachSchema(Schemas.Topic);
+DailyGoals.attachSchema(Schemas.DailyGoal);
+

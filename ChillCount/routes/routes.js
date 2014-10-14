@@ -1,64 +1,105 @@
 
-//We route the pages
-Router.map(function() {
+  Router.map(function() {
+    this.route('login',{
+      layoutTemplate: 'layout'
+    });
 
-  this.route('login',{
-    layoutTemplate: 'layout'
-  });
-
-  this.route('topicCreation',{
-    layoutTemplate: 'layout'
-  });
-  //This will render the topics board template
-  this.route('topicsBoard', {
-    path: '/',
-    layoutTemplate: 'layout',
-    onBeforeAction: function () {
-      //We "prefilter" if the user is logging in order to redirect to the good page
-      if (Meteor.user() === null){
-        if(!Meteor.loggingIn()){
-          Router.go('login');
+    this.route('topicCreation',{
+      layoutTemplate: 'layout'
+    });
+    //This will render the topics board template
+    this.route('topicsBoard', {
+      path: '/',
+      layoutTemplate: 'layout',
+      onBeforeAction: function () {
+        //We "prefilter" if the user is logging in order to redirect to the good page
+        if (Meteor.user() === null){
+          if(!Meteor.loggingIn()){
+            Router.go('login');
+          }
         }
+      },
+      data: function(){
+        var topics_board_data;
+        if (Meteor.user() && Meteor.user().isAdmin()){
+          topics_board_data = {
+            topics: Topics.find(
+              {},
+              {sort: {score: -1, name: 1}})
+          };
+        }
+        else{
+          topics_board_data = {
+            topics: Topics.find(
+              {$or:
+                [{user_id: Meteor.userId()},
+                {type: 'public'}]
+              },
+              {sort: {score: -1, name: 1}})
+          };
+        }
+        return topics_board_data;
       }
-      this.next();
-    },
-    data: function(){
-      var topics_board_data;
-      if (Meteor.user() && Meteor.user().isAdmin()){
-        topics_board_data = {
-          topics: Topics.find({}, {sort: {score: -1, name: 1}})
-        };
-      }
-      else{
-        topics_board_data = {
-          topics: Topics.find({$or: [{user_id: Meteor.userId()}, {type: 'public'}]}, {sort: {score: -1, name: 1}})
-        };
-      }
-      return topics_board_data;
-    }
-  });
+    });
 
-  //this will render the topic timeline, with the relevant data
-  this.route('topicTimeline', {
-    path:'/topics/:id',
-    layoutTemplate: 'layout',
-    notFoundTemplate: 'page_not_found',
-    //Returns the relevant data to the template
-    //It will then understand what it is about
-    data: function() {
+    //this will render the topic timeline, with the relevant data
+    this.route('topicTimeline', {
+      path:'/topics/:id',
+      layoutTemplate: 'layout',
+      notFoundTemplate: 'page_not_found',
+      //Returns the relevant data to the template
+      //It will then understand what it is about
+      data: function() {
 
-      var timeline_data;
-      var topic = Topics.findOne(this.params.id);
-      if(typeof topic !== 'undefined') {
-        timeline_data = {
+        var timeline_data;
+        var topic = Topics.findOne(this.params.id);
+        if(typeof topic !== 'undefined') {
+          timeline_data = {
+            topic_id: this.params.id,
+            name: topic.name,
+            logs: Logs.find({topic_id: this.params.id}, {sort: {timestamp: -1}}),
+            score: topic.score,
+            description: topic.description
+          };      
+        }
+        return timeline_data;
+      }
+    });
+
+    this.route('topicStats', {
+      path:'/topics/:id/stats',
+      layoutTemplate: 'layout',
+      notFoundTemplate: 'page_not_found',
+      data: function() {
+        var stats_data;
+        var topic = Topics.findOne(this.params.id);
+        var goal = DailyGoals.findOne({
           topic_id: this.params.id,
-          name: topic.name,
-          logs: Logs.find({topic_id: this.params.id}, {sort: {timestamp: -1}}),
-          score: topic.score,
-          description: topic.description
-        };      
+          user_id: Meteor.userId()
+        });
+        if(typeof topic !== 'undefined') {
+          if(typeof goal ==='undefined'){
+            var timestamp = (new Date()).getTime();
+            DailyGoals.insert({
+              topic_id: this.params.id,
+              user_id: Meteor.userId(),
+              comparator: "moreThan",
+              value:0,
+              timestamp: timestamp
+            });
+          }
+           stats_data = {
+            topic_id: this.params.id,
+            name: topic.name,
+            goal: goal,
+            my_logs: Logs.find(
+            {
+              topic_id: this.params.id,
+              user_id: Meteor.userId()
+            })
+          };
+        }           
+        return stats_data;
       }
-      return timeline_data;
-    }
-  });
-});
+    });
+  });  
