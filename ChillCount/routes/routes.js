@@ -23,12 +23,19 @@
         var topics_board_data;
         if (Meteor.user() && Meteor.user().isAdmin()){
           topics_board_data = {
-            topics: Topics.find({}, {sort: {score: -1, name: 1}})
+            topics: Topics.find(
+              {},
+              {sort: {score: -1, name: 1}})
           };
         }
         else{
           topics_board_data = {
-            topics: Topics.find({$or: [{user_id: Meteor.userId()}, {type: 'public'}]}, {sort: {score: -1, name: 1}})
+            topics: Topics.find(
+              {$or:
+                [{user_id: Meteor.userId()},
+                {type: 'public'}]
+              },
+              {sort: {score: -1, name: 1}})
           };
         }
         return topics_board_data;
@@ -56,6 +63,33 @@
           };      
         }
         return timeline_data;
+      }
+    });
+
+    this.route('topicStats', {
+      path:'/topics/:id/stats',
+      layoutTemplate: 'layout',
+      notFoundTemplate: 'page_not_found',
+      data: function() {
+        var stats_data;
+        var topic = Topics.findOne(this.params.id);
+        if(typeof topic !== 'undefined') {
+           stats_data = {
+            topic_id: this.params.id,
+            name: topic.name,
+            goals: DailyGoals.find(
+              {
+                topic_id: this.params.id,
+                user_id: Meteor.userId()
+              }),
+            logs: Logs.find(
+            {
+              topic_id: this.params.id,
+              user_id: Meteor.userId()
+            })
+          };
+        }           
+        return stats_data;
       }
     });
   });  
