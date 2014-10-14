@@ -24,6 +24,11 @@ Log.extend({
 
   //.toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
  },
+ formatted_day: function (){
+  var day = new Date(this.timestamp);
+  var dayWrapper = moment(day);
+  return dayWrapper.format("MMM Do");
+ },
  isMessage: function() {
   var res = (this.type === 'message');
   return res;
