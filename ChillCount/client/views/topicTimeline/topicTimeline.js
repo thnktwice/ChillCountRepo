@@ -2,6 +2,9 @@ Template.topicTimeline.events({
   'click #back' : function(){
     Router.go("topicsBoard");
   },
+  'click #go_stats' : function (){
+    Router.go("/topics/"+this.topic_id+"/stats");
+  },
   'click button#new_message' : function(e, templ) {
     //We stop the event from propagating
     e.preventDefault();
