@@ -17,8 +17,8 @@ accounts-password
 reywood:bootstrap3-sass
 aldeed:collection2
 reywood:font-awesome-sass
-richsilv:semantic-ui-sass
 raix:handlebar-helpers
-velocity:html-reporter
 mike:mocha
 mrt:accounts-ui-bootstrap-3
+richsilv:semantic-ui-sass
+
