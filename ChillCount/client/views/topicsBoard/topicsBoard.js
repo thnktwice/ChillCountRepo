@@ -5,13 +5,3 @@ Template.topicsBoard.events({
     Router.go('topicCreation');
   }
 });
-
-//Useful logging of the template data
-Template.topicsBoard.helpers({
-  debug: function () {
-    console.log(this);
-  },
-  beanIsConnected: function (){
-    return Session.equals('bluetooth_status','bean_connected');
-  }
-});
