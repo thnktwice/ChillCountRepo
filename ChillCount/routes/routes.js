@@ -60,7 +60,6 @@
           timeline_data = {
             topic_id: this.params.id,
             name: topic.name,
-            logs: Logs.find({topic_id: this.params.id}, {sort: {timestamp: -1}}),
             daily_logs: daily_logs,
             score: topic.score,
             description: topic.description
