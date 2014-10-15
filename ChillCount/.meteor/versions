@@ -2,7 +2,6 @@ accounts-base@1.1.2
 accounts-password@1.0.3
 aldeed:collection2@2.1.0
 aldeed:simple-schema@1.0.3
-amplify@1.0.0
 application-configuration@1.0.3
 autopublish@1.0.1
 autoupdate@1.1.2
@@ -37,7 +36,6 @@ iron:layout@0.4.1
 iron:router@0.9.4
 jquery@1.0.1
 json@1.0.1
-less@1.0.10
 livedata@1.0.11
 localstorage@1.0.1
 logging@1.0.4
@@ -45,7 +43,6 @@ meteor-platform@1.1.2
 meteor@1.1.2
 meteorhacks:async@1.0.0
 meteorhacks:npm@1.2.0
-mike:mocha@0.3.12
 minifiers@1.1.1
 minimongo@1.0.4
 mobile-status-bar@1.0.1
@@ -79,7 +76,5 @@ tracker@1.0.3
 ui@1.0.4
 underscore@1.0.1
 url@1.0.1
-velocity:core@0.2.14
-velocity:html-reporter@0.2.3
 webapp-hashing@1.0.1
 webapp@1.1.3
