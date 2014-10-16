@@ -13,6 +13,7 @@ if (Meteor.isCordova) {
 
     var beanScratchServiceUuid = "a495ff20-c5b1-4b44-b512-1370f02d74de";
     var beanScratchOneCharacteristicUuid = "a495ff21-c5b1-4b44-b512-1370f02d74de";
+    var beanScratchTwoCharacteristicUuid = "a495ff22-c5b1-4b44-b512-1370f02d74de";
 
     var scanTimer = null;
     var connectTimer = null;
@@ -151,6 +152,21 @@ if (Meteor.isCordova) {
       }
     };
 
+    var respondToResultSuccessCallback = function(success) {
+      alert("write success");
+    };
+
+    var respondToResult = function (){//Send feedback message on log working
+      var value = "3";
+      var params = {
+        "value":value,
+        "serviceUuid":beanScratchServiceUuid,
+        "characteristicUuid":beanScratchTwoCharacteristicUuid,
+        "type":"noResponse"
+      };
+      bluetoothle.write(respondToResultSuccessCallback, error, params);
+    };
+
     var subscribeToScratchOneSuccess = function (successReturn) {
       if (successReturn.status === "subscribed") {
         bluetoothLogging("Subscribed to the ChillButton ! You can log safely");
@@ -170,6 +186,8 @@ if (Meteor.isCordova) {
         var topic_id = Session.get('selected_topic_id');
         var user_id = Meteor.userId();  
         Meteor.call('addARemoteCount', [topic_id,user_id], function(topic_id,user_id){});
+
+        respondToResult();
       }
     };
 
