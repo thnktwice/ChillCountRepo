@@ -8,8 +8,7 @@ DailyGoal = Model(DailyGoals);
 
 DailyGoal.extend({
  defaultValues: {
-  comparator:'moreThan',
-  value: 0
+  comparator:'moreThan'
  },
  user: function() {
   var user = Meteor.users.findOne({_id: this.user_id});
