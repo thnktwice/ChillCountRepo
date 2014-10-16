@@ -157,7 +157,9 @@ if (Meteor.isCordova) {
     };
 
     var respondToResult = function (){//Send feedback message on log working
-      var value = "3";
+      var u8 = new Uint8Array(1);
+      u8[0] = 3;
+      var value = bluetoothle.bytesToEncodedString(u8);
       var params = {
         "value":value,
         "serviceUuid":beanScratchServiceUuid,
