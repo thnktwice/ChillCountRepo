@@ -186,8 +186,10 @@ if (Meteor.isCordova) {
         // alert("inrmotecount1");
         // alert(Session.get('selected_topic_id'));
         // alert(Meteor.userId());
-        var topic_id = Session.get('selected_topic_id'); 
-        Meteor.call('addARemoteCount', [topic_id], function(topic_id){});
+        var topic_id = Session.get('selected_topic_id');
+        var user_id = Meteor.userId();  
+        Meteor.call('addARemoteCount', [topic_id,user_id], function(topic_id,user_id){
+        });
         respondToResult();
       }
     };
