@@ -96,5 +96,14 @@ Topic.extend({
       .value();
     // console.log(JSON.stringify(res));
     return res;
+  },
+  dailyGoal : function (user_id) {//return undefined if there is no goal set
+    var daily_goal = DailyGoals.findOne({topic_id:this._id,user_id:user_id});
+    if (typeof daily_goal !== 'undefined'){
+      if (typeof daily_goal.value === 'undefined') {
+        daily_goal = undefined;
+      }
+    }
+    return daily_goal;
   }
 });
