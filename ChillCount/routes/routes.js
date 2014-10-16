@@ -87,7 +87,6 @@
               topic_id: this.params.id,
               user_id: Meteor.userId(),
               comparator: "moreThan",
-              value:0,
               timestamp: timestamp
             });
           }
