@@ -22,7 +22,7 @@ if (Meteor.isCordova) {
     var androidPlatform = "Android"; 
 
     var bluetoothLogging = function (logmessage) {
-      if (logmessage === "isDisconnected : Device is disconnected"){
+      if (logmessage === "isDisconnected : Device is disconnected" || "Reconnection timed out"){
         Session.set("logmessage", "ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.");
         Session.set("bluetooth_status","bean_disconnected");
         //We try to reconnect directly without asking
@@ -368,6 +368,9 @@ if (Meteor.isCordova) {
       retry: function() {
         // closeDevice();
         reconnect();
+      },
+      write: function(value) {
+        writeValue(value);
       },
       isAvailable: function() {
         //Not sure exactly what to put for ios
