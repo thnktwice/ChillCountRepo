@@ -23,7 +23,7 @@ if (Meteor.isCordova) {
     var androidPlatform = "Android"; 
 
     var bluetoothLogging = function (logmessage) {
-      if (logmessage === "isDisconnected : Device is disconnected" || "Reconnection timed out"){
+      if (logmessage === "isDisconnected : Device is disconnected"){
         Session.set("logmessage", "ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.");
         Session.set("bluetooth_status","bean_disconnected");
         //We try to reconnect directly without asking
@@ -153,10 +153,11 @@ if (Meteor.isCordova) {
     };
 
     var respondToResultSuccessCallback = function(success) {
-      alert("write success");
+      // alert("write success");
     };
 
     var respondToResult = function (){//Send feedback message on log working
+      // alert("sending result");
       var u8 = new Uint8Array(1);
       u8[0] = 3;
       var value = bluetoothle.bytesToEncodedString(u8);
@@ -181,14 +182,12 @@ if (Meteor.isCordova) {
         var intVal = unit8ArrayVal["0"];
         // alert(JSON.stringify(unit8ArrayVal));
         bluetoothLogging('Chillbutton was clicked and sent the message : (' + intVal +'). Link it to a topic to see it actually work !');
-        navigator.vibrate(3000);
+        // navigator.vibrate(3000);
         // alert("inrmotecount1");
         // alert(Session.get('selected_topic_id'));
         // alert(Meteor.userId());
-        var topic_id = Session.get('selected_topic_id');
-        var user_id = Meteor.userId();  
-        Meteor.call('addARemoteCount', [topic_id,user_id], function(topic_id,user_id){});
-
+        var topic_id = Session.get('selected_topic_id'); 
+        Meteor.call('addARemoteCount', [topic_id], function(topic_id){});
         respondToResult();
       }
     };

@@ -37,8 +37,6 @@ void loop()
 {
 
  if (clicked == 1) {
-    Bean.setLed(255,0,0);
-    delay(500);   
     uint8_t buffer[2];
     uint16_t an0 = analogRead(8);
   
@@ -49,19 +47,32 @@ void loop()
  }
  
  if (clicked == 2) {
-   Bean.setLed(0,255,0);
-   delay(500);
+   // Bean.setLed(0,255,0);
+   // delay(500);
    scratchState = Bean.readScratchNumber(2);
+   if (scratchState == 2) {
+     Bean.setLed(55,100,255);
+     scratchState = 0;
+     Bean.setScratchNumber(2,5);
+     clicked = 3;
+   }
    if (scratchState == 3) {
-     Bean.setLed(0,0,255);
-     delay(500);
-     Bean.setLed(255,255,255);
-     delay(500);
+     Bean.setLedGreen(255);
+     scratchState = 0;
+     Bean.setScratchNumber(2,5);
+     clicked = 3;
+   }
+   if (scratchState == 1) {
+     Bean.setLedBlue(255);
+     scratchState = 0;
+     Bean.setScratchNumber(2,5);
      clicked = 3;
    }
  }
  
  if (clicked == 3) {
+   delay(1000);
+   Bean.setLed(0,0,0);
    clicked = 0;
    Bean.sleep(MAX_BEAN_SLEEP);
  }
