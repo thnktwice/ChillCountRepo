@@ -59,6 +59,45 @@ Template.daily_log.helpers({
   },
   topic: function(){
     return Topics.findOne(this[0][0].topic_id);
+  },
+  goalMessage: function (){
+    var topic = Topics.findOne(this[0][0].topic_id);
+    var daily_goal = topic.dailyGoal(Meteor.userId());
+    var goal_message = "";
+
+    var htmlGoalMessage = function(goal_message, success) {
+      if(success){
+        return "<span class='goal_success'>"+goal_message+"</span>";
+      }else {
+        return "<span class='goal_failure'>"+goal_message+"</span>";
+      }
+    };
+    console.log(daily_goal);
+    if (typeof daily_goal !== 'undefined') {
+      console.log(daily_goal);
+      if (daily_goal.comparator === 'moreThan'){
+        if (daily_goal.isReached(this[1])) {
+          goal_message = htmlGoalMessage(
+            "Congratz ! Goal exceeded by " + daily_goal.difference(this[1]),
+            true);
+        } else {
+          goal_message = htmlGoalMessage(
+            "Keep going, still " + daily_goal.difference(this[1]) + " to go !",
+            false);
+        }
+      } else {//less than
+        if (daily_goal.isReached(this[1])) {
+          goal_message = htmlGoalMessage(
+            "Congratz ! " + daily_goal.difference(this[1]) + " below your goal !",
+            true);
+        } else {
+          goal_message = htmlGoalMessage(
+            "Out of your goal by " + daily_goal.difference(this[1]),
+            false);
+        }
+      }
+    }
+    return goal_message;
   }
 });
 
