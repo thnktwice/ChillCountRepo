@@ -60,6 +60,17 @@ Schemas.Topic = new SimpleSchema({
     }
 });
 
+Schemas.MyTopic = new SimpleSchema({
+    user_id: {
+        type: String,
+        label: "User"
+    },
+    topic_id: {
+        type: String,
+        label: "Topic"
+    },
+});
+
 Schemas.DailyGoal = new SimpleSchema({
     user_id: {
         type: String,
@@ -85,6 +96,7 @@ Schemas.DailyGoal = new SimpleSchema({
     },
 });
 
+MyTopics.attachSchema(Schemas.MyTopic);
 Logs.attachSchema(Schemas.Log);
 Topics.attachSchema(Schemas.Topic);
 DailyGoals.attachSchema(Schemas.DailyGoal);

@@ -17,5 +17,8 @@ Template.topic.events({
     }else{
       Session.set("selected_topic_id", this._id);
     }
+  },
+  'click .add_to_my_topics': function() {
+    Meteor.user().addToMyTopics(this._id);
   }
 });

@@ -26,7 +26,12 @@ User.extend({
     }
   },
   addToMyTopics: function(topic_id){
-    this.profile[topic_id] = topic_id;
-    return this.profile[topic_id];
+    if (typeof MyTopics.findOne({user_id:this._id, topic_id:topic_id}) === 'undefined') {
+      MyTopics.insert({
+          user_id:this._id,
+          topic_id:topic_id
+      });  
+    }
+    return _.pluck(MyTopics.find({user_id:this._id}).fetch(),"topic_id");
   }
 });
