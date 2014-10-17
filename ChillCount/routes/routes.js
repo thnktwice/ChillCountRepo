@@ -23,7 +23,7 @@
         var topics_board_data;
         if (Session.equals('topic_view','mine')){//Mine view
           if(Meteor.user()){
-            var my_topics_keys = _.keys(MyTopics.find({user_id:Meteor.userId()}));
+            var my_topics_keys = _.pluck(MyTopics.find({user_id:Meteor.userId()}).fetch(),'topic_id');
             var topics = Topics.find(
               {_id:{$all:my_topics_keys}},
               {sort: {score: -1, name: 1}}
