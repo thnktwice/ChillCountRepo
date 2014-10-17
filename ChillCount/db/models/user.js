@@ -24,5 +24,9 @@ User.extend({
     else {
       return 'same token !';
     }
+  },
+  addToMyTopics: function(topic_id){
+    this.profile[topic_id] = topic_id;
+    return this.profile[topic_id];
   }
 });
