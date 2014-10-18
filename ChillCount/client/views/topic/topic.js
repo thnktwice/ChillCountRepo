@@ -20,5 +20,8 @@ Template.topic.events({
   },
   'click .add_to_my_topics': function() {
     Meteor.user().addToMyTopics(this._id);
+  },
+  'click .remove_from_my_topics': function () {
+    Meteor.user().removeFromMyTopics(this._id);
   }
 });

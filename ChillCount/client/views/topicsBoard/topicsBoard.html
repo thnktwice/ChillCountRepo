@@ -12,10 +12,10 @@
             </div> 
             <div class="col-xs-2">
             </div>
-            <div class="col-xs-2 title" id="mine">
+            <div class="col-xs-2 title {{$.Session.equals 'topic_view' 'mine'}}" id="mine">
             Mine
             </div>            
-            <div class="col-xs-2 title" id="all">
+            <div class="col-xs-2 title {{$.Session.equals 'topic_view' 'all'}}" id="all">
             All
             </div>
           </div>

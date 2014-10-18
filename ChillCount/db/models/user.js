@@ -33,5 +33,11 @@ User.extend({
       });  
     }
     return _.pluck(MyTopics.find({user_id:this._id}).fetch(),"topic_id");
+  },
+  removeFromMyTopics: function (topic_id) {
+    MyTopics.findOne({
+      user_id:this._id,
+      topic_id:topic_id
+    }).delete();
   }
 });
