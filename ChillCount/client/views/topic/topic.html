@@ -21,6 +21,16 @@
               </div>
               {{/if}}
             </div>
+            {{#if $.Session.equals 'topic_view' 'all'}}
+              <div class="col-xs-2 add_to_my_topics">
+                Select
+              </div>
+            {{/if}}
+            {{#if $.Session.equals 'topic_view' 'mine'}}
+              <div class="col-xs-2 remove_from_my_topics">
+                Remove
+              </div>
+            {{/if}}
           </div>
         </div>
         <div class="col-xs-1">

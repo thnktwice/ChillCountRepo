@@ -7,10 +7,16 @@
           <div class="row">
             <div class="col-xs-2 left_button" id="add_topic">
             </div>
-            <div class="col-xs-8 title_box">
+            <div class="col-xs-4 title_box">
                 <h2 class="title">Chillcount</h2>
             </div> 
-            <div class="col-xs-2 right_button">
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-2 title {{$.Session.equals 'topic_view' 'mine'}}" id="mine">
+            Mine
+            </div>            
+            <div class="col-xs-2 title {{$.Session.equals 'topic_view' 'all'}}" id="all">
+            All
             </div>
           </div>
         </div>
