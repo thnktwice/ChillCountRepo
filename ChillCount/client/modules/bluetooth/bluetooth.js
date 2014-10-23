@@ -162,8 +162,9 @@ if (Meteor.isCordova) {
       var u8 = new Uint8Array(1);
 
       var topic = Topics.findOne(topic_id);
+      var dailyLogsCount = topic.dailyLogs()[0][1];
 
-      if(topic.dailyGoal(user_id).isReached) {
+      if(topic.dailyGoal(user_id).isReached(dailyLogsCount)) {
         u8[0] = 3;
       } else {
         u8[0] = 4;
