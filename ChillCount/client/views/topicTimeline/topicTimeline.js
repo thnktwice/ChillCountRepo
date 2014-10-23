@@ -56,7 +56,7 @@ Template.topicTimeline.helpers({
 
 Template.daily_log.helpers({
   count: function() {
-    return this[1];
+    return this[1] ? this[1] :0;
   },
   logs: function() {
     return this[0];
