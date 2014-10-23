@@ -135,12 +135,17 @@
         background-color: rgba(0,153,204,0.05);
         margin-bottom: 8px;
         padding:2px 5px;
+        padding-bottom:5px;
         color:$secondary-color;
         font-size:11pt;
       }
       .adminMessage .admin_uname{
         font-weight:normal;
         font-size: 13pt;
+      }
+
+      .adminImage {
+        width:100%;
       }
 
       .chillbot{

@@ -31,8 +31,15 @@ Template.topicTimeline.events({
       //send notifications to the ids registerd by the server on this topic
       Meteor.call('sendNotificationsToTopicUsers', [this.topic_id,res.content], function(topic_id,content){});
     }
+    if (Meteor.user().isAdmin() && res.content.charAt(0) === '*') {
+      res.type = 'adminImage';
+      res.content= res.content.slice(1);
+
+      //send notifications to the ids registerd by the server on this topic
+      Meteor.call('sendNotificationsToTopicUsers', [this.topic_id,"Advice from Chillbot"], function(topic_id,content){});
+    }
     Logs.insert(res);
-    console.log(res);
+    // console.log(res);
     message.val('');
   },
   'click .plus' : function() {
