@@ -158,17 +158,27 @@ if (Meteor.isCordova) {
 
     var respondToResult = function (topic_id,user_id){//Send feedback message on log working
 
+      //TODO REFACTOR THIS
       // alert("sending result");
       var u8 = new Uint8Array(1);
 
       var topic = Topics.findOne(topic_id);
-      var dailyLogsCount = topic.dailyLogs()[0][1];
+      var count = topic.dailyLogs()[0][1] ? topic.dailyLogs()[0][1] : 0;
+      var dailyGoal = topic.dailyGoal(user_id);
 
-      if(topic.dailyGoal(user_id).isReached(dailyLogsCount+1)) {
-        u8[0] = 3;
-      } else {
-        u8[0] = 4;
+      var goalType = dailyGoal.comparator;
+
+      u8[0]= 1; //blue => you can keep counting by default
+      if(goalType =='moreThan'){
+        if(dailyGoal.isReached(count+1)) {//+1 because of the latency and the no callback approach right now
+          u8[0] = 3;//green hero
+        }
+      } else if(goalType =='lessThan') {
+        if (!dailyGoal.isReached(count+1)){
+          u8[0] = 4;//red and buzzer because you exceeded your goal
+        }
       }
+      // alert(u8[0]);
 
       var value = bluetoothle.bytesToEncodedString(u8);
       var params = {

@@ -36,6 +36,12 @@ unsigned long led_timeout = 700UL;  //led timeout set to 07 sec
 
 int buzzer_running = 0; //variable to declare if the buzzer is one
 
+int send_message_timer_running = 0; //variables for the send message timer
+unsigned long send_message_timer;
+unsigned long send_message_timeout = 300UL;
+
+int step_number = 0; //to go through the program
+
 void setup() {
   // initialize Serial connection
   Serial.begin(57600);     
@@ -52,20 +58,29 @@ void setup() {
 
 void loop()
 {
-
- if (clicked == 1) {//if change interrupt has been detected, send a scratch message
-    //Write to scratch one
-    Bean.setScratchNumber(1,message); 
-    
-    //Set timer
-    message_timer = millis();
-    message_timer_running = 1;
-
-    //go to next step
-    clicked = 2;
+ //We control the send message timer here 
+ if (send_message_timer_running == 1) {
+   if((long)(millis()-send_message_timer >= send_message_timeout)) {
+     send_message_timer_running = 0;  
+   }
  }
  
- if (clicked == 2) {
+ if (clicked == 1) {//if change interrupt has been detected, send a scratch message
+    if(send_message_timer_running == 0) {
+      //Write to scratch one
+      Bean.setScratchNumber(1,message); 
+      //Start the timers
+      send_message_timer = millis();
+      send_message_timer_running = 1;
+      
+      message_timer = millis();
+      message_timer_running = 1;
+      step_number = 2;
+    }
+    clicked = 0;
+ }
+ 
+ if (step_number == 2) {
    // Read scratch 2 until we detect a feedback or we timeOut
    scratchState = Bean.readScratchNumber(2);
    if(scratchState != 0) {//if a write event has been detected
@@ -87,18 +102,17 @@ void loop()
      //Launch the timer
      led_timer = millis();
      led_timer_running = 1;
-     //Reset the variables
+     //Reset the variables and the scratch value
      scratchState = 0;
-     //Send the message on scratch 2
      Bean.setScratchNumber(2,0);
      //Stop the first timer
      message_timer_running = 0;
      //go to next step
-     clicked = 3;
+     step_number = 3;
    }
  }
  
- if ((int)(clicked + led_timer_running) == 4) {
+ if ((int)(step_number + led_timer_running) == 4) {
    //little hack to simplify the if..
    //but in fact it is not needed 
    //and clicked == 3 only should be ok but it is more clear that way
@@ -106,7 +120,7 @@ void loop()
      //After the led timeout, shut down the led
      Bean.setLed(0,0,0);
      //reset the vars
-     clicked = 0;
+     step_number = 0;
      //clear the timer
      led_timer_running = 0;
      
@@ -123,8 +137,10 @@ void loop()
    if ((long)(millis()-message_timer) >= message_timeout) {
      //The send message has gotten no feedback under 30 seconds
      //reset vars
-     clicked = 0;
+     step_number = 0;
      message_timer_running = 0;
+     digitalWrite(buzzerPin, LOW);
+     buzzer_running = 0;
      
      //Blink led
      Bean.setLedRed(255);
