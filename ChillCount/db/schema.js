@@ -24,12 +24,6 @@ Schemas.Log = new SimpleSchema({
         label: "Content of the message",
         optional: true,
         max: 1000
-    },
-    score: {
-        type: Number,
-        label: "Personal score at the log moment",
-        optional: true,
-        min: 0
     }
 });
 
