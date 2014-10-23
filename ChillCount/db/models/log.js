@@ -41,6 +41,10 @@ Log.extend({
   // var res = ((typeof this.content !== 'undefined') && _.contains(admins,this.user_id) && (this.content.charAt(0)==='&'));
   var res = (this.type === 'adminMessage');
   return res;  
+ },
+ isAdminImage: function() {
+  var res = (this.type === 'adminImage');
+  return res;  
  }
 });
 
