@@ -156,10 +156,34 @@ if (Meteor.isCordova) {
       // alert("write success");
     };
 
-    var respondToResult = function (){//Send feedback message on log working
+    var respondToResult = function (topic_id,user_id){//Send feedback message on log working
+
+      //TODO REFACTOR THIS
       // alert("sending result");
       var u8 = new Uint8Array(1);
-      u8[0] = 3;
+      u8[0]= 1; //blue => you can keep counting by default
+
+      var topic = Topics.findOne(topic_id);
+      var dailyGoal = topic.dailyGoal(user_id);
+
+      if(typeof topic.dailyLogs()[0] !== 'undefined'){//if the topic has logs today
+        var count = topic.dailyLogs()[0][1] ? topic.dailyLogs()[0][1] : 0;
+      }
+      
+      if(typeof dailyGoal !== 'undefined') {//if there is a goal set
+        var goalType = dailyGoal.comparator;
+        if(goalType =='moreThan'){
+          if(dailyGoal.isReached(count+1)) {//+1 because of the latency and the no callback approach right now
+            u8[0] = 3;//green hero
+          }
+        } else if(goalType =='lessThan') {
+          if (!dailyGoal.isReached(count+1)){
+            u8[0] = 4;//red and buzzer because you exceeded your goal
+          }
+        }
+      }
+      // alert(u8[0]);
+
       var value = bluetoothle.bytesToEncodedString(u8);
       var params = {
         "value":value,
@@ -190,7 +214,7 @@ if (Meteor.isCordova) {
         var user_id = Meteor.userId();  
         Meteor.call('addARemoteCount', [topic_id,user_id], function(topic_id,user_id){
         });
-        respondToResult();
+        respondToResult(topic_id,user_id);
       }
     };
 

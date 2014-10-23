@@ -17,7 +17,7 @@ Schemas.Log = new SimpleSchema({
     },
     type: {
         type: String,
-        label: "Log type : count, message, adminMessage ",
+        label: "Log type : count, message, adminMessage, adminImage ",
     },
     content: {
         type: String,
