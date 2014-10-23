@@ -79,7 +79,7 @@ Template.daily_log.helpers({
         return "<span class='goal_failure'>"+goal_message+"</span>";
       }
     };
-    console.log(daily_goal);
+    // console.log(daily_goal);
     if (typeof daily_goal !== 'undefined') {
       console.log(daily_goal);
       if (daily_goal.comparator === 'moreThan'){

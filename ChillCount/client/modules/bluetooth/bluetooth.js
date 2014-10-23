@@ -166,8 +166,9 @@ if (Meteor.isCordova) {
       var topic = Topics.findOne(topic_id);
       var dailyGoal = topic.dailyGoal(user_id);
 
+      var count = 0;
       if(typeof topic.dailyLogs()[0] !== 'undefined'){//if the topic has logs today
-        var count = topic.dailyLogs()[0][1] ? topic.dailyLogs()[0][1] : 0;
+        count = topic.dailyLogs()[0][1];
       }
       
       if(typeof dailyGoal !== 'undefined') {//if there is a goal set
