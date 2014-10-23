@@ -156,10 +156,19 @@ if (Meteor.isCordova) {
       // alert("write success");
     };
 
-    var respondToResult = function (){//Send feedback message on log working
+    var respondToResult = function (topic_id,user_id){//Send feedback message on log working
+
       // alert("sending result");
       var u8 = new Uint8Array(1);
-      u8[0] = 3;
+
+      var topic = Topics.findOne(topic_id);
+
+      if(topic.dailyGoal(user_id).isReached) {
+        u8[0] = 3;
+      } else {
+        u8[0] = 4;
+      }
+
       var value = bluetoothle.bytesToEncodedString(u8);
       var params = {
         "value":value,
@@ -190,7 +199,7 @@ if (Meteor.isCordova) {
         var user_id = Meteor.userId();  
         Meteor.call('addARemoteCount', [topic_id,user_id], function(topic_id,user_id){
         });
-        respondToResult();
+        respondToResult(topic_id,user_id);
       }
     };
 
