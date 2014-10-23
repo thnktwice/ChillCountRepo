@@ -25,7 +25,7 @@
     </div>
     <div class="row"> 
       <div class="col-xs-12 mine">
-        <span class="score_log">{{score}}</span>
+        <span class="score_log">{{this.timedScore}}</span>
         <span class="name_log">&nbsp;by me</span>
       </div>
     </div>
@@ -40,7 +40,7 @@
     <div class="row"> 
       <div class="col-xs-12">
         <span class="name_log">{{this.uname}}:&nbsp;</span>
-        <span class="score_log">{{score}}</span>
+        <span class="score_log">{{this.timedScore}}</span>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
         <div class="message">
           <div class="row"> 
             <div class="col-xs-12 uname mine">
-              ({{score}})  Me
+              ({{this.timedScore}})  Me
             </div>
           </div>
           <div class="row">
@@ -81,7 +81,7 @@
         <div class="message">
           <div class="row"> 
             <div class="col-xs-12 uname">
-              {{this.uname}}  ({{score}})
+              {{this.uname}}  ({{this.timedScore}})
             </div>
           </div>
           <div class="row">

@@ -48,6 +48,19 @@ Log.extend({
  isAdminImage: function() {
   var res = (this.type === 'adminImage');
   return res;  
+ },
+ timedScore: function(){//return personal score at the log moment
+  var count = Logs.find({
+    user_id:this.user_id,
+    topic_id:this.topic_id,
+    timestamp:{$lt:this.timestamp},
+    type: 'count'
+  }).count();
+
+  if(this.type =='count'){
+    count = count+1;
+  }
+  return count;
  }
 });
 
