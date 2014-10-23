@@ -161,21 +161,25 @@ if (Meteor.isCordova) {
       //TODO REFACTOR THIS
       // alert("sending result");
       var u8 = new Uint8Array(1);
+      u8[0]= 1; //blue => you can keep counting by default
 
       var topic = Topics.findOne(topic_id);
-      var count = topic.dailyLogs()[0][1] ? topic.dailyLogs()[0][1] : 0;
       var dailyGoal = topic.dailyGoal(user_id);
 
-      var goalType = dailyGoal.comparator;
-
-      u8[0]= 1; //blue => you can keep counting by default
-      if(goalType =='moreThan'){
-        if(dailyGoal.isReached(count+1)) {//+1 because of the latency and the no callback approach right now
-          u8[0] = 3;//green hero
-        }
-      } else if(goalType =='lessThan') {
-        if (!dailyGoal.isReached(count+1)){
-          u8[0] = 4;//red and buzzer because you exceeded your goal
+      if(typeof topic.dailyLogs()[0] !== 'undefined'){//if the topic has logs today
+        var count = topic.dailyLogs()[0][1] ? topic.dailyLogs()[0][1] : 0;
+      }
+      
+      if(typeof dailyGoal !== 'undefined') {//if there is a goal set
+        var goalType = dailyGoal.comparator;
+        if(goalType =='moreThan'){
+          if(dailyGoal.isReached(count+1)) {//+1 because of the latency and the no callback approach right now
+            u8[0] = 3;//green hero
+          }
+        } else if(goalType =='lessThan') {
+          if (!dailyGoal.isReached(count+1)){
+            u8[0] = 4;//red and buzzer because you exceeded your goal
+          }
         }
       }
       // alert(u8[0]);
