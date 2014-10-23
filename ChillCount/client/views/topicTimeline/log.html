@@ -8,7 +8,11 @@
     {{/if}}    
     {{#if this.isAdminMessage}}
       {{> adminMessage}}
+    {{/if}}    
+    {{#if this.isAdminImage}}
+      {{> adminImage}}
     {{/if}}
+
   {{#if currentUser.isAdmin}}
   <a class="delete">Delete</a> 
   {{/if}}    
@@ -115,6 +119,32 @@
         <div class="row">
           <div class="col-xs-12 admin_content">
           {{content}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="adminImage">
+  <div class="row"> 
+    <div class="col-xs-12 admin_formatted_time">
+      {{formatted_time timestamp}}
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-xs-11">
+      <div class="adminMessage">
+        <div class="row"> 
+          <div class="col-xs-12 admin_uname">
+            <span>Chillbot</span>
+            <span class="chillbot"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 admin_content">
+          <img class="adminImage" src={{content}}>
+          <br/>
           </div>
         </div>
       </div>
