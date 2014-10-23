@@ -20,9 +20,12 @@ Log.extend({
  formatted_time: function () {
   var day = new Date(this.timestamp);
   var dayWrapper = moment(day);
-  return dayWrapper.format("MMM Do, HH:mm");
-
-  //.toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
+  dayWrapper = dayWrapper.format("MMM Do, HH:mm");
+  var delete_html= "";
+  if(Meteor.user().isAdmin() || this.user_id == Meteor.userId()){
+    delete_html = " <a class='delete'>X</a> ";
+  }
+  return dayWrapper +delete_html;
  },
  formatted_day: function (){
   var day = new Date(this.timestamp);
