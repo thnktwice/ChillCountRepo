@@ -47,7 +47,14 @@
   font-weight:150;
 
 }
-
+.daily_score {
+  color:$secondary-color;
+  font-size: 12pt;
+  font-weight:500;
+}
+.daily_report {
+  color:$primary-color;
+}
 .goal_success {
   background-color: #C2E0C2;
   color: white;

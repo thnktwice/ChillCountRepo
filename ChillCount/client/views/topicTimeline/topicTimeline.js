@@ -55,56 +55,67 @@ Template.topicTimeline.helpers({
 });
 
 Template.daily_log.helpers({
-  count: function() {
-    return this[1] ? this[1] :0;
+  dayCount: function() {
+    var count = 0;
+    if (typeof this[1] !== 'undefined') {
+      count = this[1];
+    }
+    var day = "Today";
+    var today_string = moment(new Date()).format("MMM Do");
+    if (typeof this[0] !== 'undefined') {
+      day = this[0][0].formatted_day();
+      if(day === today_string) {
+        day = "Today";
+      }
+    }
+    return day + ": <span class ='daily_score'>"+count+"</span>";
   },
   logs: function() {
-    return this[0];
-  },
-  day: function() {
-    return this[0][0].formatted_day();
+    return this[0] ?this[0]:null;
   },
   topic: function(){
     return Topics.findOne(this[0][0].topic_id);
   },
   goalMessage: function (){
-    var topic = Topics.findOne(this[0][0].topic_id);
-    var daily_goal = topic.dailyGoal(Meteor.userId());
-    var goal_message = "";
+    if(typeof this[0] !== 'undefined') {
+      var topic = Topics.findOne(this[0][0].topic_id);
+      var daily_goal = topic.dailyGoal(Meteor.userId());
+      var goal_message = "";
 
-    var htmlGoalMessage = function(goal_message, success) {
-      if(success){
-        return "<span class='goal_success'>"+goal_message+"</span>";
-      }else {
-        return "<span class='goal_failure'>"+goal_message+"</span>";
-      }
-    };
-    // console.log(daily_goal);
-    if (typeof daily_goal !== 'undefined') {
-      console.log(daily_goal);
-      if (daily_goal.comparator === 'moreThan'){
-        if (daily_goal.isReached(this[1])) {
-          goal_message = htmlGoalMessage(
-            "Congratz ! Goal exceeded by " + daily_goal.difference(this[1]),
-            true);
-        } else {
-          goal_message = htmlGoalMessage(
-            "Keep going, still " + daily_goal.difference(this[1]) + " to go !",
-            false);
+      var htmlGoalMessage = function(goal_message, success) {
+        if(success){
+          return "<span class='goal_success'>"+goal_message+"</span>";
+        }else {
+          return "<span class='goal_failure'>"+goal_message+"</span>";
         }
-      } else {//less than
-        if (daily_goal.isReached(this[1])) {
-          goal_message = htmlGoalMessage(
-            "Congratz ! " + daily_goal.difference(this[1]) + " below your goal !",
-            true);
-        } else {
-          goal_message = htmlGoalMessage(
-            "Out of your goal by " + daily_goal.difference(this[1]),
-            false);
+      };
+      // console.log(daily_goal);
+      if (typeof daily_goal !== 'undefined') {
+        console.log(daily_goal);
+        if (daily_goal.comparator === 'moreThan'){
+          if (daily_goal.isReached(this[1])) {
+            goal_message = htmlGoalMessage(
+              "Congratz ! Goal exceeded by " + daily_goal.difference(this[1]),
+              true);
+          } else {
+            goal_message = htmlGoalMessage(
+              "Keep going, still " + daily_goal.difference(this[1]) + " to go !",
+              false);
+          }
+        } else {//less than
+          if (daily_goal.isReached(this[1])) {
+            goal_message = htmlGoalMessage(
+              "Congratz ! " + daily_goal.difference(this[1]) + " below your goal !",
+              true);
+          } else {
+            goal_message = htmlGoalMessage(
+              "Out of your goal by " + daily_goal.difference(this[1]),
+              false);
+          }
         }
       }
+      return goal_message;
     }
-    return goal_message;
   }
 });
 
