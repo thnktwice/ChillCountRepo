@@ -28,6 +28,12 @@ if (Meteor.isCordova) {
         Session.set("bluetooth_status","bean_disconnected");
         //We try to reconnect directly without asking
         Meteor.setTimeout(reconnect,3000);
+      // } else if ("Connection timed out"){
+      //   Session.set("logmessage","No Bean was detected around, and connection timed out. Maybe the battery was low ! Reset to be sure or call 911");
+      //   Session.set("bluetooth_status","bean_disconnected");
+      // } else if (logmessage === "Reconnection timed out") {
+      //   Session.set("logmessage","Reconnection timed out. You must be trying to reconnect to a different bean than last time. Reset ");
+      //   Session.set("bluetooth_status","bean_disconnected");
       }
       else{
         Session.set("logmessage", logmessage);
@@ -113,6 +119,7 @@ if (Meteor.isCordova) {
       if (successReturn.status === "connected") {
         bluetoothLogging("Reconnected to : " + successReturn.name + " - " + successReturn.address);
         clearReconnectTimeout();
+        Session.set("bluetooth_status","bean_connected");
         if (device.platform === iOSPlatform) {
           bluetoothLogging("Let's discover the Bean Services my little iOS friend !");
           // var params = {"serviceUuids":batteryServiceUuid};
@@ -413,7 +420,12 @@ if (Meteor.isCordova) {
       },
       retry: function() {
         // closeDevice();
-        reconnect();
+        // if (Session.equals('logmessage',"ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.")) {//if it is just a temporary disconnect
+          reconnect();
+        // } else{
+        //   closeDevice();
+        //   initializeSuccessCallback({'status':'enabled'});
+        // }
       },
       write: function(value) {
         writeValue(value);
@@ -447,4 +459,4 @@ if (Meteor.isCordova) {
     return myself;
 
   }.call();  
-}
+};
