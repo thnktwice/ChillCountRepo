@@ -398,15 +398,9 @@ if (Meteor.isCordova) {
 
     var initializeSuccessCallback = function (successReturn) {
       if (successReturn.status === 'enabled') {
-        var address = window.localStorage.getItem(addressKey);
-        if (address === null){
           bluetoothLogging("Bluetooth init success");
           var params = {"serviceUuids": beanServiceUuid};
           bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});
-        }
-        else {
-          connectDevice(address);
-        }
       }
       else {
         bluetoothLogging("Unexpected initialize status: " + successReturn.status);
@@ -419,7 +413,7 @@ if (Meteor.isCordova) {
         if (closeSuccess.status == 'closed'){
           bluetoothLogging("BLE closed successfully...restarting ble");
           //restart from the beginning
-          myself.setup();
+          bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});
         } else{
           bluetoothLogging("Unexpected ble close status " +closeSuccess.status);
         }
@@ -454,16 +448,24 @@ if (Meteor.isCordova) {
       retry: function() {
         // closeDevice();
         // if (Session.equals('logmessage',"ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.")) {//if it is just a temporary disconnect
-        bluetoothle.isConnected(function(isConnected){
-          if(isConnected) {
-            //Disconnect before closing
+        bluetoothle.isConnected(function(obj){
+          if(obj.isConnected===true) {
+            bluetoothLogging("ble is connected");
+            //Disconnect before scanning again
             bluetoothle.disconnect(retryDisconnectSuccess,retryDisconnectError);
           } else {
-            //close directly
-            retryClose();
+            bluetoothle.isInitialized(function(obj){
+              if(obj.isInitialized===true){
+                bluetoothLogging("ble is init,starting scan");
+                //rescan
+                bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});
+              }else {
+                //e close  directly
+                retryClose();
+              }
+            });
           }
         });
-          reconnect();
         // } else{
         //   closeDevice();
         //   initializeSuccessCallback({'status':'enabled'});
