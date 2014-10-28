@@ -37,7 +37,7 @@
 
 .topic .name {
   font-size: 1.3em;
-  vertical-align: middle;
+  // vertical-align: middle;
   text-align: left;
   color:$primary-color;
 }
@@ -96,4 +96,10 @@
 .creator_name {
   font-style: italic;
   color:$secondary-color
+}
+
+.delete_topic {
+  font-size:8pt;
+  color: $primary-color;
+  font-style:italic;
 }
