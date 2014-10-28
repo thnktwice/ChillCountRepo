@@ -51,6 +51,15 @@ Template.topicTimeline.helpers({
   my_score: function(){
     var my_score = Logs.find({user_id: Meteor.userId(), topic_id: this.topic_id, type: 'count'}).count();
     return my_score;
+  },
+  daily_logs:function() {
+    var topic = Topics.findOne(this.topic_id);
+    var daily_logs = topic.dailyLogs();
+      if (daily_logs.length === 0) {
+        //hack to have Today even if no log
+        daily_logs =[[undefined,undefined]];
+      }
+    return daily_logs;
   }
 });
 

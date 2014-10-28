@@ -67,16 +67,16 @@
         var topic = Topics.findOne(this.params.id);
         if(typeof topic !== 'undefined') {
           //Here we process the data of the topic
-          var daily_logs = topic.dailyLogs();
-          if (daily_logs.length === 0) {
-            //hack to have Today even if no log
-            daily_logs =[[undefined,undefined]];
-          }
+          // var daily_logs = topic.dailyLogs();
+          // if (daily_logs.length === 0) {
+          //   //hack to have Today even if no log
+          //   daily_logs =[[undefined,undefined]];
+          // }
 
           timeline_data = {
             topic_id: this.params.id,
             name: topic.name,
-            daily_logs: daily_logs,
+            // daily_logs: daily_logs,
             score: topic.score,
             description: topic.description
           };      
