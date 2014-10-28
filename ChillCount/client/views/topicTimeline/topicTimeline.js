@@ -77,21 +77,25 @@ Template.daily_log.helpers({
     return Topics.findOne(this[0][0].topic_id);
   },
   goalMessage: function (){
+    var htmlGoalMessage = function(goal_message, success) {
+      if(success){
+        return "<span class='goal_success'>"+goal_message+"</span>";
+      }else {
+        return "<span class='goal_failure'>"+goal_message+"</span>";
+      }
+    };
+
     if(typeof this[0] !== 'undefined') {
       var topic = Topics.findOne(this[0][0].topic_id);
       var daily_goal = topic.dailyGoal(Meteor.userId());
       var goal_message = "";
 
-      var htmlGoalMessage = function(goal_message, success) {
-        if(success){
-          return "<span class='goal_success'>"+goal_message+"</span>";
-        }else {
-          return "<span class='goal_failure'>"+goal_message+"</span>";
-        }
-      };
       // console.log(daily_goal);
       if (typeof daily_goal !== 'undefined') {
         console.log(daily_goal);
+        if (typeof this[1] === 'undefined') {
+          this[1]=0;
+        }
         if (daily_goal.comparator === 'moreThan'){
           if (daily_goal.isReached(this[1])) {
             goal_message = htmlGoalMessage(

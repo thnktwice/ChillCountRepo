@@ -84,9 +84,11 @@
   font-size: 8pt;
 }
 
-.admin_formatted_time{
+.count_formatted_time {
   color:grey;
   font-size: 8pt;
+  margin-bottom: -8px;
+  z-index: 50;
 }
 
 .count.mine{

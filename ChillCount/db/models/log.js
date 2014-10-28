@@ -20,7 +20,7 @@ Log.extend({
  formatted_time: function () {
   var day = new Date(this.timestamp);
   var dayWrapper = moment(day);
-  dayWrapper = dayWrapper.format("MMM Do, HH:mm");
+  dayWrapper = dayWrapper.format("HH:mm");
   var delete_html= "";
   if(Meteor.user().isAdmin() || this.user_id == Meteor.userId()){
     delete_html = " <a class='delete'>X</a> ";
