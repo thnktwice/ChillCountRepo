@@ -54,12 +54,14 @@ Template.topicTimeline.helpers({
   },
   daily_logs:function() {
     var topic = Topics.findOne(this.topic_id);
-    var daily_logs = topic.dailyLogs();
+    if(typeof topic !== 'undefined'){
+      var daily_logs = topic.dailyLogs();
       if (daily_logs.length === 0) {
         //hack to have Today even if no log
         daily_logs =[[undefined,undefined]];
       }
     return daily_logs;
+    }
   }
 });
 
@@ -101,7 +103,7 @@ Template.daily_log.helpers({
 
       // console.log(daily_goal);
       if (typeof daily_goal !== 'undefined') {
-        console.log(daily_goal);
+        // console.log(daily_goal);
         if (typeof this[1] === 'undefined') {
           this[1]=0;
         }
