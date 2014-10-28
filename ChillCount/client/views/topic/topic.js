@@ -1,6 +1,15 @@
 Template.topic.helpers({
   selected: function() {
     return Session.equals("selected_topic_id", this._id) ? "selected" : '';    
+  },
+  creator_name: function(){
+    var res = "me";
+    if(Meteor.user()){
+      if (Meteor.user().isAdmin() || (this.user_id !== Meteor.userId())){
+        res = this.uname();
+      }
+    }
+    return res;
   }
 });
 

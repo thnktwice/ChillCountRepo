@@ -8,21 +8,9 @@
         </div>
         <div class="col-xs-7 name">
           {{name}}
-          {{#if currentUserIsAdmin}}
             <div class="creator">
-              by <span class="creator_name">{{this.uname}}</span>
+              by <span class="creator_name">{{creator_name}}</span>
             </div>
-          {{/if}}  
-          {{#if $not isMine}}
-            <div class="creator">
-              by <span class="creator_name">{{this.uname}}</span>
-            </div>
-          {{/if}}  
-          {{#if isMine}}
-            <div class="creator">
-              by <span class="creator_name">me</span>
-            </div>
-          {{/if}}
           <div class="row">
             <div class="col-xs-3 {{type}}_small_icon">
             </div>
