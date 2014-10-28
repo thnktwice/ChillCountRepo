@@ -413,6 +413,39 @@ if (Meteor.isCordova) {
       }
     };
 
+    //Functions used in the retry
+    var retryClose = function () {
+      bluetoothle.close(function(closeSuccess){
+        if (closeSuccess.status == 'closed'){
+          bluetoothLogging("BLE closed successfully...restarting ble");
+          //restart from the beginning
+          myself.setup();
+        } else{
+          bluetoothLogging("Unexpected ble close status " +closeSuccess.status);
+        }
+      }, function(closeError){
+        bluetoothLogging("Close error: " + closeError.error + " - " + closeError.message);
+      });
+    };
+
+    var  retryDisconnectSuccess = function(obj){
+      if (obj.status == "disconnected") {
+        bluetoothLogging("Disconnected successfully");
+        retryClose();
+      }
+      else if (obj.status == "disconnecting") {
+        bluetoothLogging("Disconnecting device...");
+      }
+      else { 
+        bluetoothLogging("Unexpected disconnect status: " + obj.status);
+      }
+    };
+
+    var  retryDisconnectError = function(obj) {
+      bluetoothLogging("Disconnect error: " + obj.error + " - " + obj.message);
+    };
+
+
     var myself = {
       setup: function(){
         // alert("setup");
@@ -421,6 +454,15 @@ if (Meteor.isCordova) {
       retry: function() {
         // closeDevice();
         // if (Session.equals('logmessage',"ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.")) {//if it is just a temporary disconnect
+        bluetoothle.isConnected(function(isConnected){
+          if(isConnected) {
+            //Disconnect before closing
+            bluetoothle.disconnect(retryDisconnectSuccess,retryDisconnectError);
+          } else {
+            //close directly
+            retryClose();
+          }
+        });
           reconnect();
         // } else{
         //   closeDevice();
@@ -459,4 +501,4 @@ if (Meteor.isCordova) {
     return myself;
 
   }.call();  
-};
+}

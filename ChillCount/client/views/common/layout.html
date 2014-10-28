@@ -6,11 +6,9 @@
     <div id="bluetooth_status">
       {{$.Session.get 'logmessage'}}
     </div>
-    {{#if $.Session.equals 'bluetooth_status' 'bean_disconnected'}}
     <div id="bluetooth_reconnect">
-    <a>Reconnect to the ChillButton >></a>
+    <a>Reset connection with ChillButton >></a>
     </div>
-    {{/if}}
   </i>
 </p>
 </template>
