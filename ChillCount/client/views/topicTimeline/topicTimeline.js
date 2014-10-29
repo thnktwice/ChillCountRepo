@@ -5,7 +5,7 @@ Template.topicTimeline.events({
   'click #go_stats' : function (){
     Router.go("/topics/"+this.topic_id+"/stats");
   },
-  'click button#new_message' : function(e, templ) {
+  'submit form.form-search' : function(e, templ) {
     //We stop the event from propagating
     e.preventDefault();
     //We take the value from the input
