@@ -6,8 +6,23 @@ Template.topicCreation.events({
     var topic_name = templ.$("#topic_name").val();
     var topic_type = templ.$("#topic_type").html();
     var topic_description = templ.$("#topic_description").val();
-    console.log(topic_name);
-    console.log(topic_description);
+    // console.log(topic_name);
+    // console.log(topic_description);
+    //We create the relevant new topic in the database
+    var topic_id = Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
+    Meteor.user().addToMyTopics(topic_id);
+    Router.go('/topics/'+topic_id);
+  },
+  'submit form.form-search': function(e,templ){
+    e.preventDefault();
+      //We stop the event from propagating
+    e.preventDefault();
+    //We take the value from the inputs
+    var topic_name = templ.$("#topic_name").val();
+    var topic_type = templ.$("#topic_type").html();
+    var topic_description = templ.$("#topic_description").val();
+    // console.log(topic_name);
+    // console.log(topic_description);
     //We create the relevant new topic in the database
     var topic_id = Topics.insert({user_id: Meteor.userId(), name: topic_name, description:topic_description, type:topic_type, score: 0});
     Meteor.user().addToMyTopics(topic_id);
