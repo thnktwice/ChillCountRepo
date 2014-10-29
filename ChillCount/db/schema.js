@@ -17,19 +17,13 @@ Schemas.Log = new SimpleSchema({
     },
     type: {
         type: String,
-        label: "Log type : count, message, adminMessage ",
+        label: "Log type : count, message, adminMessage, adminImage ",
     },
     content: {
         type: String,
         label: "Content of the message",
         optional: true,
         max: 1000
-    },
-    score: {
-        type: Number,
-        label: "Personal score at the log moment",
-        optional: true,
-        min: 0
     }
 });
 

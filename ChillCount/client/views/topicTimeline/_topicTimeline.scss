@@ -47,7 +47,14 @@
   font-weight:150;
 
 }
-
+.daily_score {
+  color:$secondary-color;
+  font-size: 12pt;
+  font-weight:500;
+}
+.daily_report {
+  color:$primary-color;
+}
 .goal_success {
   background-color: #C2E0C2;
   color: white;
@@ -77,9 +84,11 @@
   font-size: 8pt;
 }
 
-.admin_formatted_time{
+.count_formatted_time {
   color:grey;
   font-size: 8pt;
+  margin-bottom: -8px;
+  z-index: 50;
 }
 
 .count.mine{
@@ -107,7 +116,11 @@
   color:$primary-color;
 }
 
-
+.delete {
+  //This is to expand the hit zone artifically
+  padding:12px;
+  margin:-12px;
+}
 .message{
  /*       border-style: solid;
         border-width: 1px 1px 1px 1px;
@@ -135,12 +148,17 @@
         background-color: rgba(0,153,204,0.05);
         margin-bottom: 8px;
         padding:2px 5px;
+        padding-bottom:5px;
         color:$secondary-color;
         font-size:11pt;
       }
       .adminMessage .admin_uname{
         font-weight:normal;
         font-size: 13pt;
+      }
+
+      .adminImage {
+        width:100%;
       }
 
       .chillbot{

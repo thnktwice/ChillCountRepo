@@ -73,7 +73,7 @@ Topic.extend({
   },
   dailyLogs : function () {
     // This is an array grouped by day with the relevant score
-    var res = {};
+    var res = [];
     var user_id = Meteor.userId();
 
     var logs = Logs.find(

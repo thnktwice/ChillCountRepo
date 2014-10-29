@@ -59,7 +59,6 @@
     <br/>
     <div class="row">
       <div class="col-xs-12">
-      
         {{#each daily_logs}}
           {{>daily_log}}
         {{/each}}
@@ -70,8 +69,8 @@
 </template>
 
 <template name="daily_log">
-<p>
-   ({{count}}) on {{day}}. <br/> {{{goalMessage}}}
+<p class='daily_report'>
+   {{{dayCount}}} <br/> {{{goalMessage}}}
 </p>
 <hr/>
   {{#each logs}}

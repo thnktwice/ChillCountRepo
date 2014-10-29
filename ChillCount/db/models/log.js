@@ -20,9 +20,12 @@ Log.extend({
  formatted_time: function () {
   var day = new Date(this.timestamp);
   var dayWrapper = moment(day);
-  return dayWrapper.format("MMM Do, HH:mm");
-
-  //.toLocaleDateString() + " " + new Date(this.timestamp).toLocaleTimeString();
+  dayWrapper = dayWrapper.format("HH:mm");
+  var delete_html= "";
+  if(Meteor.user().isAdmin() || this.user_id == Meteor.userId()){
+    delete_html = " <a class='delete'>X</a> ";
+  }
+  return dayWrapper +delete_html;
  },
  formatted_day: function (){
   var day = new Date(this.timestamp);
@@ -41,6 +44,23 @@ Log.extend({
   // var res = ((typeof this.content !== 'undefined') && _.contains(admins,this.user_id) && (this.content.charAt(0)==='&'));
   var res = (this.type === 'adminMessage');
   return res;  
+ },
+ isAdminImage: function() {
+  var res = (this.type === 'adminImage');
+  return res;  
+ },
+ timedScore: function(){//return personal score at the log moment
+  var count = Logs.find({
+    user_id:this.user_id,
+    topic_id:this.topic_id,
+    timestamp:{$lt:this.timestamp},
+    type: 'count'
+  }).count();
+
+  if(this.type =='count'){
+    count = count+1;
+  }
+  return count;
  }
 });
 

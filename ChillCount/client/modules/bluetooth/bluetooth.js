@@ -28,6 +28,12 @@ if (Meteor.isCordova) {
         Session.set("bluetooth_status","bean_disconnected");
         //We try to reconnect directly without asking
         Meteor.setTimeout(reconnect,3000);
+      // } else if ("Connection timed out"){
+      //   Session.set("logmessage","No Bean was detected around, and connection timed out. Maybe the battery was low ! Reset to be sure or call 911");
+      //   Session.set("bluetooth_status","bean_disconnected");
+      // } else if (logmessage === "Reconnection timed out") {
+      //   Session.set("logmessage","Reconnection timed out. You must be trying to reconnect to a different bean than last time. Reset ");
+      //   Session.set("bluetooth_status","bean_disconnected");
       }
       else{
         Session.set("logmessage", logmessage);
@@ -113,6 +119,7 @@ if (Meteor.isCordova) {
       if (successReturn.status === "connected") {
         bluetoothLogging("Reconnected to : " + successReturn.name + " - " + successReturn.address);
         clearReconnectTimeout();
+        Session.set("bluetooth_status","bean_connected");
         if (device.platform === iOSPlatform) {
           bluetoothLogging("Let's discover the Bean Services my little iOS friend !");
           // var params = {"serviceUuids":batteryServiceUuid};
@@ -156,10 +163,35 @@ if (Meteor.isCordova) {
       // alert("write success");
     };
 
-    var respondToResult = function (){//Send feedback message on log working
+    var respondToResult = function (topic_id,user_id){//Send feedback message on log working
+
+      //TODO REFACTOR THIS
       // alert("sending result");
       var u8 = new Uint8Array(1);
-      u8[0] = 3;
+      u8[0]= 1; //blue => you can keep counting by default
+
+      var topic = Topics.findOne(topic_id);
+      var dailyGoal = topic.dailyGoal(user_id);
+
+      var count = 0;
+      if(typeof topic.dailyLogs()[0] !== 'undefined'){//if the topic has logs today
+        count = topic.dailyLogs()[0][1];
+      }
+      
+      if(typeof dailyGoal !== 'undefined') {//if there is a goal set
+        var goalType = dailyGoal.comparator;
+        if(goalType =='moreThan'){
+          if(dailyGoal.isReached(count+1)) {//+1 because of the latency and the no callback approach right now
+            u8[0] = 3;//green hero
+          }
+        } else if(goalType =='lessThan') {
+          if (!dailyGoal.isReached(count+1)){
+            u8[0] = 4;//red and buzzer because you exceeded your goal
+          }
+        }
+      }
+      // alert(u8[0]);
+
       var value = bluetoothle.bytesToEncodedString(u8);
       var params = {
         "value":value,
@@ -190,7 +222,7 @@ if (Meteor.isCordova) {
         var user_id = Meteor.userId();  
         Meteor.call('addARemoteCount', [topic_id,user_id], function(topic_id,user_id){
         });
-        respondToResult();
+        respondToResult(topic_id,user_id);
       }
     };
 
@@ -366,20 +398,47 @@ if (Meteor.isCordova) {
 
     var initializeSuccessCallback = function (successReturn) {
       if (successReturn.status === 'enabled') {
-        var address = window.localStorage.getItem(addressKey);
-        if (address === null){
           bluetoothLogging("Bluetooth init success");
           var params = {"serviceUuids": beanServiceUuid};
           bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});
-        }
-        else {
-          connectDevice(address);
-        }
       }
       else {
         bluetoothLogging("Unexpected initialize status: " + successReturn.status);
       }
     };
+
+    //Functions used in the retry
+    var retryClose = function () {
+      bluetoothle.close(function(closeSuccess){
+        if (closeSuccess.status == 'closed'){
+          bluetoothLogging("BLE closed successfully...restarting ble");
+          //restart from the beginning
+          bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});
+        } else{
+          bluetoothLogging("Unexpected ble close status " +closeSuccess.status);
+        }
+      }, function(closeError){
+        bluetoothLogging("Close error: " + closeError.error + " - " + closeError.message);
+      });
+    };
+
+    var  retryDisconnectSuccess = function(obj){
+      if (obj.status == "disconnected") {
+        bluetoothLogging("Disconnected successfully");
+        retryClose();
+      }
+      else if (obj.status == "disconnecting") {
+        bluetoothLogging("Disconnecting device...");
+      }
+      else { 
+        bluetoothLogging("Unexpected disconnect status: " + obj.status);
+      }
+    };
+
+    var  retryDisconnectError = function(obj) {
+      bluetoothLogging("Disconnect error: " + obj.error + " - " + obj.message);
+    };
+
 
     var myself = {
       setup: function(){
@@ -388,7 +447,29 @@ if (Meteor.isCordova) {
       },
       retry: function() {
         // closeDevice();
-        reconnect();
+        // if (Session.equals('logmessage',"ChillButton has been disconnected :( Please try the above with your ChillButton nearby, or close then restart your application.")) {//if it is just a temporary disconnect
+        bluetoothle.isConnected(function(obj){
+          if(obj.isConnected===true) {
+            bluetoothLogging("ble is connected");
+            //Disconnect before scanning again
+            bluetoothle.disconnect(retryDisconnectSuccess,retryDisconnectError);
+          } else {
+            bluetoothle.isInitialized(function(obj){
+              if(obj.isInitialized===true){
+                bluetoothLogging("ble is init,starting scan");
+                //rescan
+                bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});
+              }else {
+                //e close  directly
+                retryClose();
+              }
+            });
+          }
+        });
+        // } else{
+        //   closeDevice();
+        //   initializeSuccessCallback({'status':'enabled'});
+        // }
       },
       write: function(value) {
         writeValue(value);
