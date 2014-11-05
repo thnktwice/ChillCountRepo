@@ -6,7 +6,7 @@ Template.topic.helpers({
     var res = "me";
     if(Meteor.user()){
       if (Meteor.user().isAdmin() || (this.user_id !== Meteor.userId())){
-        res = this.uname();
+        res = this.uname_topic();
       }
     }
     return res;

@@ -8,7 +8,7 @@ User.extend({
   var res = (_.contains(admins,this.profile.username));
   return res;      
   },
-  uname: function() {
+  uname_user: function() {
     // !! FACEBOOK AND OTHER LOGIN NOT WORKING IN PRODUCTION SERVER
     // var first_name = this.profile.name.split(' ')[0];
     // var last_name_initial = this.profile.name.split(' ').slice(-1).join(' ').charAt(0);
