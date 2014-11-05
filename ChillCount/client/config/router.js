@@ -1,8 +1,5 @@
-// Router.configure({
-//   layoutTemplate: 'layout',
-//   notFoundTemplate: 'notFound',
-//   yieldTemplates: {
-//     'header': { to: 'header' },
-//     'footer': { to: 'footer' }
-//   }
-// });
+Router.configure({
+  waitOn: function(){
+    return Meteor.subscribe('topics'); 
+  }
+});
