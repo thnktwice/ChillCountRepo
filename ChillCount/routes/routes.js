@@ -15,12 +15,12 @@ Router.map(function() {
       if (Meteor.user() === null) {
         if (!Meteor.loggingIn()) {
           Router.go('login');
+        }else{
+          this.next();
         }
-      }
-      this.next();
-    },
-    waitOn: function(){
-      return Meteor.subscribe('topics'); 
+      }else{
+        this.next(); 
+      } 
     },
     data: function() {
       var topics_board_data;

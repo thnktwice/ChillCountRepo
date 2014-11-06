@@ -1,1 +1,1 @@
-// Meteor.subscribe('topics');
+Meteor.subscribe('topics');
