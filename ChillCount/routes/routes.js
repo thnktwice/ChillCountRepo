@@ -19,6 +19,9 @@ Router.map(function() {
       }
       this.next();
     },
+    waitOn: function(){
+      return Meteor.subscribe('topics'); 
+    },
     data: function() {
       var topics_board_data;
       if (Session.equals('topic_view', 'mine')) { //Mine view
