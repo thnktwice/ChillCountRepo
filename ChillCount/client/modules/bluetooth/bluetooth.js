@@ -35,7 +35,9 @@ if (Meteor.isCordova) {
       //   Session.set("logmessage","Reconnection timed out. You must be trying to reconnect to a different bean than last time. Reset ");
       //   Session.set("bluetooth_status","bean_disconnected");
       }
-      else{
+      else if (logmessage === 'Scan was stopped successfully' ) {
+        Meteor.setTimeout(myself.retry(), 4000);
+      }else{
         Session.set("logmessage", logmessage);
       }
     };
