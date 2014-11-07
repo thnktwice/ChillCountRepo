@@ -36,7 +36,13 @@ if (Meteor.isCordova) {
       //   Session.set("bluetooth_status","bean_disconnected");
       }
       else if (logmessage === 'Scan was stopped successfully' ) {
-        Meteor.setTimeout(myself.retry(), 4000);
+        Meteor.setTimeout(function(){
+          bluetoothle.isConnected(function(obj){
+            if(!obj.isConnected){
+              myself.retry();
+            }
+          });
+        }, 5000);
       }else{
         Session.set("logmessage", logmessage);
       }
