@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 iron:router
 channikhabra:stupid-models
@@ -18,3 +17,7 @@ aldeed:collection2
 raix:handlebar-helpers
 reywood:bootstrap3-sass
 mrt:accounts-ui-bootstrap-3
+meteorhacks:kadira
+meteorhacks:unblock
+meteorhacks:fast-render@2.0.0-rc3
+

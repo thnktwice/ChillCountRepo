@@ -13,9 +13,8 @@ Log.extend({
   type:'count',
   content:''
  },
- uname: function() {
-  var user = Meteor.users.findOne({_id: this.user_id});
-  return user.uname();
+ uname_log: function() {
+  return Users.findOne(this.user_id).uname_user();
  },
  formatted_time: function () {
   var day = new Date(this.timestamp);

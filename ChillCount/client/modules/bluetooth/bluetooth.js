@@ -454,8 +454,9 @@ if (Meteor.isCordova) {
             //Disconnect before scanning again
             bluetoothle.disconnect(retryDisconnectSuccess,retryDisconnectError);
           } else {
-            bluetoothle.isInitialized(function(obj){
-              if(obj.isInitialized===true){
+            bluetoothle.isInitialized(function(obj2){
+//WATCH OUT FOR isInitAlized
+              if(obj2.isInitalized===true){
                 bluetoothLogging("ble is init,starting scan");
                 //rescan
                 bluetoothle.startScan(startScanSuccessCallback, error, {'serviceUuids':[]});

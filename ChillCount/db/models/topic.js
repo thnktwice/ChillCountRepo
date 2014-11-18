@@ -10,9 +10,11 @@ Topic.extend({
   defaultValues: {
     score: 0
   },
-  uname: function() {
+  uname_topic: function() {
     var user = Meteor.users.findOne({_id: this.user_id});
-    return user.uname();
+    if(user){
+      return user.uname_user();
+    }
   },
   appleUserDeviceTokens: function () {
     var user_device_tokens = [];
