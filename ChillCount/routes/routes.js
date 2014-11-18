@@ -70,7 +70,8 @@ Router.map(function() {
         }
       }
       return topics_board_data;
-    }
+    },
+    fastRender: true
   });
 
   //this will render the topic timeline, with the relevant data
